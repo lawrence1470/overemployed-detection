@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import SplitText from "~/components/ui/split-text";
-import ThreeDMarqueeDemo from "~/components/3d-marquee-demo";
+import GridMotionDemo from "~/components/grid-motion-demo";
 
 export function HeroSection() {
 	return (
@@ -106,10 +106,10 @@ export function HeroSection() {
 					{/* Clean CTA buttons */}
 					<div className="flex flex-col items-center gap-4 sm:flex-row lg:items-start">
 						<a
-							href="#contact"
+							href="#waitlist"
 							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
 						>
-							Start Verification
+							Join Waitlist
 						</a>
 						<button
 							type="button"
@@ -120,9 +120,9 @@ export function HeroSection() {
 					</div>
 				</div>
 
-				{/* Right Content - 3D Marquee */}
-				<div className="hidden lg:block">
-					<ThreeDMarqueeDemo />
+				{/* Right Content - Grid Motion */}
+				<div className="hidden lg:flex lg:items-center lg:justify-center">
+					<GridMotionDemo />
 				</div>
 			</div>
 

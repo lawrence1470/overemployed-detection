@@ -115,10 +115,10 @@ export function SohamSection() {
 					{/* Clean CTA */}
 					<div className="mt-12">
 						<a
-							href="/sign-in"
+							href="#waitlist"
 							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
 						>
-							Detect the Next Soham
+							Join Waitlist
 						</a>
 					</div>
 				</div>

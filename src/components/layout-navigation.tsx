@@ -46,10 +46,10 @@ export function LayoutNavigation() {
 			</div>
 
 			<a
-				href="#contact"
+				href="#waitlist"
 				className="inline-block rounded-lg bg-white px-6 py-2 font-medium text-black transition-colors hover:bg-gray-100"
 			>
-				Get Started
+				Join Waitlist
 			</a>
 		</nav>
 	);

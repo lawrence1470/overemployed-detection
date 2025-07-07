@@ -135,10 +135,10 @@ export function MoonlightingSection() {
 					{/* Simple CTA */}
 					<div className="fade-in mt-12">
 						<a
-							href="/sign-in"
+							href="#waitlist"
 							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
 						>
-							Stop the Double-Booking
+							Join Waitlist
 						</a>
 					</div>
 				</div>
