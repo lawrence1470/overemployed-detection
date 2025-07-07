@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SplitText from "~/components/ui/split-text";
+import ThreeDMarqueeDemo from "~/components/3d-marquee-demo";
 
 export function HeroSection() {
 	return (
@@ -56,62 +57,72 @@ export function HeroSection() {
 			</div>
 
 			{/* Hero Content */}
-			<div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 pt-24">
-				{/* Simple badge */}
-				<div className="mb-6 flex items-center space-x-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-2 backdrop-blur-sm">
-					<div className="h-2 w-2 rounded-full bg-blue-400" />
-					<span className="text-gray-300 text-sm">
-						Employee Verification Platform
-					</span>
+			<div className="relative z-10 grid min-h-screen grid-cols-1 items-center justify-center px-4 pt-24 lg:grid-cols-2 lg:gap-8">
+				{/* Left Content */}
+				<div className="flex flex-col items-center justify-center lg:items-start">
+					{/* Simple badge */}
+					<div className="mb-6 flex items-center space-x-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-2 backdrop-blur-sm">
+						<div className="h-2 w-2 rounded-full bg-blue-400" />
+						<span className="text-gray-300 text-sm">
+							Employee Verification Platform
+						</span>
+					</div>
+
+					{/* Main Heading */}
+					<div className="mb-4 text-center lg:text-left">
+						<SplitText
+							text="Are We Hiring"
+							className="block font-bold text-5xl text-white leading-tight md:text-7xl"
+							delay={80}
+							duration={1.0}
+							ease="power3.out"
+							splitType="chars"
+							from={{ opacity: 0, y: 60, rotationX: -90 }}
+							to={{ opacity: 1, y: 0, rotationX: 0 }}
+							threshold={0.8}
+							rootMargin="0px"
+							textAlign="left"
+						/>
+						<SplitText
+							text="the Same Guy?"
+							className="block font-bold text-5xl text-white leading-tight md:text-7xl"
+							delay={60}
+							duration={1.0}
+							ease="power3.out"
+							splitType="chars"
+							from={{ opacity: 0, y: 60, rotationX: -90 }}
+							to={{ opacity: 1, y: 0, rotationX: 0 }}
+							threshold={0.8}
+							rootMargin="0px"
+							textAlign="left"
+						/>
+					</div>
+
+					{/* Simple subtitle */}
+					<p className="mb-8 max-w-2xl text-center text-gray-400 text-lg leading-relaxed lg:text-left">
+						Detect dual employment conflicts with advanced verification technology
+					</p>
+
+					{/* Clean CTA buttons */}
+					<div className="flex flex-col items-center gap-4 sm:flex-row lg:items-start">
+						<a
+							href="#contact"
+							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
+						>
+							Start Verification
+						</a>
+						<button
+							type="button"
+							className="rounded-lg border border-gray-600 px-8 py-3 font-medium text-white transition-colors hover:border-gray-400"
+						>
+							Learn More
+						</button>
+					</div>
 				</div>
 
-				{/* Main Heading */}
-				<div className="mb-4 text-center">
-					<SplitText
-						text="Are We Hiring"
-						className="block font-bold text-5xl text-white leading-tight md:text-7xl"
-						delay={80}
-						duration={1.0}
-						ease="power3.out"
-						splitType="chars"
-						from={{ opacity: 0, y: 60, rotationX: -90 }}
-						to={{ opacity: 1, y: 0, rotationX: 0 }}
-						threshold={0.8}
-						rootMargin="0px"
-					/>
-					<SplitText
-						text="the Same Guy?"
-						className="block font-bold text-5xl text-white leading-tight md:text-7xl"
-						delay={60}
-						duration={1.0}
-						ease="power3.out"
-						splitType="chars"
-						from={{ opacity: 0, y: 60, rotationX: -90 }}
-						to={{ opacity: 1, y: 0, rotationX: 0 }}
-						threshold={0.8}
-						rootMargin="0px"
-					/>
-				</div>
-
-				{/* Simple subtitle */}
-				<p className="mb-8 max-w-2xl text-center text-gray-400 text-lg leading-relaxed">
-					Detect dual employment conflicts with advanced verification technology
-				</p>
-
-				{/* Clean CTA buttons */}
-				<div className="flex flex-col items-center gap-4 sm:flex-row">
-					<a
-						href="#contact"
-						className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
-					>
-						Start Verification
-					</a>
-					<button
-						type="button"
-						className="rounded-lg border border-gray-600 px-8 py-3 font-medium text-white transition-colors hover:border-gray-400"
-					>
-						Learn More
-					</button>
+				{/* Right Content - 3D Marquee */}
+				<div className="hidden lg:block">
+					<ThreeDMarqueeDemo />
 				</div>
 			</div>
 
