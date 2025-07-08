@@ -140,29 +140,41 @@ export default function OveremployedRedditSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-red-500/20">
+              <motion.a
+                href="https://www.reddit.com/r/overemployed/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl border border-red-500/20 cursor-pointer group transition-all duration-300 hover:border-red-500/40 hover:shadow-red-500/20"
+                whileHover={{ scale: 1.02, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <Image
                   src="/assets/reddit.png"
                   alt="Reddit Overemployed Community"
                   width={600}
                   height={600}
-                  className="w-full h-auto"
+                  className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center gap-4 text-white">
-                    <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center group-hover:bg-red-400 transition-colors duration-300">
                       <span className="text-xl font-bold">OE</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg">r/overemployed</h3>
+                      <h3 className="font-bold text-lg group-hover:text-red-300 transition-colors duration-300">r/overemployed</h3>
                       <p className="text-white/80 text-sm">
                         451,827 deceptive employees • 2,143 online
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+                
+                {/* Click indicator */}
+                <div className="absolute top-4 right-4 bg-red-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Visit Subreddit
+                </div>
+              </motion.a>
 
               {/* Floating Warning Badge */}
               <motion.div

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { WobbleCard } from "~/components/ui/wobble-card";
+import { PointerHighlight } from "~/components/ui/pointer-highlight";
 
 export default function ProblemSolutionSection() {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,8 +72,14 @@ export default function ProblemSolutionSection() {
               $17K to replace each mis-hire
             </h2>
             <p className="text-left text-base md:text-lg text-white/80 leading-relaxed">
-              42 days + $4.7K to hire, then months to discover the truth. The
-              real cost of overemployed hires is devastating.
+              <PointerHighlight
+                pointerClassName="text-purple-400"
+                rectangleClassName="border-purple-400/50"
+              >
+                42 days + $4.7K to hire
+              </PointerHighlight>
+              , then months to discover the truth. The real cost of overemployed
+              hires is devastating.
             </p>
           </div>
         </WobbleCard>

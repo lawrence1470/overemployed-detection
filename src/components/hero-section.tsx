@@ -44,7 +44,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-black/50 to-purple-950/30" />
         <motion.div
-          className="absolute top-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-600/5 blur-3xl"
+          className="absolute top-1/3 left-1/3 h-32 w-32 sm:h-48 sm:w-48 md:h-64 md:w-64 lg:h-96 lg:w-96 rounded-full bg-blue-600/5 blur-2xl sm:blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.02, 0.05, 0.02],
@@ -56,7 +56,7 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute right-1/3 bottom-1/3 h-96 w-96 rounded-full bg-purple-600/5 blur-3xl"
+          className="absolute right-1/3 bottom-1/3 h-32 w-32 sm:h-48 sm:w-48 md:h-64 md:w-64 lg:h-96 lg:w-96 rounded-full bg-purple-600/5 blur-2xl sm:blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.02, 0.05, 0.02],
@@ -68,7 +68,7 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-indigo-600/2 blur-2xl transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 h-24 w-24 sm:h-32 sm:w-32 md:h-48 md:w-48 lg:h-64 lg:w-64 rounded-full bg-indigo-600/2 blur-xl sm:blur-2xl transform -translate-x-1/2 -translate-y-1/2"
           animate={{
             rotate: 360,
             scale: [1, 1.3, 1],
@@ -165,22 +165,51 @@ export function HeroSection() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-20 flex min-h-screen items-center justify-center px-4">
+      <div className="relative z-20 flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         {/* Centered Content */}
-        <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
+        <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto w-full">
+          {/* Premium badge with magnetic hover - Mobile optimized */}
+          <motion.div
+            className="mb-4 sm:mb-6 md:mb-8 flex items-center space-x-2 rounded-full border border-white/20 bg-white/10 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 backdrop-blur-xl shadow-2xl cursor-pointer group"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            whileHover={{
+              scale: 1.05,
+              y: -2,
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+            }}
+          >
+            <motion.div
+              className="h-2 w-2 rounded-full bg-blue-400"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.7, 1, 0.7],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <span className="text-white/90 text-xs sm:text-sm font-medium group-hover:text-white transition-colors">
+              Employee Verification Platform
+            </span>
+          </motion.div>
+
           {/* Premium Main Heading with magnetic effect */}
           <motion.div
-            className="mb-6 text-center relative"
+            className="mb-4 sm:mb-6 md:mb-8 text-center relative w-full"
             style={{ x: springX, y: springY }}
           >
             <div className="relative">
-              {/* Glow effect behind text */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl rounded-lg" />
+              {/* Glow effect behind text - smaller on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl sm:blur-2xl md:blur-3xl rounded-lg scale-50 sm:scale-75 md:scale-100" />
 
               <div className="text-center">
                 <SplitText
                   text="Are We Hiring the Same"
-                  className="block font-bold text-3xl sm:text-4xl text-white leading-tight md:text-5xl lg:text-6xl xl:text-7xl relative z-10"
+                  className="block font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white leading-[1.1] sm:leading-tight relative z-10 px-2"
                   delay={80}
                   duration={1.0}
                   ease="power3.out"
@@ -193,7 +222,7 @@ export function HeroSection() {
                 />
                 <SplitText
                   text="Guy?"
-                  className="block font-bold text-3xl sm:text-4xl text-white leading-tight md:text-5xl lg:text-6xl xl:text-7xl relative z-10"
+                  className="block font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white leading-[1.1] sm:leading-tight relative z-10 mt-1 sm:mt-2"
                   delay={120}
                   duration={1.0}
                   ease="power3.out"
@@ -210,7 +239,7 @@ export function HeroSection() {
 
           {/* Premium subtitle with enhanced typography */}
           <motion.p
-            className="mb-12 max-w-3xl text-center text-white/80 text-xl md:text-2xl leading-relaxed font-light tracking-wide"
+            className="mb-6 sm:mb-8 md:mb-12 max-w-3xl text-center text-white/80 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed font-light tracking-wide px-2 sm:px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -220,11 +249,11 @@ export function HeroSection() {
           </motion.p>
 
           {/* Premium CTA buttons with advanced interactions */}
-          <div className="flex flex-col items-center gap-4 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-4 w-full px-2 sm:px-4">
             <HoverBorderGradient
               as="a"
-              containerClassName="rounded-xl"
-              className="bg-white text-black px-8 py-3 font-medium hover:bg-gray-50 transition-colors"
+              containerClassName="rounded-xl w-full sm:w-auto"
+              className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 font-medium hover:bg-gray-50 transition-colors text-sm sm:text-base w-full sm:w-auto text-center"
               duration={1}
               clockwise={true}
               {...{ href: "/waitlist" }}
@@ -237,7 +266,7 @@ export function HeroSection() {
 
       {/* Premium bottom elements with subtle animations */}
       <motion.div
-        className="absolute bottom-4 left-8 text-white/60 text-xs font-medium"
+        className="absolute bottom-4 left-4 sm:left-8 text-white/60 text-[10px] sm:text-xs font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
@@ -251,7 +280,7 @@ export function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute right-8 bottom-4 text-white/60 text-xs font-medium"
+        className="absolute right-4 sm:right-8 bottom-4 text-white/60 text-[10px] sm:text-xs font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2, duration: 1 }}
