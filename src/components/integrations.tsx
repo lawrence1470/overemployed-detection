@@ -200,6 +200,149 @@ export default function IntegrationsSection() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Security & Compliance Section */}
+        <motion.div 
+          className="mt-24 lg:mt-32 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 text-white/80 text-sm font-medium mb-8 backdrop-blur-sm border border-white/10"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            🔒 Enterprise Security
+          </motion.div>
+
+          <motion.p 
+            className={cn(getComponentClasses.body('lg'), "text-white/80 max-w-4xl mx-auto leading-relaxed mb-12")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            VerifyHire is SOC 2 compliant with enterprise-grade security standards, GDPR compliance, and end-to-end encryption. We take your security seriously.
+          </motion.p>
+
+          {/* Security Logos */}
+          <motion.div 
+            className="flex flex-wrap items-center justify-center gap-8 lg:gap-12 opacity-70"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 0.7, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {/* SOC 2 Logo */}
+            <motion.div 
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">SOC</span>
+              </div>
+              <span className="text-white text-sm font-medium">SOC 2 Type II</span>
+            </motion.div>
+
+            {/* GDPR Logo */}
+            <motion.div 
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-8 h-8 rounded bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">GDPR</span>
+              </div>
+              <span className="text-white text-sm font-medium">GDPR Compliant</span>
+            </motion.div>
+
+            {/* ISO 27001 Logo */}
+            <motion.div 
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-8 h-8 rounded bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">ISO</span>
+              </div>
+              <span className="text-white text-sm font-medium">ISO 27001</span>
+            </motion.div>
+
+            {/* SSL/TLS Logo */}
+            <motion.div 
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-8 h-8 rounded bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">SSL</span>
+              </div>
+              <span className="text-white text-sm font-medium">256-bit SSL</span>
+            </motion.div>
+
+            {/* HIPAA Logo */}
+            <motion.div 
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-8 h-8 rounded bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">HIPAA</span>
+              </div>
+              <span className="text-white text-sm font-medium">HIPAA Ready</span>
+            </motion.div>
+          </motion.div>
+
+          {/* Security Features Grid */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                icon: "🔐",
+                title: "End-to-End Encryption",
+                desc: "All data encrypted in transit and at rest with AES-256"
+              },
+              {
+                icon: "🛡️",
+                title: "Zero Trust Architecture",
+                desc: "Multi-factor authentication and role-based access controls"
+              },
+              {
+                icon: "📋",
+                title: "Audit Trails",
+                desc: "Complete audit logs for compliance and forensic analysis"
+              }
+            ].map((feature, index) => (
+              <motion.div 
+                key={index}
+                className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -4 }}
+              >
+                <div className="text-2xl mb-4">{feature.icon}</div>
+                <h4 className="text-white font-semibold mb-2 group-hover:text-white/90 transition-colors">
+                  {feature.title}
+                </h4>
+                <p className="text-white/70 text-sm leading-relaxed group-hover:text-white/80 transition-colors">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

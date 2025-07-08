@@ -15,9 +15,10 @@ import { HowItWorksSection } from "~/components/how-it-works";
 import { GlowingFeaturesSection } from "~/components/glowing-features-section";
 import { MoonlightingSection } from "~/components/moonlighting-section";
 import { SohamSection } from "~/components/soham-section";
+import { FAQSection } from "~/components/faq-section";
 import { WaitlistSection } from "~/components/waitlist-section";
 import IntegrationsSection from "~/components/integrations";
-import WobbleCardDemo from "~/components/wobble-card-demo";
+import ProblemSolutionSection from "~/components/problem-solution-section";
 import OveremployedRedditSection from "~/components/overemployed-reddit-section";
 
 // Premium Floating Elements with Glassmorphism
@@ -94,54 +95,6 @@ function FloatingElements() {
           }}
         />
       ))}
-    </div>
-  );
-}
-
-// Section Divider Component
-function SectionDivider({
-  variant = "wave",
-}: {
-  variant?: "wave" | "diagonal" | "curve";
-}) {
-  if (variant === "wave") {
-    return (
-      <div className="relative h-20 overflow-hidden">
-        <svg
-          className="absolute bottom-0 w-full h-20"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <motion.path
-            d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
-            fill="currentColor"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          />
-        </svg>
-      </div>
-    );
-  }
-
-  if (variant === "diagonal") {
-    return (
-      <div className="relative h-20 overflow-hidden transform -skew-y-1">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" />
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative h-16 overflow-hidden">
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-        initial={{ x: "-100%" }}
-        whileInView={{ x: "100%" }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-        viewport={{ once: true }}
-      />
     </div>
   );
 }
@@ -256,14 +209,23 @@ export default function Home() {
         </motion.div>
       </AnimatedSection>
 
-      {/* Transition */}
-      <div className="relative z-10 text-gray-200">
-        <SectionDivider variant="wave" />
-      </div>
-
       {/* Features Section */}
       <AnimatedSection className="relative z-10 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
         <FeaturesSection />
+      </AnimatedSection>
+
+      {/* How It Works Section */}
+      <AnimatedSection direction="up" delay={0.2} className="relative z-10">
+        <div className="relative overflow-hidden">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            viewport={{ once: true }}
+          />
+          <HowItWorksSection />
+        </div>
       </AnimatedSection>
 
       {/* Glowing Features with Parallax */}
@@ -329,7 +291,7 @@ export default function Home() {
               ease: "easeInOut",
             }}
           />
-          <WobbleCardDemo />
+          <ProblemSolutionSection />
         </div>
       </AnimatedSection>
 
@@ -358,11 +320,6 @@ export default function Home() {
         </motion.div>
       </AnimatedSection>
 
-      {/* Diagonal Transition */}
-      <div className="relative z-10 text-gray-800">
-        <SectionDivider variant="diagonal" />
-      </div>
-
       {/* Moonlighting with Floating Animation */}
       <AnimatedSection direction="left" delay={0.2} className="relative z-10">
         <div className="relative">
@@ -378,6 +335,20 @@ export default function Home() {
             }}
           />
           <MoonlightingSection />
+        </div>
+      </AnimatedSection>
+
+      {/* FAQ Section */}
+      <AnimatedSection direction="up" delay={0.2} className="relative z-10">
+        <div className="relative overflow-hidden">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            viewport={{ once: true }}
+          />
+          <FAQSection />
         </div>
       </AnimatedSection>
 

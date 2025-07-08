@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { WobbleCard } from "~/components/ui/wobble-card";
 
-export default function WobbleCardDemo() {
+export default function ProblemSolutionSection() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGetStarted = async () => {

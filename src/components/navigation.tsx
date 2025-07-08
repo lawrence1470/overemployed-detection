@@ -69,15 +69,6 @@ export function Navigation() {
 
       {/* Enhanced CTA Button */}
       <div className="flex items-center space-x-4">
-        {/* Sign In Link (hidden on mobile) */}
-        <motion.a
-          href="/sign-in"
-          className="hidden md:block text-white/70 hover:text-white transition-colors duration-200 font-medium"
-          whileHover={{ scale: 1.05 }}
-        >
-          Sign In
-        </motion.a>
-
         {/* Premium CTA Button */}
         <HoverBorderGradient
           as="a"

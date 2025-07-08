@@ -1,156 +1,236 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "motion/react";
+import { getComponentClasses } from "~/lib/design-system";
+import { cn } from "~/lib/utils";
 
 export function SohamSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black text-white">
-      {/* Minimal Background */}
+    <section className="relative py-32 bg-black text-white overflow-hidden">
+      {/* Premium Minimal Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
-        <div className="absolute top-1/4 right-1/3 h-96 w-96 rounded-full bg-red-500/5 blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-orange-500/5 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-black to-zinc-950" />
+        <motion.div
+          className="absolute top-1/3 right-1/4 h-96 w-96 rounded-full bg-red-500/5 blur-3xl"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.05, 0.1, 0.05],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       </div>
 
-      {/* Minimal Floating Elements */}
+      {/* Subtle Floating Elements */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Simple network lines */}
-        <svg className="absolute inset-0 h-full w-full opacity-10">
-          <line
-            x1="10%"
-            y1="20%"
-            x2="90%"
-            y2="80%"
-            stroke="white"
-            strokeWidth="1"
-          />
-          <line
-            x1="90%"
-            y1="20%"
-            x2="10%"
-            y2="80%"
-            stroke="white"
-            strokeWidth="1"
-          />
-        </svg>
-
-        {/* Minimal floating cards */}
-        <div className="absolute top-32 right-8 hidden rounded-xl border border-gray-800 bg-gray-900/50 p-3 backdrop-blur-sm lg:block">
-          <div className="mb-1 flex items-center space-x-2">
-            <div className="h-2 w-2 rounded-full bg-red-400" />
-            <span className="text-gray-300 text-xs">Portfolio Alert</span>
+        <motion.div
+          className="absolute top-20 right-12 hidden lg:block"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
+          <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl p-4">
+            <div className="flex items-center space-x-3 mb-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-400/60" />
+              <span className="text-xs text-white/40 font-medium">
+                PORTFOLIO
+              </span>
+            </div>
+            <div className="text-2xl font-light text-white/90">4</div>
+            <div className="text-xs text-white/30">Companies</div>
           </div>
-          <div className="font-semibold text-base text-white">4</div>
-          <div className="text-gray-400 text-xs">Companies Funded</div>
-        </div>
+        </motion.div>
 
-        <div className="absolute bottom-32 left-8 hidden rounded-xl border border-gray-800 bg-gray-900/50 p-3 backdrop-blur-sm lg:block">
-          <div className="mb-1 flex items-center space-x-2">
-            <div className="h-2 w-2 rounded-full bg-orange-400" />
-            <span className="text-gray-300 text-xs">Efficiency Drop</span>
+        <motion.div
+          className="absolute bottom-20 left-12 hidden lg:block"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 1 }}
+        >
+          <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl p-4">
+            <div className="flex items-center space-x-3 mb-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-orange-400/60" />
+              <span className="text-xs text-white/40 font-medium">
+                EFFICIENCY
+              </span>
+            </div>
+            <div className="text-2xl font-light text-white/90">10%</div>
+            <div className="text-xs text-white/30">Per Role</div>
           </div>
-          <div className="font-semibold text-base text-white">90%</div>
-          <div className="text-gray-400 text-xs">Per Employee</div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Content - Better Centered */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-20 w-full">
-        {/* Simple badge */}
-        <div className="mb-8 flex items-center space-x-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-2 backdrop-blur-sm">
-          <div className="h-2 w-2 rounded-full bg-red-400" />
-          <span className="text-gray-300 text-sm">
-            🧠 Serial Optimization Alert
-          </span>
-        </div>
+      {/* Main Content */}
+      <div className={cn(getComponentClasses.container(), "relative z-10")}>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          {/* Left Side - Large Profile */}
+          <motion.div
+            className="flex flex-col items-center lg:items-start space-y-8"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            {/* Premium Badge */}
+            <motion.div
+              className="inline-flex items-center space-x-3 px-6 py-3 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-xl"
+              whileHover={{
+                scale: 1.02,
+                borderColor: "rgba(255,255,255,0.15)",
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="w-2 h-2 rounded-full bg-red-400/80" />
+              <span className="text-sm text-white/70 font-medium">
+                SERIAL OPTIMIZATION
+              </span>
+            </motion.div>
 
-        {/* Main Content */}
-        <div className="max-w-4xl text-center">
-          {/* Profile Image */}
-          <div className="mb-8 flex justify-center">
+            {/* Large Profile Image */}
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 blur-xl scale-110"></div>
-              <div className="relative overflow-hidden rounded-full border-4 border-red-400/30 shadow-2xl">
+              <motion.div
+                className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-red-500/10 via-orange-500/5 to-red-500/10 blur-2xl"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
                 <Image
                   src="/assets/soham.JPG"
                   alt="Soham Parekh"
-                  width={200}
-                  height={200}
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  width={400}
+                  height={400}
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   priority
                 />
-              </div>
-              {/* Animated ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-red-400/50 animate-pulse"></div>
-            </div>
-          </div>
-
-          <h2 className="mb-8 font-bold text-4xl text-white md:text-6xl lg:text-7xl leading-tight">
-            Don't Hire Another{" "}
-            <span className="relative">
-              <span className="relative z-10 border-b-2 border-red-400 pb-1">
-                Soham Parekh
-              </span>
-            </span>
-          </h2>
-
-          <p className="mb-10 text-gray-400 text-xl md:text-2xl max-w-2xl mx-auto">
-            He's smart. Too smart. For all four of your competitors.
-          </p>
-
-          <div className="mb-10 flex items-center justify-center space-x-6 text-5xl">
-            <span>🧢</span>
-            <span className="text-gray-400">→</span>
-            <span>🧑‍💻</span>
-            <span className="text-gray-400">→</span>
-            <span>👻</span>
-          </div>
-
-          <div className="space-y-6 text-gray-400 mb-16">
-            <p className="text-xl md:text-2xl">
-              You thought you hired a 10x engineer.
-            </p>
-            <p className="text-xl md:text-2xl">
-              Turns out you hired 10% of a 10x engineer.
-            </p>
-            <p className="text-lg md:text-xl">
-              Stop funding a man's entire Series A portfolio with your payroll.
-            </p>
-          </div>
-
-          {/* Clean Stats */}
-          <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3 max-w-3xl mx-auto">
-            <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-              <div className="mb-2 font-bold text-3xl text-white">10%</div>
-              <div className="text-gray-400 text-sm">
-                of attention per employer
+                {/* Subtle overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
             </div>
-            <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-              <div className="mb-2 font-bold text-3xl text-white">4x</div>
-              <div className="text-gray-400 text-sm">
-                salary dilution factor
-              </div>
-            </div>
-            <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-              <div className="mb-2 font-bold text-3xl text-white">$250K</div>
-              <div className="text-gray-400 text-sm">
-                wasted on ghost productivity
-              </div>
-            </div>
-          </div>
 
-          {/* Clean CTA */}
-          <div className="mt-8">
-            <a
-              href="#waitlist"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-lg bg-white px-10 py-4 font-medium text-black text-lg transition-colors hover:bg-gray-100"
+            {/* Minimal Stats Row */}
+            <div className="flex space-x-6 pt-4">
+              {[
+                { value: "10%", label: "attention" },
+                { value: "4x", label: "dilution" },
+                { value: "$250K", label: "wasted" },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-xl font-light text-white/90 mb-1">
+                    {item.value}
+                  </div>
+                  <div className="text-xs text-white/40 uppercase tracking-wider">
+                    {item.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right Side - Clean Content */}
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-6">
+              <h2 className="text-5xl lg:text-6xl font-light text-white leading-tight">
+                Don't Hire Another{" "}
+                <span className="relative">
+                  <span className="relative z-10 font-medium border-b border-red-400/50 pb-1">
+                    Soham Parekh
+                  </span>
+                </span>
+              </h2>
+
+              <p className="text-xl text-white/60 font-light leading-relaxed max-w-lg">
+                He's smart. Too smart. For all four of your competitors.
+              </p>
+            </div>
+
+            <div className="space-y-4 pt-4">
+              <motion.p
+                className="text-lg text-white/70 font-light"
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                You thought you hired a 10x engineer.
+              </motion.p>
+              <motion.p
+                className="text-lg text-white/70 font-light"
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Turns out you hired 10% of a 10x engineer.
+              </motion.p>
+              <motion.p
+                className="text-base text-red-400/80 font-light pt-2"
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Stop funding a man's entire Series A portfolio with your
+                payroll.
+              </motion.p>
+            </div>
+
+            {/* Premium CTA */}
+            <motion.div
+              className="pt-8"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              Join Waitlist
-            </a>
-          </div>
+              <motion.a
+                href="#waitlist"
+                className="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl border border-white/20 bg-white/[0.03] backdrop-blur-xl text-white font-medium transition-all duration-300 hover:bg-white/[0.08] hover:border-white/30"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Join Waitlist</span>
+                <motion.svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  whileHover={{ x: 2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </motion.svg>
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
