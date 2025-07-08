@@ -1,0 +1,46 @@
+# VerifyHire Robots.txt
+# https://verifyhire.com
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /early-access/checkout
+
+# Allow specific paths for better indexing
+Allow: /waitlist
+Allow: /about
+Allow: /features
+Allow: /pricing
+
+# Sitemap location
+Sitemap: https://verifyhire.com/sitemap.xml
+
+# Crawl-delay for responsible crawling
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

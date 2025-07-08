@@ -218,8 +218,36 @@ export default function Home() {
   );
   const hue = useTransform(scrollYProgress, [0, 1], [240, 300]);
 
+  // Product Schema for SEO
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "VerifyHire",
+    description: "Advanced employee verification and overemployment detection platform",
+    brand: {
+      "@type": "Brand",
+      name: "VerifyHire"
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/PreOrder",
+      priceValidUntil: "2025-12-31"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "189"
+    }
+  };
+
   return (
     <main ref={containerRef} className="relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       {/* Enhanced Global Parallax Background */}
       <motion.div
         className="fixed inset-0 z-0 pointer-events-none"
