@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
         >
           <Link
             href="/"
-            className="mb-8 inline-flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
+            className="mb-8 inline-flex items-center gap-2 text-white transition-colors hover:text-gray-300"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home

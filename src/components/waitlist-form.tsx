@@ -292,9 +292,9 @@ export function WaitlistForm() {
                       as="div"
                       containerClassName="w-full rounded-xl"
                       className={cn(
-                        "relative flex min-h-[56px] w-full cursor-pointer items-center justify-center overflow-hidden bg-gray-900 border border-gray-700 px-8 py-5 font-semibold text-white transition-all duration-300 hover:bg-gray-800",
+                        "relative flex min-h-[56px] w-full cursor-pointer items-center justify-center overflow-hidden bg-white px-8 py-5 font-semibold text-black transition-all duration-300 hover:bg-gray-100",
                         isSubmitting &&
-                          "cursor-not-allowed border-gray-600/20 bg-gray-600/30 text-gray-500 hover:bg-gray-600/30"
+                          "cursor-not-allowed opacity-50 hover:bg-gray-100"
                       )}
                     >
                       <span className="relative z-10 flex h-full items-center justify-center gap-2 leading-none">
@@ -313,8 +313,8 @@ export function WaitlistForm() {
                           </>
                         ) : (
                           <>
-                            <span className="text-white">Join Waitlist</span>
-                            <ArrowRight className="h-4 w-4 text-white transition-all duration-200 group-hover:translate-x-1" />
+                            <span className="text-black">Join Waitlist</span>
+                            <ArrowRight className="h-4 w-4 text-black transition-all duration-200 group-hover:translate-x-1" />
                           </>
                         )}
                       </span>

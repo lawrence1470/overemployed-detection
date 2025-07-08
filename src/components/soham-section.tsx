@@ -226,7 +226,7 @@ export function SohamSection() {
             >
               <motion.a
                 href="#waitlist"
-                className="inline-flex items-center space-x-3 rounded-2xl border border-white/20 bg-white/[0.03] px-8 py-4 font-medium text-white backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
+                className="inline-flex items-center space-x-3 rounded-2xl border border-gray-300 bg-white px-8 py-4 font-medium text-black transition-all duration-300 hover:border-gray-400 hover:bg-gray-100"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >

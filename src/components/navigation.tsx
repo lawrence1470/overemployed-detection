@@ -66,15 +66,15 @@ export function Navigation() {
         <HoverBorderGradient
           as="a"
           containerClassName="rounded-xl"
-          className="whitespace-nowrap bg-gray-900 border border-gray-700 px-6 py-3 font-semibold text-white text-sm shadow-lg transition-all duration-200 hover:bg-gray-800 md:text-base"
+          className="whitespace-nowrap bg-white border border-gray-300 px-6 py-3 font-semibold text-black text-sm shadow-lg transition-all duration-200 hover:bg-gray-100 md:text-base"
           duration={1}
           clockwise={true}
           {...{ href: "/waitlist" }}
         >
-          <span className="flex items-center space-x-2">
-            <span>Join Waitlist</span>
+          <span className="flex items-center space-x-2 text-black">
+            <span className="text-black">Join Waitlist</span>
             <svg
-              className="h-4 w-4"
+              className="h-4 w-4 text-black"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

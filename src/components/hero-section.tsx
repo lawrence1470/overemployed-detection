@@ -276,7 +276,7 @@ export function HeroSection() {
             <HoverBorderGradient
               as="a"
               containerClassName="rounded-xl"
-              className="bg-gray-900 border border-gray-700 px-8 py-3 text-center font-medium text-white text-sm transition-colors hover:bg-gray-800 sm:px-10 sm:py-4 sm:text-base"
+              className="bg-white border border-gray-300 px-8 py-3 text-center font-medium text-black text-sm transition-colors hover:bg-gray-100 sm:px-10 sm:py-4 sm:text-base"
               duration={1}
               clockwise={true}
               {...{ href: "/waitlist" }}
