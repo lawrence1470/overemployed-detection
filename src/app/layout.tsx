@@ -41,7 +41,7 @@ export default function RootLayout({
       <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
         <TRPCReactProvider>
           <ComingSoonWrapper
-            comingSoonMode={env.COMING_SOON_MODE === "true"}
+            comingSoonMode={env.COMING_SOON_MODE.trim() === "true"}
             isDevelopment={env.NODE_ENV === "development"}
           >
             <PremiumLoader />

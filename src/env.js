@@ -17,7 +17,7 @@ export const env = createEnv({
 		GOOGLE_CLIENT_SECRET: z.string().optional(),
 		RESEND_API_KEY: z.string().optional(),
 		FROM_EMAIL: z.string().email().optional(),
-		COMING_SOON_MODE: z.string().optional().default("false"),
+		COMING_SOON_MODE: z.string().optional().default("false").transform(val => val?.trim()),
 	},
 
 	/**

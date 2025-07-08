@@ -9,6 +9,7 @@ import { getComponentClasses, designSystem } from "~/lib/design-system";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 import { ArrowRight, Building2, Users, ChevronDown, Check, Mail } from "lucide-react";
 import { api } from "~/trpc/react";
+import { WaitlistLoader } from "~/components/waitlist-loader";
 
 interface FormData {
   email: string;
@@ -49,23 +50,33 @@ export function WaitlistForm() {
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
   const [showHrisDropdown, setShowHrisDropdown] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   
   const joinWaitlistMutation = api.waitlist.join.useMutation({
     onSuccess: (data) => {
       if (data.success) {
-        setStep(2);
+        // Show loader before transitioning to step 2
+        setShowLoader(true);
       } else {
         // Handle case where user is already on waitlist
         alert(data.message);
+        setIsSubmitting(false);
+        setShowLoader(false);
       }
-      setIsSubmitting(false);
     },
     onError: (error) => {
       console.error('Failed to join waitlist:', error);
       alert('Failed to join waitlist. Please try again.');
       setIsSubmitting(false);
+      setShowLoader(false);
     },
   });
+
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+    setIsSubmitting(false);
+    setStep(2);
+  };
 
   const handleSubmitStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,8 +107,17 @@ export function WaitlistForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <AnimatePresence mode="wait">
+    <>
+      {/* Waitlist Loader */}
+      <WaitlistLoader 
+        isLoading={showLoader}
+        onComplete={handleLoaderComplete}
+        duration={2800}
+        email={formData.email}
+      />
+      
+      <div className="max-w-2xl mx-auto">
+        <AnimatePresence mode="wait">
         {step === 1 ? (
           <motion.div
             key="step1"
@@ -161,7 +181,7 @@ export function WaitlistForm() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-lg overflow-hidden"
+                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden"
                       >
                         {employeeCountOptions.map((option) => (
                           <button
@@ -172,9 +192,9 @@ export function WaitlistForm() {
                               setShowEmployeeDropdown(false);
                             }}
                             className={cn(
-                              "w-full text-left px-3 py-2 text-sm text-white/80",
-                              "hover:bg-gray-800 hover:text-white transition-colors",
-                              formData.employeeCount === option.label && "bg-gray-800 text-white"
+                              "w-full text-left px-3 py-2 text-sm text-white",
+                              "hover:bg-gray-800/80 hover:text-white transition-colors",
+                              formData.employeeCount === option.label && "bg-gray-700 text-white"
                             )}
                           >
                             {option.label}
@@ -215,7 +235,7 @@ export function WaitlistForm() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-lg overflow-hidden max-h-60 overflow-y-auto"
+                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden max-h-60 overflow-y-auto"
                       >
                         {hrisSystems.map((system) => (
                           <button
@@ -226,9 +246,9 @@ export function WaitlistForm() {
                               setShowHrisDropdown(false);
                             }}
                             className={cn(
-                              "w-full text-left px-3 py-2 text-sm text-white/80",
-                              "hover:bg-gray-800 hover:text-white transition-colors",
-                              formData.hrisSystem === system && "bg-gray-800 text-white"
+                              "w-full text-left px-3 py-2 text-sm text-white",
+                              "hover:bg-gray-800/80 hover:text-white transition-colors",
+                              formData.hrisSystem === system && "bg-gray-700 text-white"
                             )}
                           >
                             {system}
@@ -351,5 +371,6 @@ export function WaitlistForm() {
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }

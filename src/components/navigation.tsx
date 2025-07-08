@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import VerifyHireLogo from "~/components/ui/verifyhire-logo";
 
 export function Navigation() {
@@ -11,11 +11,14 @@ export function Navigation() {
   const navOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
   const navBlur = useTransform(scrollY, [0, 100], [8, 20]);
 
+  const updateScrolled = useCallback(() => {
+    setIsScrolled(window.scrollY > 50);
+  }, []);
+
   useEffect(() => {
-    const updateScrolled = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", updateScrolled);
     return () => window.removeEventListener("scroll", updateScrolled);
-  }, []);
+  }, [updateScrolled]);
 
   return (
     <motion.nav
@@ -33,7 +36,8 @@ export function Navigation() {
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       {/* Enhanced Logo */}
-      <motion.div
+      <motion.a
+        href="/"
         className="flex items-center space-x-3 group cursor-pointer"
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -54,7 +58,7 @@ export function Navigation() {
             Employee Verification
           </span>
         </div>
-      </motion.div>
+      </motion.a>
 
       {/* Enhanced CTA Button */}
       <div className="flex items-center space-x-4">
