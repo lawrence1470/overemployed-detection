@@ -17,7 +17,11 @@ export const env = createEnv({
 		GOOGLE_CLIENT_SECRET: z.string().optional(),
 		RESEND_API_KEY: z.string().optional(),
 		FROM_EMAIL: z.string().email().optional(),
-		COMING_SOON_MODE: z.string().optional().default("false").transform(val => val?.trim()),
+		COMING_SOON_MODE: z
+			.string()
+			.optional()
+			.default("false")
+			.transform((val) => val?.trim()),
 	},
 
 	/**
@@ -26,7 +30,11 @@ export const env = createEnv({
 	 * `NEXT_PUBLIC_`.
 	 */
 	client: {
-		NEXT_PUBLIC_SITE_URL: z.string().url().optional().default("https://verifyhire.com"),
+		NEXT_PUBLIC_SITE_URL: z
+			.string()
+			.url()
+			.optional()
+			.default("https://verifyhire.com"),
 	},
 
 	/**

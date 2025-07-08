@@ -1,54 +1,56 @@
-import { Resend } from 'resend';
-import { env } from '~/env';
-import { render } from '@react-email/render';
-import React from 'react';
-import { WaitlistConfirmationEmail } from '~/emails/waitlist-confirmation';
+import { render } from "@react-email/render";
+import React from "react";
+import { Resend } from "resend";
+import { WaitlistConfirmationEmail } from "~/emails/waitlist-confirmation";
+import { env } from "~/env";
 
 // Initialize Resend with API key
 const resend = new Resend(env.RESEND_API_KEY);
 
 interface WaitlistEmailData {
-  email: string;
-  employeeCount?: string;
-  hrisSystem?: string;
+	email: string;
+	employeeCount?: string;
+	hrisSystem?: string;
 }
 
 export async function sendWaitlistThankYouEmail(data: WaitlistEmailData) {
-  if (!env.RESEND_API_KEY || !env.FROM_EMAIL) {
-    console.warn('Resend API key or FROM_EMAIL not configured, skipping email send');
-    return { success: false, message: 'Email service not configured' };
-  }
+	if (!env.RESEND_API_KEY || !env.FROM_EMAIL) {
+		console.warn(
+			"Resend API key or FROM_EMAIL not configured, skipping email send",
+		);
+		return { success: false, message: "Email service not configured" };
+	}
 
-  try {
-    const emailHtml = await render(
-      React.createElement(WaitlistConfirmationEmail, {
-        email: data.email,
-        employeeCount: data.employeeCount,
-        hrisSystem: data.hrisSystem,
-      })
-    );
+	try {
+		const emailHtml = await render(
+			React.createElement(WaitlistConfirmationEmail, {
+				email: data.email,
+				employeeCount: data.employeeCount,
+				hrisSystem: data.hrisSystem,
+			}),
+		);
 
-    console.log('Email HTML type:', typeof emailHtml);
-    console.log('Email HTML length:', emailHtml?.length);
+		console.log("Email HTML type:", typeof emailHtml);
+		console.log("Email HTML length:", emailHtml?.length);
 
-    const result = await resend.emails.send({
-      from: env.FROM_EMAIL,
-      to: [data.email],
-      subject: 'You\'re on the VerifyHire waitlist',
-      html: String(emailHtml),
-    });
+		const result = await resend.emails.send({
+			from: env.FROM_EMAIL,
+			to: [data.email],
+			subject: "You're on the VerifyHire waitlist",
+			html: String(emailHtml),
+		});
 
-    console.log('Email sent successfully:', result);
-    return { success: true, data: result };
-  } catch (error) {
-    console.error('Failed to send email:', error);
-    return { success: false, error };
-  }
+		console.log("Email sent successfully:", result);
+		return { success: true, data: result };
+	} catch (error) {
+		console.error("Failed to send email:", error);
+		return { success: false, error };
+	}
 }
 
 // Legacy HTML template - kept for reference but not used
 function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
-  return `
+	return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -326,22 +328,34 @@ function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
                 <div class="email" style="color: #22c55e; font-weight: 600;">${data.email}</div>
             </div>
             
-            ${(data.employeeCount || data.hrisSystem) ? `
+            ${
+							data.employeeCount || data.hrisSystem
+								? `
             <div class="company-info">
-                ${data.employeeCount ? `
+                ${
+									data.employeeCount
+										? `
                 <div class="company-info-item">
                     <span class="company-info-label">Company Size</span>
                     <span class="company-info-value">${data.employeeCount}</span>
                 </div>
-                ` : ''}
-                ${data.hrisSystem ? `
+                `
+										: ""
+								}
+                ${
+									data.hrisSystem
+										? `
                 <div class="company-info-item">
                     <span class="company-info-label">Current HRIS</span>
                     <span class="company-info-value">${data.hrisSystem}</span>
                 </div>
-                ` : ''}
+                `
+										: ""
+								}
             </div>
-            ` : ''}
+            `
+								: ""
+						}
             
             <div class="threat-section" style="background: #1a0f08; border: 1px solid #3d1f0a;">
                 <div class="threat-title" style="color: #f97316;">Understanding the Threat</div>
@@ -394,14 +408,14 @@ function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
 }
 
 function getWaitlistThankYouEmailText(data: WaitlistEmailData): string {
-  return `
+	return `
 You're on the VerifyHire waitlist!
 
 Thank you for joining our waitlist. We'll notify you when we're ready for new customers.
 
 Confirmation sent to: ${data.email}
-${data.employeeCount ? `\nCompany Size: ${data.employeeCount}` : ''}
-${data.hrisSystem ? `Current HRIS: ${data.hrisSystem}` : ''}
+${data.employeeCount ? `\nCompany Size: ${data.employeeCount}` : ""}
+${data.hrisSystem ? `Current HRIS: ${data.hrisSystem}` : ""}
 
 UNDERSTANDING THE THREAT:
 - 451K+ r/Overemployed Members
