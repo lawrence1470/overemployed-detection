@@ -18,38 +18,30 @@ const shockingThreads: RedditThread[] = [
   {
     title: "Is it time theft to be efficient?",
     year: "2022",
-    issue: "Advocates time theft & profane anti-employer rants",
-    quote:
-      "I'm not eating anyone's a** to keep my job. F*** you — you eat mine.",
+    issue: "Advocates time theft",
+    quote: "I'm not eating anyone's a** to keep my job.",
     upvotes: "2.1k",
   },
   {
-    title: "Accepting J3 and just do nothing until I get fired?",
+    title: "Accepting J3 and just do nothing?",
     year: "2023",
-    issue: "Bragging about collecting paychecks with zero work",
-    quote: "Could I simply take a J3...literally do absolutely nothing?",
+    issue: "Collecting paychecks with zero work",
+    quote: "Could I simply take a J3...do absolutely nothing?",
     upvotes: "892",
   },
   {
-    title: "Yes – It is Ethical to Lie in Business",
+    title: "Yes – It is Ethical to Lie",
     year: "2024",
-    issue: "Promoting résumé fraud & background check deception",
-    quote: "I believe everyone should lie, and there are ways to cover it up.",
+    issue: "Promoting résumé fraud",
+    quote: "Everyone should lie, there are ways to cover it up.",
     upvotes: "1.4k",
   },
   {
     title: "F*** employers, get money",
     year: "2024",
-    issue: "Pure hostility: treat jobs like disposable ATMs",
-    quote: "No loyalty, do the bare minimum, milk two jobs, repeat.",
+    issue: "Treat jobs like disposable ATMs",
+    quote: "No loyalty, do the bare minimum, milk two jobs.",
     upvotes: "3.2k",
-  },
-  {
-    title: "Anyone know of a next-gen mouse jiggler?",
-    year: "2025",
-    issue: "Seeking hardware to defeat activity monitoring",
-    quote: "Need a device that moves, clicks and types to fool monitoring.",
-    upvotes: "567",
   },
 ];
 
@@ -57,7 +49,7 @@ export default function OveremployedRedditSection() {
   const [selectedThread, setSelectedThread] = useState<number | null>(null);
 
   return (
-    <section className="relative h-full w-full py-20 lg:py-32 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden">
+    <section className="relative h-full w-full py-12 lg:py-20 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden">
       {/* Ominous Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-950/20 via-transparent to-orange-900/20" />
@@ -91,47 +83,35 @@ export default function OveremployedRedditSection() {
         className={cn(getComponentClasses.container(), "relative z-10 w-full")}
       >
         <div className="max-w-6xl mx-auto">
-          {/* Shocking Header */}
+          {/* Compact Header */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-8 lg:mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-red-500/10 text-red-400 text-sm font-medium mb-8 backdrop-blur-sm border border-red-500/20"
+              className="inline-flex items-center px-3 py-1.5 rounded-full bg-red-500/10 text-red-400 text-xs font-medium mb-4 backdrop-blur-sm border border-red-500/20"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              ⚠️ HR Directors: Your Blood Pressure Will Spike
+              ⚠️ HR Alert: Active Threat
             </motion.div>
 
-            <h2
-              className={cn(
-                getComponentClasses.heading("xl"),
-                "text-white mb-6"
-              )}
-            >
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3">
               Inside the <span className="text-red-500">r/Overemployed</span>{" "}
               Cesspool
             </h2>
-            <p
-              className={cn(
-                getComponentClasses.body("lg"),
-                "text-white/80 max-w-3xl mx-auto"
-              )}
-            >
-              451,000+ members openly plotting workplace deception. Here's their
-              "greatest hits" — the posts that would make any employer's legal
-              team panic.
+            <p className="text-base lg:text-lg text-white/80 max-w-2xl mx-auto">
+              451,000+ members openly plotting workplace deception
             </p>
           </motion.div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
             {/* Reddit Screenshot */}
             <motion.div
               className="relative"
@@ -156,15 +136,15 @@ export default function OveremployedRedditSection() {
                   className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-4 text-white">
-                    <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center group-hover:bg-red-400 transition-colors duration-300">
-                      <span className="text-xl font-bold">OE</span>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <div className="flex items-center gap-3 text-white">
+                    <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center group-hover:bg-red-400 transition-colors duration-300">
+                      <span className="text-lg font-bold">OE</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg group-hover:text-red-300 transition-colors duration-300">r/overemployed</h3>
-                      <p className="text-white/80 text-sm">
-                        451,827 deceptive employees • 2,143 online
+                      <h3 className="font-bold text-base group-hover:text-red-300 transition-colors duration-300">r/overemployed</h3>
+                      <p className="text-white/80 text-xs">
+                        451,827 members • 2,143 online
                       </p>
                     </div>
                   </div>
@@ -178,10 +158,10 @@ export default function OveremployedRedditSection() {
 
               {/* Floating Warning Badge */}
               <motion.div
-                className="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg"
+                className="absolute -top-3 -right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg"
                 animate={{
-                  y: [0, -10, 0],
-                  rotate: [-5, 5, -5],
+                  y: [0, -5, 0],
+                  rotate: [-3, 3, -3],
                 }}
                 transition={{
                   duration: 3,
@@ -189,32 +169,27 @@ export default function OveremployedRedditSection() {
                   ease: "easeInOut",
                 }}
               >
-                🚨 Active Threat
+                🚨 Live
               </motion.div>
             </motion.div>
 
             {/* Shocking Threads List */}
             <motion.div
-              className="space-y-4"
+              className="space-y-3"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3
-                className={cn(
-                  getComponentClasses.heading("md"),
-                  "text-white mb-6"
-                )}
-              >
-                The Most Toxic Threads That Prove the Threat is Real:
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
+                Most Toxic Threads:
               </h3>
 
               {shockingThreads.map((thread, index) => (
                 <motion.div
                   key={index}
                   className={cn(
-                    "p-4 rounded-xl border transition-all duration-300 cursor-pointer",
+                    "p-3 rounded-lg border transition-all duration-300 cursor-pointer",
                     selectedThread === index
                       ? "bg-red-500/20 border-red-500/40"
                       : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
@@ -226,22 +201,22 @@ export default function OveremployedRedditSection() {
                   onClick={() =>
                     setSelectedThread(selectedThread === index ? null : index)
                   }
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-white font-semibold flex-1 pr-4">
+                  <div className="flex items-start justify-between mb-1">
+                    <h4 className="text-white font-medium text-sm flex-1 pr-3">
                       "{thread.title}"{" "}
-                      <span className="text-white/60">({thread.year})</span>
+                      <span className="text-white/50 text-xs">({thread.year})</span>
                     </h4>
                     {thread.upvotes && (
-                      <span className="text-orange-400 text-sm font-medium">
+                      <span className="text-orange-400 text-xs font-medium">
                         ⬆ {thread.upvotes}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-red-400 text-sm mb-2">{thread.issue}</p>
+                  <p className="text-red-400 text-xs mb-1">{thread.issue}</p>
 
                   <motion.div
                     initial={false}
@@ -249,8 +224,8 @@ export default function OveremployedRedditSection() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="pt-2 border-t border-white/10">
-                      <p className="text-white/70 text-sm italic">
+                    <div className="pt-1.5 border-t border-white/10">
+                      <p className="text-white/70 text-xs italic">
                         "{thread.quote}"
                       </p>
                     </div>
@@ -258,31 +233,28 @@ export default function OveremployedRedditSection() {
                 </motion.div>
               ))}
 
-              {/* Call to Action */}
+              {/* Compact Call to Action */}
               <motion.div
-                className="mt-8 p-6 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30"
+                className="mt-6 p-4 rounded-lg bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-white font-bold mb-3">
-                  This is Just the Tip of the Iceberg
+                <h4 className="text-white font-bold text-sm mb-2">
+                  Protect Your Company
                 </h4>
-                <p className="text-white/80 text-sm leading-relaxed mb-4">
-                  These threads represent open advocacy for fraud, time theft,
-                  résumé lies, and deliberate deception. Your employees are
-                  reading this content daily, learning new ways to exploit your
-                  trust.
+                <p className="text-white/80 text-xs leading-relaxed mb-3">
+                  These threads represent open advocacy for fraud and deception.
                 </p>
                 <motion.button
-                  className="inline-flex items-center px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-medium transition-all duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition-all duration-200"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                 >
-                  Protect Your Company Now
+                  Join Waitlist
                   <svg
-                    className="ml-2 w-4 h-4"
+                    className="ml-2 w-3 h-3"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -299,9 +271,9 @@ export default function OveremployedRedditSection() {
             </motion.div>
           </div>
 
-          {/* Bottom Stats */}
+          {/* Compact Bottom Stats */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 lg:mt-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -331,19 +303,19 @@ export default function OveremployedRedditSection() {
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                className="text-center p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
-                whileHover={{ scale: 1.05, y: -4 }}
+                className="text-center p-4 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm"
+                whileHover={{ scale: 1.03, y: -2 }}
                 transition={{ duration: 0.3 }}
               >
                 <div
                   className={cn(
-                    "text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-2",
+                    "text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-1",
                     stat.color
                   )}
                 >
                   {stat.value}
                 </div>
-                <p className="text-white/70 text-sm">{stat.label}</p>
+                <p className="text-white/70 text-xs">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>

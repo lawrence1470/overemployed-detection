@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { getComponentClasses } from "~/lib/design-system";
 import { cn } from "~/lib/utils";
+import { LinkPreview } from "~/components/ui/link-preview";
 
 export function SohamSection() {
   return (
@@ -156,9 +157,12 @@ export function SohamSection() {
               <h2 className="text-5xl lg:text-6xl font-light text-white leading-tight">
                 Don't Hire Another{" "}
                 <span className="relative">
-                  <span className="relative z-10 font-medium border-b border-orange-400/50 pb-1">
+                  <LinkPreview 
+                    url="https://news.ycombinator.com/item?id=44448461&utm_source=chatgpt.com"
+                    className="relative z-10 font-medium border-b border-orange-400/50 pb-1 text-white hover:text-orange-300 transition-colors duration-300"
+                  >
                     Soham Parekh
-                  </span>
+                  </LinkPreview>
                 </span>
               </h2>
 
