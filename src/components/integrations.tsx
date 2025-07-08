@@ -8,15 +8,15 @@ export default function IntegrationsSection() {
   const [hoveredIntegration, setHoveredIntegration] = useState<string | null>(null);
 
   return (
-    <section className="relative py-20 lg:py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
+    <section className="relative py-20 lg:py-32">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5" />
         <motion.div 
-          className="absolute top-20 right-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"
+          className="absolute top-20 right-20 w-72 h-72 bg-cyan-600/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
+            opacity: [0.05, 0.1, 0.05]
           }}
           transition={{ 
             duration: 8, 
@@ -25,10 +25,10 @@ export default function IntegrationsSection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute bottom-20 left-20 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2]
+            opacity: [0.05, 0.1, 0.05]
           }}
           transition={{ 
             duration: 10, 

@@ -40,14 +40,14 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Premium Background with enhanced depth */}
+      {/* Premium Background with enhanced depth - softer colors */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-black/90 to-gray-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/50 via-black/90 to-purple-950/50" />
         <motion.div
-          className="absolute top-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"
+          className="absolute top-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
+            opacity: [0.05, 0.15, 0.05],
           }}
           transition={{
             duration: 8,
@@ -56,10 +56,10 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute right-1/3 bottom-1/3 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"
+          className="absolute right-1/3 bottom-1/3 h-96 w-96 rounded-full bg-purple-600/10 blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
-            opacity: [0.1, 0.2, 0.1],
+            opacity: [0.05, 0.15, 0.05],
           }}
           transition={{
             duration: 10,
@@ -68,7 +68,7 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-cyan-500/5 blur-2xl transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-indigo-600/5 blur-2xl transform -translate-x-1/2 -translate-y-1/2"
           animate={{
             rotate: 360,
             scale: [1, 1.3, 1],

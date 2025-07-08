@@ -7,15 +7,15 @@ import { cn } from "~/lib/utils";
 
 export function SohamSection() {
   return (
-    <section className="relative py-32 bg-black text-white overflow-hidden">
-      {/* Premium Minimal Background */}
+    <section className="relative py-32 bg-gradient-to-b from-black via-gray-950 to-gray-900 text-white overflow-hidden">
+      {/* Premium Minimal Background with smooth transition */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-black to-zinc-950" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-black/80 to-purple-950/20" />
         <motion.div
-          className="absolute top-1/3 right-1/4 h-96 w-96 rounded-full bg-red-500/5 blur-3xl"
+          className="absolute top-1/3 right-1/4 h-96 w-96 rounded-full bg-orange-600/5 blur-3xl"
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.05, 0.1, 0.05],
+            opacity: [0.03, 0.08, 0.03],
           }}
           transition={{
             duration: 8,
@@ -35,7 +35,7 @@ export function SohamSection() {
         >
           <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl p-4">
             <div className="flex items-center space-x-3 mb-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-400/60" />
+              <div className="w-1.5 h-1.5 rounded-full bg-orange-400/60" />
               <span className="text-xs text-white/40 font-medium">
                 PORTFOLIO
               </span>
@@ -84,7 +84,7 @@ export function SohamSection() {
               }}
               transition={{ duration: 0.3 }}
             >
-              <div className="w-2 h-2 rounded-full bg-red-400/80" />
+              <div className="w-2 h-2 rounded-full bg-orange-400/80" />
               <span className="text-sm text-white/70 font-medium">
                 SERIAL OPTIMIZATION
               </span>
@@ -93,7 +93,7 @@ export function SohamSection() {
             {/* Large Profile Image */}
             <div className="relative">
               <motion.div
-                className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-red-500/10 via-orange-500/5 to-red-500/10 blur-2xl"
+                className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-orange-500/10 via-orange-500/5 to-orange-500/10 blur-2xl"
                 animate={{
                   scale: [1, 1.05, 1],
                   opacity: [0.3, 0.5, 0.3],
@@ -156,7 +156,7 @@ export function SohamSection() {
               <h2 className="text-5xl lg:text-6xl font-light text-white leading-tight">
                 Don't Hire Another{" "}
                 <span className="relative">
-                  <span className="relative z-10 font-medium border-b border-red-400/50 pb-1">
+                  <span className="relative z-10 font-medium border-b border-orange-400/50 pb-1">
                     Soham Parekh
                   </span>
                 </span>
@@ -187,7 +187,7 @@ export function SohamSection() {
                 Turns out you hired 10% of a 10x engineer.
               </motion.p>
               <motion.p
-                className="text-base text-red-400/80 font-light pt-2"
+                className="text-base text-orange-400/80 font-light pt-2"
                 initial={{ opacity: 0, y: 5 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.8 }}

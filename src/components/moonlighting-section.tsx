@@ -9,17 +9,17 @@ export function MoonlightingSection() {
     <section
       className={cn(
         getComponentClasses.section(),
-        "min-h-screen bg-black text-white"
+        "min-h-screen bg-gradient-to-b from-gray-950 via-black to-gray-950 text-white"
       )}
     >
       {/* Minimal Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-950/20 via-black/90 to-orange-950/20" />
         <motion.div
-          className="absolute top-1/4 right-1/3 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"
+          className="absolute top-1/4 right-1/3 h-96 w-96 rounded-full bg-orange-600/5 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
+            opacity: [0.05, 0.1, 0.05],
           }}
           transition={{
             duration: 8,
@@ -28,7 +28,7 @@ export function MoonlightingSection() {
           }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"
+          className="absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-orange-500/5 blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.1, 0.2, 0.1],

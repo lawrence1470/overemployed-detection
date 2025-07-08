@@ -159,17 +159,17 @@ export default function Home() {
           opacity: backgroundOpacity,
         }}
       >
-        {/* Dynamic color-shifting background */}
+        {/* Dynamic color-shifting background - more subtle */}
         <motion.div
           className="absolute inset-0"
           style={{
             background: useTransform(
               hue,
               (latest) => `linear-gradient(135deg, 
-								hsl(${latest}, 70%, 8%) 0%, 
-								hsl(${latest + 30}, 60%, 6%) 25%, 
-								hsl(${latest + 60}, 80%, 4%) 75%, 
-								hsl(${latest + 90}, 70%, 8%) 100%)`
+								hsl(${latest}, 40%, 4%) 0%, 
+								hsl(${latest + 30}, 30%, 3%) 25%, 
+								hsl(${latest + 60}, 35%, 2%) 75%, 
+								hsl(${latest + 90}, 40%, 4%) 100%)`
             ),
           }}
         />
@@ -204,7 +204,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Features Section */}
-      <AnimatedSection className="relative z-10 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <AnimatedSection className="relative z-10">
         <FeaturesSection />
       </AnimatedSection>
 
@@ -212,7 +212,7 @@ export default function Home() {
       <AnimatedSection direction="up" delay={0.2} className="relative z-10">
         <div className="relative overflow-hidden">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5"
+            className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5"
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5 }}
@@ -226,7 +226,7 @@ export default function Home() {
       <AnimatedSection direction="left" delay={0.2} className="relative z-10">
         <div className="relative overflow-hidden">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
+            className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5 }}
@@ -238,7 +238,7 @@ export default function Home() {
 
       {/* Creative Integrations Section */}
       <AnimatedSection direction="up" delay={0.1} className="relative z-10">
-        <div className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 relative overflow-hidden">
           {/* Animated Grid Background */}
           <motion.div
             className="absolute inset-0 opacity-5"
@@ -271,7 +271,7 @@ export default function Home() {
 
       {/* Wobble Card with Rotation Effect */}
       <AnimatedSection direction="right" delay={0.3} className="relative z-10">
-        <div className="py-20 bg-white dark:bg-gray-800 relative">
+        <div className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 relative">
           <motion.div
             className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl"
             animate={{
@@ -292,7 +292,7 @@ export default function Home() {
       {/* Pointer Highlight with Magnetic Effect */}
       <AnimatedSection direction="up" delay={0.4} className="relative z-10">
         <motion.div
-          className="bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden"
+          className="bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-950 flex items-center justify-center relative overflow-hidden"
           whileInView={{
             background: [
               "linear-gradient(135deg, rgb(243 244 246) 0%, rgb(243 244 246) 100%)",
@@ -318,7 +318,7 @@ export default function Home() {
       <AnimatedSection direction="left" delay={0.2} className="relative z-10">
         <div className="relative">
           <motion.div
-            className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-2xl"
+            className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-orange-600/5 to-orange-500/5 rounded-full blur-2xl"
             animate={{
               rotate: 360,
               scale: [1, 1.3, 1],

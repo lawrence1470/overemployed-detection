@@ -1,74 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "motion/react";
 import { getComponentClasses, designSystem } from "~/lib/design-system";
 import { cn } from "~/lib/utils";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 
 export function WaitlistSection() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-  };
-
-  if (isSubmitted) {
-    return (
-      <section
-        id="waitlist"
-        className="min-h-screen bg-black text-white flex items-center justify-center px-4"
-      >
-        <motion.div
-          className="max-w-2xl mx-auto text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="mb-8">
-            <motion.div
-              className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{
-                delay: 0.3,
-                duration: 0.5,
-                type: "spring",
-                stiffness: 300,
-              }}
-            >
-              <svg
-                className="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </motion.div>
-            <h2
-              className={cn(
-                getComponentClasses.heading("xl"),
-                "text-white mb-6"
-              )}
-            >
-              You're in!
-            </h2>
-            <p className={cn(getComponentClasses.body("lg"), "text-white/70")}>
-              Thanks for joining our waitlist. We'll keep you updated on our
-              progress.
-            </p>
-          </div>
-        </motion.div>
-      </section>
-    );
-  }
 
   return (
     <section
@@ -102,8 +39,7 @@ export function WaitlistSection() {
           </p>
         </motion.div>
 
-        <motion.form
-          onSubmit={handleSubmit}
+        <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,10 +47,10 @@ export function WaitlistSection() {
         >
           <div className="flex justify-center">
             <HoverBorderGradient
-              as="button"
+              as="a"
               containerClassName="rounded-xl"
-              className="bg-gray-800/50 text-white hover:bg-gray-700/50 px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300 whitespace-nowrap relative overflow-hidden"
-              onClick={(e) => handleSubmit(e as any)}
+              className="bg-gray-800/50 text-white hover:bg-gray-700/50 px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300 whitespace-nowrap relative overflow-hidden inline-block cursor-pointer"
+              {...{ href: "/waitlist" }}
             >
               <motion.span
                 className="flex items-center space-x-2"
@@ -140,7 +76,7 @@ export function WaitlistSection() {
               </motion.span>
             </HoverBorderGradient>
           </div>
-        </motion.form>
+        </motion.div>
 
         <motion.div
           className="border-t border-white/10 pt-12"

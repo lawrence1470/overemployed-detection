@@ -7,15 +7,15 @@ import { cn } from "~/lib/utils";
 
 export function FeaturesSection() {
   return (
-    <section className={cn(getComponentClasses.section(), "relative bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white overflow-hidden")}>
-      {/* Background Effects */}
+    <section className={cn(getComponentClasses.section(), "relative bg-gradient-to-b from-gray-900 to-gray-50 dark:from-gray-900 dark:to-gray-900 text-black dark:text-white overflow-hidden")}>
+      {/* Background Effects with softer colors */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5" />
         <motion.div 
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
+            opacity: [0.1, 0.2, 0.1]
           }}
           transition={{ 
             duration: 8, 
@@ -24,10 +24,10 @@ export function FeaturesSection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2]
+            opacity: [0.1, 0.2, 0.1]
           }}
           transition={{ 
             duration: 10, 

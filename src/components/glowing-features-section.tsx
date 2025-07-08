@@ -4,7 +4,7 @@ import GlowingEffectDemoSecond from "~/components/ui/glowing-effect-demo-2";
 
 export function GlowingFeaturesSection() {
   return (
-    <section className="bg-black text-white py-24">
+    <section className="bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white py-24">
       <div className="max-w-7xl mx-auto px-4">
         {/* Simple Header */}
         <div className="text-center mb-16">
