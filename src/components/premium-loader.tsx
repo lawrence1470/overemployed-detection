@@ -80,7 +80,7 @@ export function PremiumLoader() {
       setCurrentState(0);
       return;
     }
-    
+
     const timeout = setTimeout(() => {
       setCurrentState((prevState) =>
         Math.min(prevState + 1, loadingStates.length - 1)
@@ -131,29 +131,8 @@ export function PremiumLoader() {
 
         {/* Logo and branding */}
         <div className="relative z-10 flex flex-col items-center">
-          <motion.div
-            className="mb-8 flex items-center space-x-3"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-white via-gray-100 to-gray-200 shadow-lg border border-white/20">
-              <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-inner">
-                <div className="absolute inset-1 rounded bg-gradient-to-br from-white/10 to-transparent" />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-2xl text-white tracking-tight">
-                VerifyHire
-              </span>
-              <span className="text-sm text-white/70 font-medium tracking-wide">
-                Employee Verification Platform
-              </span>
-            </div>
-          </motion.div>
-
           {/* Loading states */}
-          <div className="flex relative justify-start max-w-xl mx-auto flex-col">
+          <div className="flex relative justify-center items-center max-w-xl mx-auto flex-col">
             {loadingStates.map((loadingState, index) => {
               const distance = Math.abs(index - currentState);
               const opacity = Math.max(1 - distance * 0.3, 0.1);
@@ -161,10 +140,10 @@ export function PremiumLoader() {
               return (
                 <motion.div
                   key={index}
-                  className="text-left flex gap-3 mb-4"
-                  initial={{ opacity: 0, y: -(currentState * 40) }}
-                  animate={{ opacity: opacity, y: -(currentState * 40) }}
-                  transition={{ duration: 0.5 }}
+                  className="flex gap-3 mb-3 items-center"
+                  initial={{ opacity: 0, y: -(currentState * 32) }}
+                  animate={{ opacity: opacity, y: -(currentState * 32) }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <div>
                     {index > currentState && (

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 import { useState, useEffect } from "react";
+import VerifyHireLogo from "~/components/ui/verifyhire-logo";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,23 +39,11 @@ export function Navigation() {
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       >
         <motion.div
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-white via-gray-100 to-gray-200 shadow-lg border border-white/20"
-          whileHover={{
-            rotate: [0, -10, 10, 0],
-            boxShadow: "0 12px 30px rgba(255,255,255,0.25)",
-          }}
+          className="relative flex h-9 w-9 items-center justify-center"
+          whileHover={{ rotate: [0, -10, 10, 0] }}
           transition={{ duration: 0.6, type: "spring" }}
         >
-          <motion.div
-            className="h-5 w-5 rounded-lg bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-inner"
-            whileHover={{ scale: 1.1 }}
-          >
-            {/* Subtle inner detail */}
-            <div className="absolute inset-1 rounded bg-gradient-to-br from-white/10 to-transparent" />
-          </motion.div>
-
-          {/* Ambient glow effect */}
-          <div className="absolute inset-0 rounded-xl bg-white/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <VerifyHireLogo className="h-9 w-9" />
         </motion.div>
 
         <div className="flex flex-col">

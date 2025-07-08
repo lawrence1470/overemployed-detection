@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   title: "VerifyPro - Employee Verification Platform",
   description:
     "Comprehensive employee verification and overemployment detection for modern startups",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
+    { rel: "icon", url: "/favicon.ico", sizes: "any" },
+  ],
 };
 
 const inter = Inter({
@@ -37,7 +40,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
         <TRPCReactProvider>
-          <ComingSoonWrapper 
+          <ComingSoonWrapper
             comingSoonMode={env.COMING_SOON_MODE === "true"}
             isDevelopment={env.NODE_ENV === "development"}
           >
