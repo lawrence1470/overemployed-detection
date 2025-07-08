@@ -6,6 +6,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navigation } from "~/components/navigation";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ComingSoonWrapper } from "~/components/coming-soon-wrapper";
+import { StructuredData } from "~/components/structured-data";
 import { env } from "~/env";
 
 const siteUrl = env.NEXT_PUBLIC_SITE_URL;
@@ -117,31 +118,10 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "VerifyHire",
-    description: "Employee verification and overemployment detection platform",
-    url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
-    sameAs: [
-      "https://twitter.com/verifyhire",
-      "https://linkedin.com/company/verifyhire",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      email: "support@verifyhire.com",
-    },
-  };
-
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <StructuredData />
         <TRPCReactProvider>
           <ComingSoonWrapper
             comingSoonMode={env.COMING_SOON_MODE.trim() === "true"}

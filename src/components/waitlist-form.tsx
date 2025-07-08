@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import dynamic from "next/dynamic";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
@@ -10,11 +9,7 @@ import { getComponentClasses, designSystem } from "~/lib/design-system";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 import { ArrowRight, Building2, Users, ChevronDown, Check, Mail } from "lucide-react";
 import { api } from "~/trpc/react";
-
-// Lazy load the WaitlistLoader component
-const WaitlistLoader = dynamic(() => import("~/components/waitlist-loader").then(mod => ({ default: mod.WaitlistLoader })), {
-  ssr: false,
-});
+import { WaitlistSuccessModal } from "~/components/waitlist-success-modal";
 
 interface FormData {
   email: string;
@@ -46,7 +41,6 @@ const hrisSystems = [
 ];
 
 export function WaitlistForm() {
-  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     email: "",
     employeeCount: "",
@@ -55,33 +49,29 @@ export function WaitlistForm() {
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
   const [showHrisDropdown, setShowHrisDropdown] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showExistingUserModal, setShowExistingUserModal] = useState(false);
   
   const joinWaitlistMutation = api.waitlist.join.useMutation({
     onSuccess: (data) => {
       if (data.success) {
-        // Show loader before transitioning to step 2
-        setShowLoader(true);
+        // Store form data in sessionStorage and redirect to pricing page
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("waitlistFormData", JSON.stringify(formData));
+          window.location.href = "/early-access";
+        }
       } else {
-        // Handle case where user is already on waitlist
-        alert(data.message);
+        // Handle case where user is already on waitlist - show modal
+        setShowExistingUserModal(true);
         setIsSubmitting(false);
-        setShowLoader(false);
       }
     },
     onError: (error) => {
       console.error('Failed to join waitlist:', error);
       alert('Failed to join waitlist. Please try again.');
       setIsSubmitting(false);
-      setShowLoader(false);
     },
   });
 
-  const handleLoaderComplete = () => {
-    setShowLoader(false);
-    setIsSubmitting(false);
-    setStep(2);
-  };
 
   const handleSubmitStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,53 +85,41 @@ export function WaitlistForm() {
     }
   };
 
-  const handleSkipPayment = () => {
-    // Handle regular waitlist signup
-    console.log("Regular waitlist signup:", formData);
-    // Redirect to success or show success message
-  };
-
-  const handlePaymentFlow = () => {
-    // Handle early access payment flow
-    console.log("Early access payment:", formData);
-    // Store form data in sessionStorage for the payment page
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("waitlistFormData", JSON.stringify(formData));
-      window.location.href = "/early-access";
-    }
+  const handleExistingUserModalClose = () => {
+    setShowExistingUserModal(false);
   };
 
   return (
     <>
-      {/* Waitlist Loader */}
-      <WaitlistLoader 
-        isLoading={showLoader}
-        onComplete={handleLoaderComplete}
-        duration={2800}
+      {/* Modal for existing users */}
+      <WaitlistSuccessModal 
+        isOpen={showExistingUserModal}
+        onClose={handleExistingUserModalClose}
         email={formData.email}
+        isExistingUser={true}
       />
       
       <div className="max-w-2xl mx-auto">
         <AnimatePresence mode="wait">
-        {step === 1 ? (
-          <motion.div
-            key="step1"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="text-center mb-12">
-              <h1 className={cn(designSystem.typography.display.md, "text-white mb-6")}>
+        <motion.div
+          key="waitlist-form"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>
+            <div className="text-center mb-8">
+              <h1 className={cn(getComponentClasses.heading("lg"), "text-white mb-4")}>
                 VerifyHire is currently at capacity!
               </h1>
-              <p className={cn(getComponentClasses.body("lg"), "text-white/70 max-w-xl mx-auto")}>
+              <p className={cn(getComponentClasses.body("md"), "text-white/70 max-w-sm mx-auto")}>
                 Join the waitlist and be the first to know when we're ready for new customers. Plus, get exclusive early access options.
               </p>
             </div>
 
-            <form onSubmit={handleSubmitStep1} className="space-y-6">
-              <div className="space-y-2">
+            <form onSubmit={handleSubmitStep1} className="space-y-4">
+              <div className="space-y-1.5">
                 <Label htmlFor="email" className="text-white/90">
                   Work Email
                 </Label>
@@ -157,7 +135,7 @@ export function WaitlistForm() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="employeeCount" className="text-white/90">
                   Company Size
                 </Label>
@@ -186,7 +164,7 @@ export function WaitlistForm() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden"
+                        className="absolute z-50 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden"
                       >
                         {employeeCountOptions.map((option) => (
                           <button
@@ -211,7 +189,7 @@ export function WaitlistForm() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="hrisSystem" className="text-white/90">
                   Current HRIS System
                 </Label>
@@ -240,7 +218,7 @@ export function WaitlistForm() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute z-10 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden max-h-60 overflow-y-auto"
+                        className="absolute z-50 w-full mt-2 bg-gray-900 border border-gray-700 rounded-md shadow-xl backdrop-blur-sm overflow-hidden max-h-60 overflow-y-auto"
                       >
                         {hrisSystems.map((system) => (
                           <button
@@ -265,34 +243,34 @@ export function WaitlistForm() {
                 </div>
               </div>
 
-              <div className="pt-6">
+              <div className="pt-4">
                 <button
                   type="submit"
-                  disabled={isSubmitting || !formData.email || !formData.employeeCount || !formData.hrisSystem}
+                  disabled={isSubmitting}
                   className="w-full relative group"
                 >
                   <HoverBorderGradient
                     as="div"
                     containerClassName="w-full rounded-xl"
                     className={cn(
-                      "w-full bg-white text-black hover:bg-gray-100 px-8 py-4 font-semibold transition-all duration-300 cursor-pointer",
-                      (isSubmitting || !formData.email || !formData.employeeCount || !formData.hrisSystem) && "opacity-50 cursor-not-allowed"
+                      "w-full bg-white text-black hover:bg-gray-100 px-8 py-5 font-semibold transition-all duration-300 cursor-pointer relative overflow-hidden flex items-center justify-center min-h-[56px]",
+                      isSubmitting && "bg-gray-600/30 text-gray-500 cursor-not-allowed hover:bg-gray-600/30 border-gray-600/20"
                     )}
                   >
-                    <span className="flex items-center justify-center gap-2">
+                    <span className="flex items-center justify-center gap-2 relative z-10 h-full leading-none">
                       {isSubmitting ? (
                         <>
                           <motion.div
-                            className="w-4 h-4 border-2 border-black border-t-transparent rounded-full"
+                            className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full"
                             animate={{ rotate: 360 }}
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                           />
-                          Joining...
+                          <span className="text-gray-400">Joining...</span>
                         </>
                       ) : (
                         <>
-                          Join Waitlist
-                          <ArrowRight className="w-4 h-4" />
+                          <span className="text-black">Join Waitlist</span>
+                          <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-all duration-200" />
                         </>
                       )}
                     </span>
@@ -300,80 +278,8 @@ export function WaitlistForm() {
                 </button>
               </div>
             </form>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="step2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <motion.div
-              className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
-            >
-              <Check className="w-8 h-8 text-white" />
-            </motion.div>
-
-            <h2 className={cn(getComponentClasses.heading("xl"), "text-white mb-6")}>
-              You're on the list!
-            </h2>
-            
-            <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-2xl p-6 border border-green-500/20 mb-8">
-              <div className="flex items-center gap-3 text-green-400 mb-3">
-                <Mail className="w-5 h-5" />
-                <span className="font-medium">Check your email!</span>
-              </div>
-              <p className={cn(getComponentClasses.body("md"), "text-white/80")}>
-                We've sent a confirmation email to <span className="text-white font-medium">{formData.email}</span> with next steps and exclusive content.
-              </p>
-            </div>
-            
-            <p className={cn(getComponentClasses.body("lg"), "text-white/70 mb-12 max-w-lg mx-auto")}>
-              We'll notify you when we're ready for new customers. In the meantime, explore the threat landscape.
-            </p>
-
-            <div className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-2xl p-8 border border-purple-500/20 mb-8">
-              <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
-                Limited Offer
-              </div>
-              
-              <h3 className={cn(getComponentClasses.heading("md"), "text-white mb-4")}>
-                Skip the line with Early Access
-              </h3>
-              
-              <p className={cn(getComponentClasses.body("md"), "text-white/70 mb-6")}>
-                Get immediate access to VerifyHire and start protecting your company today. Limited spots available.
-              </p>
-
-              <div className="space-y-4">
-                <HoverBorderGradient
-                  as="button"
-                  onClick={handlePaymentFlow}
-                  containerClassName="w-full rounded-xl"
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-8 py-4 font-semibold transition-all duration-300"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    Get Early Access - $499
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </HoverBorderGradient>
-
-                <button
-                  onClick={handleSkipPayment}
-                  className="w-full text-white/50 hover:text-white/70 text-sm transition-colors"
-                >
-                  No thanks, I'll wait
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
       </AnimatePresence>
     </div>
     </>

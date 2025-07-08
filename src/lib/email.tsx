@@ -1,5 +1,8 @@
 import { Resend } from 'resend';
 import { env } from '~/env';
+import { render } from '@react-email/render';
+import React from 'react';
+import { WaitlistConfirmationEmail } from '~/emails/waitlist-confirmation';
 
 // Initialize Resend with API key
 const resend = new Resend(env.RESEND_API_KEY);
@@ -17,12 +20,22 @@ export async function sendWaitlistThankYouEmail(data: WaitlistEmailData) {
   }
 
   try {
+    const emailHtml = await render(
+      React.createElement(WaitlistConfirmationEmail, {
+        email: data.email,
+        employeeCount: data.employeeCount,
+        hrisSystem: data.hrisSystem,
+      })
+    );
+
+    console.log('Email HTML type:', typeof emailHtml);
+    console.log('Email HTML length:', emailHtml?.length);
+
     const result = await resend.emails.send({
       from: env.FROM_EMAIL,
       to: [data.email],
-      subject: 'Welcome to VerifyHire Waitlist! 🎉',
-      html: getWaitlistThankYouEmailTemplate(data),
-      text: getWaitlistThankYouEmailText(data),
+      subject: 'You\'re on the VerifyHire waitlist',
+      html: String(emailHtml),
     });
 
     console.log('Email sent successfully:', result);
@@ -33,6 +46,7 @@ export async function sendWaitlistThankYouEmail(data: WaitlistEmailData) {
   }
 }
 
+// Legacy HTML template - kept for reference but not used
 function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
   return `
 <!DOCTYPE html>
@@ -40,14 +54,36 @@ function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to VerifyHire Waitlist</title>
+    <title>You're on the VerifyHire waitlist</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #0f0f0f;
+            background-color: #000000;
             color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
         }
         .container {
             max-width: 600px;
@@ -56,134 +92,302 @@ function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
         .logo {
-            font-size: 32px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
-        .content {
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(50, 50, 50, 0.4));
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0;
+        }
+        .main-content {
+            background-color: #0a0a0a;
+            border: 1px solid #1a1a1a;
             border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 40px 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
-        .title {
+        .success-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            line-height: 56px;
+            margin: 0 auto 24px;
             font-size: 28px;
             font-weight: bold;
             color: #ffffff;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #9ca3af;
+            text-align: center;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .email-highlight {
+            background: #0d1f0f;
+            border: 1px solid #1a3d1f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 28px;
             text-align: center;
         }
-        .text {
-            font-size: 16px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-        }
-        .highlight {
-            color: #f97316;
+        .email-highlight .email {
+            color: #22c55e;
             font-weight: 600;
+        }
+        .company-info {
+            background: #0f0f0f;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .company-info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .company-info-item:last-child {
+            margin-bottom: 0;
+        }
+        .company-info-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        .company-info-value {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .threat-section {
+            background: #1a0f08;
+            border: 1px solid #3d1f0a;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .threat-title {
+            color: #f97316;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+        .threat-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 16px;
+        }
+        .threat-stat {
+            text-align: center;
+            flex: 1;
+        }
+        .threat-stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f97316;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .threat-stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .threat-description {
+            font-size: 15px;
+            color: #d1d5db;
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            color: white;
+            background: #f97316;
+            color: #ffffff !important;
             text-decoration: none;
             padding: 16px 32px;
             border-radius: 12px;
             font-weight: 600;
             text-align: center;
-            margin: 20px 0;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+            transition: all 0.2s ease;
+        }
+        .cta-button:hover {
+            background: #ea580c;
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+        }
+        .next-steps {
+            background: #0f0f0f;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .next-steps-title {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .next-steps-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
         }
         .footer {
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
-            margin-top: 40px;
-        }
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        .stat {
-            text-align: center;
-            flex: 1;
-            margin: 10px;
-        }
-        .stat-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: #f97316;
-        }
-        .stat-label {
+            color: rgba(255, 255, 255, 0.4);
             font-size: 12px;
+            margin-top: 32px;
+        }
+        .footer-link {
             color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            margin-top: 4px;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Email client compatibility */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .main-content {
+                padding: 24px;
+            }
+            .threat-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .threat-stat {
+                margin-bottom: 8px;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .main-content {
+                background: rgba(255, 255, 255, 0.08) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
+<body style="background-color: #000000; margin: 0; padding: 0;">
+    <!-- Email wrapper table for better email client support -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #000000;">
+        <tr>
+            <td align="center" style="padding: 0;">
+                <div class="container" style="background-color: #000000;">
         <div class="header">
-            <div class="logo">VerifyHire</div>
+            <div class="logo" style="color: #ffffff;">VerifyHire</div>
+            <div class="tagline" style="color: #6b7280;">Employee Verification</div>
         </div>
         
-        <div class="content">
-            <div class="title">You're on the list! 🎉</div>
+        <div class="main-content" style="background-color: #0a0a0a;">
+            <div style="text-align: center;">
+                <div class="success-icon">✓</div>
+            </div>
             
-            <p class="text">
-                Thank you for joining the VerifyHire waitlist! We're excited to help you tackle the growing challenge of dual employment detection.
-            </p>
+            <div class="title">You're on the list!</div>
             
-            <p class="text">
-                <strong>Your spot is secured at:</strong> <span class="highlight">${data.email}</span>
-            </p>
+            <div class="subtitle">
+                Thank you for joining our waitlist. We'll notify you when we're ready for new customers.
+            </div>
             
-            ${data.employeeCount ? `<p class="text"><strong>Company Size:</strong> ${data.employeeCount}</p>` : ''}
-            ${data.hrisSystem ? `<p class="text"><strong>Current HRIS:</strong> ${data.hrisSystem}</p>` : ''}
+            <div class="email-highlight" style="background: #0d1f0f; border: 1px solid #1a3d1f;">
+                <div style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">Confirmation sent to</div>
+                <div class="email" style="color: #22c55e; font-weight: 600;">${data.email}</div>
+            </div>
             
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">451K+</div>
-                    <div class="stat-label">r/Overemployed Members</div>
+            ${(data.employeeCount || data.hrisSystem) ? `
+            <div class="company-info">
+                ${data.employeeCount ? `
+                <div class="company-info-item">
+                    <span class="company-info-label">Company Size</span>
+                    <span class="company-info-value">${data.employeeCount}</span>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">300+</div>
-                    <div class="stat-label">Daily Fraud Posts</div>
+                ` : ''}
+                ${data.hrisSystem ? `
+                <div class="company-info-item">
+                    <span class="company-info-label">Current HRIS</span>
+                    <span class="company-info-value">${data.hrisSystem}</span>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">$250K</div>
-                    <div class="stat-label">Avg. Company Loss</div>
+                ` : ''}
+            </div>
+            ` : ''}
+            
+            <div class="threat-section" style="background: #1a0f08; border: 1px solid #3d1f0a;">
+                <div class="threat-title" style="color: #f97316;">Understanding the Threat</div>
+                
+                <div class="threat-stats">
+                    <div class="threat-stat">
+                        <span class="threat-stat-number">451K+</span>
+                        <span class="threat-stat-label">r/Overemployed Members</span>
+                    </div>
+                    <div class="threat-stat">
+                        <span class="threat-stat-number">300+</span>
+                        <span class="threat-stat-label">Daily Fraud Posts</span>
+                    </div>
+                    <div class="threat-stat">
+                        <span class="threat-stat-number">$250K</span>
+                        <span class="threat-stat-label">Avg. Company Loss</span>
+                    </div>
+                </div>
+                
+                <div class="threat-description">
+                    The r/overemployed community has over 451,000 members openly sharing tactics to deceive employers. See the problem for yourself.
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="https://reddit.com/r/overemployed" class="cta-button" style="background: #f97316; color: #ffffff !important; text-decoration: none;">
+                        Explore the Threat Landscape
+                    </a>
                 </div>
             </div>
             
-            <p class="text">
-                While you wait, feel free to explore the problem we're solving. The r/overemployed community has over 451,000 members openly sharing tactics to deceive employers.
-            </p>
-            
-            <center>
-                <a href="https://reddit.com/r/overemployed" class="cta-button">
-                    See the Threat for Yourself
-                </a>
-            </center>
-            
-            <p class="text">
-                We'll notify you as soon as VerifyHire is ready for new customers. In the meantime, stay vigilant!
-            </p>
+            <div class="next-steps">
+                <div class="next-steps-title">What's Next?</div>
+                <div class="next-steps-text">
+                    We'll notify you as soon as VerifyHire is ready for new customers. In the meantime, stay vigilant about dual employment risks in your organization.
+                </div>
+            </div>
         </div>
         
         <div class="footer">
-            <p>© 2025 VerifyHire. Protecting companies from dual employment fraud.</p>
+            <p>© 2025 VerifyHire • Protecting companies from dual employment fraud</p>
             <p>This email was sent to ${data.email} because you joined our waitlist.</p>
         </div>
-    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
   `;
@@ -191,27 +395,28 @@ function getWaitlistThankYouEmailTemplate(data: WaitlistEmailData): string {
 
 function getWaitlistThankYouEmailText(data: WaitlistEmailData): string {
   return `
-Welcome to VerifyHire Waitlist!
+You're on the VerifyHire waitlist!
 
-Thank you for joining the VerifyHire waitlist! We're excited to help you tackle the growing challenge of dual employment detection.
+Thank you for joining our waitlist. We'll notify you when we're ready for new customers.
 
-Your spot is secured at: ${data.email}
-${data.employeeCount ? `Company Size: ${data.employeeCount}` : ''}
+Confirmation sent to: ${data.email}
+${data.employeeCount ? `\nCompany Size: ${data.employeeCount}` : ''}
 ${data.hrisSystem ? `Current HRIS: ${data.hrisSystem}` : ''}
 
-Key Stats:
+UNDERSTANDING THE THREAT:
 - 451K+ r/Overemployed Members
 - 300+ Daily Fraud Posts  
 - $250K Average Company Loss
 
-While you wait, feel free to explore the problem we're solving. The r/overemployed community has over 451,000 members openly sharing tactics to deceive employers.
+The r/overemployed community has over 451,000 members openly sharing tactics to deceive employers. See the problem for yourself.
 
-Visit: https://reddit.com/r/overemployed
+Explore the threat landscape: https://reddit.com/r/overemployed
 
-We'll notify you as soon as VerifyHire is ready for new customers. In the meantime, stay vigilant!
+WHAT'S NEXT?
+We'll notify you as soon as VerifyHire is ready for new customers. In the meantime, stay vigilant about dual employment risks in your organization.
 
 ---
-© 2025 VerifyHire. Protecting companies from dual employment fraud.
+© 2025 VerifyHire • Protecting companies from dual employment fraud
 This email was sent to ${data.email} because you joined our waitlist.
   `;
 }
