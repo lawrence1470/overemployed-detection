@@ -220,7 +220,7 @@ export default function PerformanceOptimizedHome() {
         delay={0.1}
         className="relative z-10"
       >
-        <div className="bg-gradient-to-b from-white to-gray-50 py-20 dark:from-gray-900 dark:to-gray-950">
+        <div className="bg-gradient-to-b from-gray-900 to-gray-950 py-20">
           <IntegrationsSection />
         </div>
       </OptimizedAnimationWrapper>
@@ -231,7 +231,7 @@ export default function PerformanceOptimizedHome() {
         delay={0.3}
         className="relative z-10"
       >
-        <div className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-950 dark:to-gray-900">
+        <div className="bg-gradient-to-b from-gray-950 to-gray-900 py-20">
           <ProblemSolutionSection />
         </div>
       </OptimizedAnimationWrapper>
@@ -242,7 +242,7 @@ export default function PerformanceOptimizedHome() {
         delay={0.4}
         className="relative z-10"
       >
-        <div className="bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-950">
+        <div className="bg-gradient-to-b from-gray-900 to-gray-950">
           <OveremployedRedditSection />
         </div>
       </OptimizedAnimationWrapper>
