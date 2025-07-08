@@ -62,7 +62,7 @@ export function PointerHighlight({
           {/* Animated rectangle */}
           <motion.div
             className={cn(
-              "absolute border border-neutral-200",
+              "absolute border border-orange-400/60",
               rectangleClassName
             )}
             style={{ x: -PAD / 2, y: -PAD / 2 }}
@@ -90,9 +90,7 @@ export function PointerHighlight({
               ease: "easeInOut",
             }}
           >
-            <Pointer
-              className={cn("h-5 w-5 text-blue-500", pointerClassName)}
-            />
+            <Pointer className={cn("h-5 w-5 text-red-500", pointerClassName)} />
           </motion.div>
         </motion.div>
       )}
