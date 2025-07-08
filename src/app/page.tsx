@@ -9,7 +9,6 @@ import {
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { HeroSection } from "~/components/hero-section";
-import { DeploymentHeroSection } from "~/components/deployment-hero-section";
 import { FeaturesSection } from "~/components/features-section";
 import { HowItWorksSection } from "~/components/how-it-works";
 import { GlowingFeaturesSection } from "~/components/glowing-features-section";
@@ -190,11 +189,6 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative z-10">
         <HeroSection />
-      </div>
-
-      {/* Deployment Hero Section */}
-      <div className="relative z-10">
-        <DeploymentHeroSection />
       </div>
 
       {/* Soham Section with Pulsing Effect */}
