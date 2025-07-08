@@ -9,10 +9,7 @@ import {
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { HeroSection } from "~/components/hero-section";
-import { FeaturesSection } from "~/components/features-section";
 import { HowItWorksSection } from "~/components/how-it-works";
-import { GlowingFeaturesSection } from "~/components/glowing-features-section";
-import { MoonlightingSection } from "~/components/moonlighting-section";
 import { SohamSection } from "~/components/soham-section";
 import { FAQSection } from "~/components/faq-section";
 import { WaitlistSection } from "~/components/waitlist-section";
@@ -203,11 +200,6 @@ export default function Home() {
         </motion.div>
       </AnimatedSection>
 
-      {/* Features Section */}
-      <AnimatedSection className="relative z-10">
-        <FeaturesSection />
-      </AnimatedSection>
-
       {/* How It Works Section */}
       <AnimatedSection direction="up" delay={0.2} className="relative z-10">
         <div className="relative overflow-hidden">
@@ -219,20 +211,6 @@ export default function Home() {
             viewport={{ once: true }}
           />
           <HowItWorksSection />
-        </div>
-      </AnimatedSection>
-
-      {/* Glowing Features with Parallax */}
-      <AnimatedSection direction="left" delay={0.2} className="relative z-10">
-        <div className="relative overflow-hidden">
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.5 }}
-            viewport={{ once: true }}
-          />
-          <GlowingFeaturesSection />
         </div>
       </AnimatedSection>
 
@@ -312,24 +290,6 @@ export default function Home() {
           />
           <OveremployedRedditSection />
         </motion.div>
-      </AnimatedSection>
-
-      {/* Moonlighting with Floating Animation */}
-      <AnimatedSection direction="left" delay={0.2} className="relative z-10">
-        <div className="relative">
-          <motion.div
-            className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-orange-600/5 to-orange-500/5 rounded-full blur-2xl"
-            animate={{
-              rotate: 360,
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-            }}
-          />
-          <MoonlightingSection />
-        </div>
       </AnimatedSection>
 
       {/* FAQ Section */}

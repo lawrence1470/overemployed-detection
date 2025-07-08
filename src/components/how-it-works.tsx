@@ -7,77 +7,33 @@ import { cn } from "~/lib/utils";
 const steps = [
   {
     number: "01",
-    title: "Connect Your HRIS",
+    title: "Connect in 2 Min.",
+    subtitle: "Connect Your HRIS",
     description:
-      "Seamlessly integrate with 100+ HR platforms in under 5 minutes",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-        />
-      </svg>
-    ),
-    features: ["OAuth 2.0", "SOC 2 Compliant", "Auto-sync"],
-    color: "blue",
-    gradient: "from-blue-500 to-cyan-500",
-    platforms: ["BambooHR", "Gusto", "Workday", "Rippling", "ADP"],
+      "Easily connect & manage your employee data using our secure OAuth integration platform.",
+    image: "/api/placeholder/600/400", // Replace with actual image
+    color: "orange",
+    gradient: "from-orange-500 to-red-500",
   },
   {
     number: "02",
-    title: "AI Monitors 24/7",
+    title: "Let Us Monitor",
+    subtitle: "We Scan 24/7",
     description:
-      "Our network scans 10,000+ companies and job boards continuously",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-        />
-      </svg>
-    ),
-    features: ["10K+ Companies", "Real-time", "99.9% Accuracy"],
-    color: "purple",
-    gradient: "from-purple-500 to-pink-500",
-    sources: ["LinkedIn", "Indeed", "Company DBs", "Public Records"],
+      "Save hours of manual checking. We'll monitor 10,000+ companies & provide real-time detection service.",
+    image: "/api/placeholder/600/400", // Replace with actual image
+    color: "orange",
+    gradient: "from-orange-500 to-red-500",
   },
   {
     number: "03",
-    title: "Instant Alerts",
-    description: "Get notified immediately with evidence and action plans",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-        />
-      </svg>
-    ),
-    features: ["Email/Slack/SMS", "Detailed Reports", "Legal Guidance"],
-    color: "red",
-    gradient: "from-red-500 to-orange-500",
-    deliverables: ["Evidence Report", "Risk Score", "Action Plan"],
+    title: "Your Company Stays Protected",
+    subtitle: "Get Instant Alerts",
+    description:
+      "Feel the peace of mind knowing your company is protected from dual employment fraud 24/7.",
+    image: "/api/placeholder/600/400", // Replace with actual image
+    color: "orange",
+    gradient: "from-orange-500 to-red-500",
   },
 ];
 
@@ -89,45 +45,14 @@ export function HowItWorksSection() {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.8, 1, 1, 0.8]
-  );
 
   return (
     <section
       ref={containerRef}
-      className="relative py-20 lg:py-32 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden"
+      className="relative py-20 lg:py-32 bg-black overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
-
-        {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
-
-      <motion.div className="relative z-10" style={{ opacity, scale }}>
-        <div className={cn(getComponentClasses.container())}>
+      <motion.div className="relative z-10" style={{ opacity }}>
+        <div className={cn(getComponentClasses.container(), "max-w-7xl")}>
           {/* Section Header */}
           <motion.div
             className="text-center mb-16 lg:mb-20"
@@ -136,28 +61,13 @@ export function HowItWorksSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-sm font-medium bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                How It Works
-              </span>
-            </motion.div>
-
             <h2
               className={cn(
                 getComponentClasses.heading("xl"),
                 "text-white mb-6"
               )}
             >
-              Three Simple Steps to
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Protect Your Company
-              </span>
+              How it Works
             </h2>
             <p
               className={cn(
@@ -165,8 +75,9 @@ export function HowItWorksSection() {
                 "text-white/70 max-w-3xl mx-auto"
               )}
             >
-              Our automated system works seamlessly in the background,
-              protecting your company from dual employment fraud 24/7.
+              It's never been easier to protect your company from dual employment.
+              <br />
+              You won't even have to leave your desk.
             </p>
           </motion.div>
 
@@ -177,175 +88,132 @@ export function HowItWorksSection() {
                 key={step.number}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
                 className="relative group"
               >
-                {/* Connection Line (desktop only) */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/4 left-full w-full h-0.5 bg-gradient-to-r from-white/20 to-transparent -z-10" />
-                )}
+                {/* Step Number Badge */}
+                <motion.div
+                  className={cn(
+                    "absolute -top-6 left-8 z-20 w-16 h-16 rounded-full",
+                    "bg-gradient-to-br flex items-center justify-center",
+                    "text-white font-bold text-2xl shadow-2xl",
+                    step.gradient
+                  )}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                >
+                  {step.number}
+                </motion.div>
 
-                {/* Step Card */}
+                {/* Card Container */}
                 <motion.div
                   className="relative h-full"
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                  {/* Glow Effect */}
-                  <div
-                    className={cn(
-                      "absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-gradient-to-r",
-                      step.gradient
-                    )}
-                  />
-
-                  {/* Card Content */}
-                  <div className="relative h-full bg-gradient-to-b from-gray-900/80 to-black/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8 overflow-hidden">
-                    {/* Step Number */}
-                    <div className="absolute top-8 right-8 text-6xl font-bold text-white/5">
-                      {step.number}
+                  {/* Image Container */}
+                  <div className="relative h-64 lg:h-72 rounded-t-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+                    {/* Placeholder for actual images/illustrations */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {index === 0 && (
+                        <svg
+                          className="w-32 h-32 text-white/20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                          />
+                        </svg>
+                      )}
+                      {index === 1 && (
+                        <svg
+                          className="w-32 h-32 text-white/20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                          />
+                        </svg>
+                      )}
+                      {index === 2 && (
+                        <svg
+                          className="w-32 h-32 text-white/20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                          />
+                        </svg>
+                      )}
                     </div>
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  </div>
 
-                    {/* Icon */}
-                    <motion.div
-                      className={cn(
-                        "w-16 h-16 rounded-xl bg-gradient-to-br flex items-center justify-center text-white mb-6",
-                        step.gradient
-                      )}
-                      whileHover={{ rotate: 5, scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      {step.icon}
-                    </motion.div>
-
-                    {/* Content */}
-                    <h3
-                      className={cn(
-                        getComponentClasses.heading("md"),
-                        "text-white mb-3"
-                      )}
-                    >
+                  {/* Content */}
+                  <div className="relative bg-gray-900/90 backdrop-blur-xl rounded-b-2xl border border-white/10 border-t-0 p-8 pt-10">
+                    <h3 className="text-white font-bold text-xl mb-4">
                       {step.title}
                     </h3>
-                    <p
-                      className={cn(
-                        getComponentClasses.body("sm"),
-                        "text-white/70 mb-6"
-                      )}
-                    >
+                    <p className="text-white/70 leading-relaxed">
                       {step.description}
                     </p>
-
-                    {/* Features */}
-                    <div className="space-y-3 mb-6">
-                      {step.features.map((feature, i) => (
-                        <motion.div
-                          key={i}
-                          className="flex items-center gap-3"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.5 + i * 0.1 }}
-                          viewport={{ once: true }}
-                        >
-                          <div
-                            className={cn(
-                              "w-1.5 h-1.5 rounded-full bg-gradient-to-r",
-                              step.gradient
-                            )}
-                          />
-                          <span className="text-sm text-white/60">
-                            {feature}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Bottom Section */}
-                    <div className="pt-6 border-t border-white/10">
-                      {step.platforms && (
-                        <div className="flex flex-wrap gap-2">
-                          {step.platforms.map((platform, i) => (
-                            <motion.span
-                              key={platform}
-                              className="text-xs px-3 py-1 rounded-full bg-white/5 text-white/50 border border-white/10"
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 0.6 + i * 0.05 }}
-                              viewport={{ once: true }}
-                              whileHover={{
-                                scale: 1.05,
-                                backgroundColor: "rgba(255,255,255,0.1)",
-                                borderColor: "rgba(255,255,255,0.3)",
-                              }}
-                            >
-                              {platform}
-                            </motion.span>
-                          ))}
-                        </div>
-                      )}
-
-                      {step.sources && (
-                        <div className="grid grid-cols-2 gap-2">
-                          {step.sources.map((source, i) => (
-                            <motion.div
-                              key={source}
-                              className="text-xs px-3 py-2 rounded-lg bg-white/5 text-white/50 border border-white/10 text-center"
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 0.6 + i * 0.05 }}
-                              viewport={{ once: true }}
-                              whileHover={{
-                                scale: 1.05,
-                                backgroundColor: "rgba(255,255,255,0.1)",
-                                borderColor: "rgba(255,255,255,0.3)",
-                              }}
-                            >
-                              {source}
-                            </motion.div>
-                          ))}
-                        </div>
-                      )}
-
-                      {step.deliverables && (
-                        <div className="space-y-2">
-                          {step.deliverables.map((item, i) => (
-                            <motion.div
-                              key={item}
-                              className="flex items-center justify-between text-xs px-3 py-2 rounded-lg bg-white/5 text-white/50 border border-white/10"
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.6 + i * 0.05 }}
-                              viewport={{ once: true }}
-                              whileHover={{
-                                backgroundColor: "rgba(255,255,255,0.1)",
-                                borderColor: "rgba(255,255,255,0.3)",
-                              }}
-                            >
-                              <span>{item}</span>
-                              <svg
-                                className="w-4 h-4 text-green-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                            </motion.div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
                   </div>
+
+                  {/* Hover Glow Effect */}
+                  <div
+                    className={cn(
+                      "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                      "bg-gradient-to-br pointer-events-none blur-xl",
+                      step.gradient
+                    )}
+                    style={{ transform: "scale(0.95)" }}
+                  />
                 </motion.div>
               </motion.div>
             ))}
           </div>
+
+          {/* CTA Button */}
+          <motion.div
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <motion.a
+              href="#waitlist"
+              className={cn(
+                "inline-flex items-center px-8 py-4 rounded-full",
+                "bg-gradient-to-r from-orange-500 to-red-500",
+                "text-white font-semibold text-lg",
+                "hover:from-orange-600 hover:to-red-600",
+                "transition-all duration-200 shadow-2xl"
+              )}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Book Now
+            </motion.a>
+          </motion.div>
         </div>
       </motion.div>
     </section>
