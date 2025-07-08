@@ -2,9 +2,15 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import { getComponentClasses } from "~/lib/design-system";
 import { cn } from "~/lib/utils";
-import { LinkPreview } from "~/components/ui/link-preview";
+
+// Lazy load LinkPreview since it makes external API calls
+const LinkPreview = dynamic(() => import("~/components/ui/link-preview").then(mod => ({ default: mod.LinkPreview })), {
+  ssr: false,
+  loading: () => <span className="underline">Loading preview...</span>,
+});
 
 export function SohamSection() {
   return (

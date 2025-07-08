@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import dynamic from "next/dynamic";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
@@ -9,7 +10,11 @@ import { getComponentClasses, designSystem } from "~/lib/design-system";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 import { ArrowRight, Building2, Users, ChevronDown, Check, Mail } from "lucide-react";
 import { api } from "~/trpc/react";
-import { WaitlistLoader } from "~/components/waitlist-loader";
+
+// Lazy load the WaitlistLoader component
+const WaitlistLoader = dynamic(() => import("~/components/waitlist-loader").then(mod => ({ default: mod.WaitlistLoader })), {
+  ssr: false,
+});
 
 interface FormData {
   email: string;

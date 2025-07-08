@@ -16,9 +16,14 @@ export function ComingSoon({ onBypass }: ComingSoonProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [attempts, setAttempts] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate verification delay
+    await new Promise(resolve => setTimeout(resolve, 800));
     
     if (password === "catsarecool") {
       // Store bypass in sessionStorage so they don't need to re-enter
@@ -28,6 +33,7 @@ export function ComingSoon({ onBypass }: ComingSoonProps) {
       setIsInvalid(true);
       setAttempts(prev => prev + 1);
       setPassword("");
+      setIsLoading(false);
       
       // Reset invalid state after animation
       setTimeout(() => setIsInvalid(false), 500);
@@ -149,13 +155,27 @@ export function ComingSoon({ onBypass }: ComingSoonProps) {
                 </button>
               </div>
 
-              <button type="submit" className="w-full">
+              <button type="submit" className="w-full" disabled={isLoading}>
                 <HoverBorderGradient
                   as="div"
                   containerClassName="w-full rounded-xl"
-                  className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 font-medium transition-all duration-300 cursor-pointer"
+                  className={cn(
+                    "w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 font-medium transition-all duration-300 cursor-pointer",
+                    isLoading && "opacity-50 cursor-not-allowed hover:bg-white/10"
+                  )}
                 >
-                  Access Site
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <motion.div
+                        className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                      Verifying...
+                    </div>
+                  ) : (
+                    "Access Site"
+                  )}
                 </HoverBorderGradient>
               </button>
             </form>

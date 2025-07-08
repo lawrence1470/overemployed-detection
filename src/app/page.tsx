@@ -8,14 +8,86 @@ import {
   useSpring,
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { HeroSection } from "~/components/hero-section";
 import { HowItWorksSection } from "~/components/how-it-works";
 import { SohamSection } from "~/components/soham-section";
-import { FAQSection } from "~/components/faq-section";
-import { WaitlistSection } from "~/components/waitlist-section";
-import IntegrationsSection from "~/components/integrations";
-import ProblemSolutionSection from "~/components/problem-solution-section";
-import OveremployedRedditSection from "~/components/overemployed-reddit-section";
+import { Skeleton, SkeletonText } from "~/components/ui/skeleton";
+
+// Lazy load below-the-fold components
+const FAQSection = dynamic(() => import("~/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
+  loading: () => (
+    <div className="py-24 px-8">
+      <div className="max-w-3xl mx-auto">
+        <Skeleton height="3rem" width="50%" className="mb-8 mx-auto" />
+        <SkeletonText lines={5} className="mb-4" />
+      </div>
+    </div>
+  ),
+});
+
+const WaitlistSection = dynamic(() => import("~/components/waitlist-section").then(mod => ({ default: mod.WaitlistSection })), {
+  loading: () => (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="max-w-2xl mx-auto w-full">
+        <Skeleton height="4rem" width="80%" className="mb-6 mx-auto" />
+        <SkeletonText lines={2} className="mb-8 text-center" />
+        <Skeleton height="48px" className="w-48 mx-auto" />
+      </div>
+    </div>
+  ),
+});
+
+const IntegrationsSection = dynamic(() => import("~/components/integrations"), {
+  loading: () => (
+    <div className="py-20">
+      <div className="text-center mb-12">
+        <Skeleton height="3rem" width="50%" className="mx-auto mb-4" />
+        <SkeletonText lines={2} className="max-w-2xl mx-auto" />
+      </div>
+      <div className="flex justify-center gap-8">
+        {[1, 2, 3, 4].map(i => (
+          <Skeleton key={i} variant="circular" width={80} height={80} />
+        ))}
+      </div>
+    </div>
+  ),
+});
+
+const ProblemSolutionSection = dynamic(() => import("~/components/problem-solution-section"), {
+  loading: () => (
+    <div className="py-20">
+      <div className="max-w-7xl mx-auto px-8">
+        <Skeleton height="3rem" width="60%" className="mb-8" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Skeleton height="300px" variant="rounded" />
+          <Skeleton height="300px" variant="rounded" />
+        </div>
+      </div>
+    </div>
+  ),
+});
+
+const OveremployedRedditSection = dynamic(() => import("~/components/overemployed-reddit-section"), {
+  loading: () => (
+    <div className="py-20">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <Skeleton height="3rem" width="80%" className="mb-4" />
+            <SkeletonText lines={3} className="mb-8" />
+            <Skeleton height="400px" variant="rounded" />
+          </div>
+          <div className="space-y-4">
+            {[1, 2, 3].map(i => (
+              <Skeleton key={i} height="100px" variant="rounded" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+});
 
 // Premium Floating Elements with Glassmorphism
 function FloatingElements() {

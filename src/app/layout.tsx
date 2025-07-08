@@ -5,7 +5,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { Navigation } from "~/components/navigation";
 import { TRPCReactProvider } from "~/trpc/react";
-import { PremiumLoader } from "~/components/premium-loader";
 import { ComingSoonWrapper } from "~/components/coming-soon-wrapper";
 import { env } from "~/env";
 
@@ -24,6 +23,8 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -31,6 +32,8 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+  preload: true,
+  fallback: ["monospace"],
 });
 
 export default function RootLayout({
@@ -44,7 +47,6 @@ export default function RootLayout({
             comingSoonMode={env.COMING_SOON_MODE.trim() === "true"}
             isDevelopment={env.NODE_ENV === "development"}
           >
-            <PremiumLoader />
             <div className="fixed top-0 right-0 left-0 z-50">
               <Navigation />
             </div>

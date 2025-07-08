@@ -2,13 +2,23 @@
 
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import SplitText from "~/components/ui/split-text";
-import Orb from "~/components/Orb";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
+import { Skeleton } from "~/components/ui/skeleton";
+
+// Lazy load the heavy Orb component
+const Orb = dynamic(() => import("~/components/Orb"), {
+  loading: () => (
+    <div className="absolute inset-0 z-0">
+      <Skeleton className="w-full h-full" animation="wave" />
+    </div>
+  ),
+  ssr: false, // Disable SSR for WebGL component
+});
 
 export function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
@@ -16,10 +26,15 @@ export function HeroSection() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      // Use window dimensions instead of currentTarget
+      const rect = {
+        left: 0,
+        top: 0,
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      setMousePosition({ x: e.clientX, y: e.clientY });
       mouseX.set(x * 20);
       mouseY.set(y * 20);
     };
