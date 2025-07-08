@@ -95,8 +95,12 @@ function StatsTicker() {
               className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-800"
             >
               <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
-              <span className="text-xs sm:text-sm text-gray-400">{stat.label}:</span>
-              <span className="text-xs sm:text-sm font-bold text-white">{stat.value}</span>
+              <span className="text-xs sm:text-sm text-gray-400">
+                {stat.label}:
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-white">
+                {stat.value}
+              </span>
             </div>
           );
         })}
