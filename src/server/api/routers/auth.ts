@@ -22,7 +22,6 @@ export const authRouter = createTRPCRouter({
         return {
           success: true,
           user: result.user,
-          session: result.session,
         };
       } catch (error) {
         throw new Error("Invalid credentials");
@@ -50,7 +49,6 @@ export const authRouter = createTRPCRouter({
         return {
           success: true,
           user: result.user,
-          session: result.session,
         };
       } catch (error) {
         throw new Error("Registration failed");
