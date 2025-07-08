@@ -13,9 +13,6 @@ Disallow: /early-access/checkout
 
 # Allow specific paths for better indexing
 Allow: /waitlist
-Allow: /about
-Allow: /features
-Allow: /pricing
 
 # Sitemap location
 Sitemap: https://verifyhire.com/sitemap.xml

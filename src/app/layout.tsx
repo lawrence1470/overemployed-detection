@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { Navigation } from "~/components/navigation";
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
       "Protect your startup from dual employment fraud. Advanced verification platform to detect overemployed workers and ensure workplace integrity.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "VerifyHire - Employee Verification Platform",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     title: "VerifyHire - Employee Verification Platform",
     description:
       "Detect overemployed workers and protect your startup with advanced employee verification.",
-    images: ["/twitter-image.png"],
+    images: ["/twitter-image"],
     creator: "@verifyhire",
   },
   robots: {
@@ -83,16 +83,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
+  category: "technology",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  category: "technology",
 };
 
 const inter = Inter({
@@ -136,15 +137,11 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <head>
+      <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
         <TRPCReactProvider>
           <ComingSoonWrapper
             comingSoonMode={env.COMING_SOON_MODE.trim() === "true"}
