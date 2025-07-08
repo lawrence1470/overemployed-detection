@@ -11,13 +11,14 @@ import { useRef, useEffect, useState } from "react";
 import { HeroSection } from "~/components/hero-section";
 import { DeploymentHeroSection } from "~/components/deployment-hero-section";
 import { FeaturesSection } from "~/components/features-section";
+import { HowItWorksSection } from "~/components/how-it-works";
 import { GlowingFeaturesSection } from "~/components/glowing-features-section";
 import { MoonlightingSection } from "~/components/moonlighting-section";
 import { SohamSection } from "~/components/soham-section";
 import { WaitlistSection } from "~/components/waitlist-section";
 import IntegrationsSection from "~/components/integrations";
 import WobbleCardDemo from "~/components/wobble-card-demo";
-import PointerHighlightDemo from "~/components/pointer-highlight-demo";
+import OveremployedRedditSection from "~/components/overemployed-reddit-section";
 
 // Premium Floating Elements with Glassmorphism
 function FloatingElements() {
@@ -353,7 +354,7 @@ export default function Home() {
             transition={{ duration: 2, delay: 0.5 }}
             viewport={{ once: true }}
           />
-          <PointerHighlightDemo />
+          <OveremployedRedditSection />
         </motion.div>
       </AnimatedSection>
 

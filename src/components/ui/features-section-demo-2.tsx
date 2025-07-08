@@ -1,4 +1,5 @@
 import { cn } from "~/lib/utils";
+import { motion } from "motion/react";
 import {
   IconShield,
   IconSearch,
@@ -79,24 +80,62 @@ const Feature = ({
   index: number;
 }) => {
   return (
-    <div
+    <motion.div
       className={cn(
-        "flex flex-col p-4 lg:p-6 relative group/feature bg-gray-900/50 border border-gray-800 lg:border-0 rounded-lg lg:rounded-none transition-all duration-200 hover:bg-gray-800/50",
+        "flex flex-col p-4 lg:p-6 relative group/feature bg-gray-900/50 border border-gray-800 lg:border-0 rounded-lg lg:rounded-none transition-all duration-200 hover:bg-gray-800/50 cursor-pointer",
         // Desktop borders - only on lg screens
         "lg:border-r lg:border-gray-800",
         (index === 0 || index === 4) && "lg:border-l lg:border-gray-800",
         index < 4 && "lg:border-b lg:border-gray-800"
       )}
+      whileHover={{ 
+        scale: 1.02,
+        y: -4,
+        backgroundColor: "rgba(31, 41, 55, 0.7)",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)"
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        type: "spring",
+        stiffness: 300,
+        damping: 30
+      }}
+      viewport={{ once: true }}
     >
-      <div className="mb-3 text-gray-400 w-5 h-5 lg:w-6 lg:h-6">
+      <motion.div 
+        className="mb-3 text-gray-400 w-5 h-5 lg:w-6 lg:h-6"
+        whileHover={{ 
+          scale: 1.1,
+          color: "#ffffff",
+          rotate: [0, -5, 5, 0]
+        }}
+        transition={{ duration: 0.3 }}
+      >
         {icon}
-      </div>
-      <div className="text-base lg:text-lg font-bold mb-2 text-white leading-tight">
+      </motion.div>
+      <motion.div 
+        className="text-base lg:text-lg font-bold mb-2 text-white leading-tight"
+        whileHover={{ color: "#f3f4f6" }}
+      >
         {title}
-      </div>
-      <p className="text-xs lg:text-sm text-gray-400 leading-relaxed">
+      </motion.div>
+      <motion.p 
+        className="text-xs lg:text-sm text-gray-400 leading-relaxed"
+        whileHover={{ color: "#d1d5db" }}
+        transition={{ duration: 0.2 }}
+      >
         {description}
-      </p>
-    </div>
+      </motion.p>
+      
+      {/* Subtle hover border effect */}
+      <motion.div
+        className="absolute inset-0 rounded-lg border border-transparent"
+        whileHover={{ borderColor: "rgba(255, 255, 255, 0.1)" }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.div>
   );
 };

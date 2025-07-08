@@ -5,81 +5,213 @@ import { cn } from "~/lib/utils";
 import { getComponentClasses } from "~/lib/design-system";
 
 export default function IntegrationsSection() {
+  const [hoveredIntegration, setHoveredIntegration] = useState<string | null>(null);
+
   return (
-    <div className={cn(getComponentClasses.container(), "grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16")}>
-      {/* Card on the left */}
-      <motion.div 
-        className="flex-shrink-0"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <UnifiedCard>
-          <CardSkeletonContainer>
-            <Skeleton />
-          </CardSkeletonContainer>
-          <UnifiedCardTitle>Trusted by Enterprise HR Teams</UnifiedCardTitle>
-          <UnifiedCardDescription>
-            Connect instantly with the HR platforms your team already uses.
-          </UnifiedCardDescription>
-        </UnifiedCard>
-      </motion.div>
-      
-      {/* Text content on the right */}
-      <motion.div 
-        className="flex-1 space-y-6"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        <span className={getComponentClasses.badge('info')}>
-          🔗 Enterprise Integrations
-        </span>
-        
-        <h2 className={cn(getComponentClasses.heading('xl'), "text-white")}>
-          Plug Into Your Existing HR Stack
-        </h2>
-        
-        <p className={cn(getComponentClasses.body('lg'), "text-white/80")}>
-          Our platform seamlessly connects with your current HR tools to automatically detect dual employment patterns.
-        </p>
-        
-        <div className="space-y-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
-              Lightning-fast OAuth setup
-            </span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
-              Real-time data synchronization
-            </span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
-              Enterprise-grade security
-            </span>
-          </div>
-        </div>
-        
-        <motion.button 
-          className={getComponentClasses.button('primary')}
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
+    <section className="relative py-20 lg:py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
+        <motion.div 
+          className="absolute top-20 right-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ 
+            duration: 10, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
+
+      <div className={cn(getComponentClasses.container(), "relative z-10")}>
+        {/* Section Header */}
+        <motion.div 
+          className="text-center mb-20 lg:mb-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          View All Integrations
-        </motion.button>
-      </motion.div>
-    </div>
+          <motion.div
+            className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 text-white/80 text-sm font-medium mb-8 backdrop-blur-sm border border-white/10"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            🔗 Enterprise Integrations
+          </motion.div>
+
+          <h2 className={cn(getComponentClasses.heading('xl'), "text-white mb-8 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text")}>
+            Seamless HR Platform Integration
+          </h2>
+          <p className={cn(getComponentClasses.body('lg'), "text-white/70 max-w-3xl mx-auto leading-relaxed")}>
+            Connect with the HR systems you already trust. Our platform integrates seamlessly with leading HRIS platforms to detect dual employment patterns across your entire tech stack.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-20">
+          {/* Enhanced Interactive Logo Display */}
+          <motion.div 
+            className="flex-shrink-0 order-2 lg:order-1"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <EnhancedCard>
+              <CardSkeletonContainer>
+                <EnhancedSkeleton 
+                  hoveredIntegration={hoveredIntegration}
+                  setHoveredIntegration={setHoveredIntegration}
+                />
+              </CardSkeletonContainer>
+              <UnifiedCardTitle>Trusted by Enterprise HR Teams</UnifiedCardTitle>
+              <UnifiedCardDescription>
+                One-click setup with OAuth 2.0 security. Connect in minutes, not months.
+              </UnifiedCardDescription>
+            </EnhancedCard>
+          </motion.div>
+          
+          {/* Enhanced Content Section */}
+          <motion.div 
+            className="flex-1 space-y-8 order-1 lg:order-2"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-6">
+              <motion.h3 
+                className={cn(getComponentClasses.heading('lg'), "text-white leading-tight")}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                Zero-Friction Integration
+              </motion.h3>
+              
+              <motion.p 
+                className={cn(getComponentClasses.body('lg'), "text-white/80 leading-relaxed")}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                Plug into your existing HR infrastructure without disrupting workflows. Our API-first approach ensures seamless data flow and real-time synchronization.
+              </motion.p>
+            </div>
+            
+            <motion.div 
+              className="grid grid-cols-1 gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              {[
+                { 
+                  icon: "⚡", 
+                  color: "from-blue-500/20 to-cyan-500/20", 
+                  title: "Lightning Setup",
+                  desc: "OAuth 2.0 authentication in under 5 minutes"
+                },
+                { 
+                  icon: "🔄", 
+                  color: "from-green-500/20 to-emerald-500/20", 
+                  title: "Real-Time Sync",
+                  desc: "Instant data updates across all connected systems"
+                },
+                { 
+                  icon: "🛡️", 
+                  color: "from-purple-500/20 to-violet-500/20", 
+                  title: "Enterprise Security",
+                  desc: "SOC 2 compliant with end-to-end encryption"
+                }
+              ].map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  className="group p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className={cn(
+                      "flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br flex items-center justify-center text-lg",
+                      feature.color
+                    )}>
+                      {feature.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-white font-semibold mb-1 group-hover:text-white/90 transition-colors">
+                        {feature.title}
+                      </h4>
+                      <p className="text-white/70 text-sm leading-relaxed group-hover:text-white/80 transition-colors">
+                        {feature.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            <motion.div
+              className="pt-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.button 
+                className="inline-flex items-center px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium backdrop-blur-sm border border-white/10 transition-all duration-200 group"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Explore All Integrations</span>
+                <motion.svg 
+                  className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </motion.svg>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
 
-const Skeleton = () => {
+const EnhancedSkeleton = ({ 
+  hoveredIntegration, 
+  setHoveredIntegration 
+}: { 
+  hoveredIntegration: string | null;
+  setHoveredIntegration: (name: string | null) => void;
+}) => {
   const scale = [1, 1.1, 1];
   const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"];
   
@@ -100,26 +232,130 @@ const Skeleton = () => {
 
   return (
     <div className="p-8 overflow-hidden h-full relative flex items-center justify-center">
-      {/* Main row of HR systems - all 5 authentic logos */}
-      <div className="flex flex-row shrink-0 justify-center items-center gap-3 flex-wrap max-w-lg">
+      {/* Enhanced grid layout for better visual balance */}
+      <div className="grid grid-cols-3 gap-4 items-center justify-center max-w-lg">
         {hrSystems.map((system, index) => {
           const LogoComponent = system.logo;
+          const isHovered = hoveredIntegration === system.name;
+          
           return (
-            <Container key={system.name} className={system.className}>
-              <LogoComponent className={`${system.logoClassName} dark:text-white`} />
-            </Container>
+            <motion.div
+              key={system.name}
+              className="flex justify-center"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              <EnhancedContainer 
+                className={system.className}
+                isHovered={isHovered}
+                onMouseEnter={() => setHoveredIntegration(system.name)}
+                onMouseLeave={() => setHoveredIntegration(null)}
+              >
+                <LogoComponent className={`${system.logoClassName} transition-all duration-300 ${
+                  isHovered ? 'scale-110' : ''
+                }`} />
+                
+                {/* Tooltip */}
+                {isHovered && (
+                  <motion.div
+                    className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1 rounded-md backdrop-blur-sm border border-white/10 whitespace-nowrap z-50"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {system.name}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-black/90"></div>
+                  </motion.div>
+                )}
+              </EnhancedContainer>
+            </motion.div>
           );
         })}
       </div>
 
+      {/* Enhanced connection visualization */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full opacity-20" viewBox="0 0 400 300">
+          <defs>
+            <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#06b6d4', stopOpacity: 0.6 }} />
+              <stop offset="100%" style={{ stopColor: '#8b5cf6', stopOpacity: 0.6 }} />
+            </linearGradient>
+          </defs>
+          
+          {/* Animated connection lines */}
+          <motion.path
+            d="M100,150 Q200,100 300,150"
+            stroke="url(#connectionGradient)"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M100,150 Q200,200 300,150"
+            stroke="url(#connectionGradient)"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          />
+        </svg>
+      </div>
+
       <div className="h-40 w-px absolute top-20 m-auto z-40 bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-move">
         <div className="w-10 h-32 top-1/2 -translate-y-1/2 absolute -left-10">
-          <Sparkles />
+          <EnhancedSparkles />
         </div>
       </div>
     </div>
   );
 };
+
+// Legacy Skeleton for compatibility
+const Skeleton = () => {
+  return <EnhancedSkeleton hoveredIntegration={null} setHoveredIntegration={() => {}} />;
+};
+const EnhancedSparkles = () => {
+  const randomMove = () => Math.random() * 2 - 1;
+  const randomOpacity = () => Math.random();
+  const random = () => Math.random();
+  return (
+    <div className="absolute inset-0">
+      {[...Array(8)].map((_, i) => (
+        <motion.span
+          key={`star-${i}`}
+          animate={{
+            top: `calc(${random() * 100}% + ${randomMove()}px)`,
+            left: `calc(${random() * 100}% + ${randomMove()}px)`,
+            opacity: randomOpacity(),
+            scale: [1, 1.5, 0],
+          }}
+          transition={{
+            duration: random() * 3 + 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{
+            position: "absolute",
+            top: `${random() * 100}%`,
+            left: `${random() * 100}%`,
+            width: `3px`,
+            height: `3px`,
+            borderRadius: "50%",
+            zIndex: 1,
+          }}
+          className="inline-block bg-gradient-to-r from-cyan-400 to-blue-500"
+        ></motion.span>
+      ))}
+    </div>
+  );
+};
+
 const Sparkles = () => {
   const randomMove = () => Math.random() * 2 - 1;
   const randomOpacity = () => Math.random();
@@ -153,6 +389,33 @@ const Sparkles = () => {
         ></motion.span>
       ))}
     </div>
+  );
+};
+
+// Enhanced Card Components
+export const EnhancedCard = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <motion.div
+      className={cn(
+        getComponentClasses.card('glass'),
+        "w-full max-w-lg relative overflow-hidden group",
+        className
+      )}
+      whileHover={{ scale: 1.02, y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      {/* Enhanced glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        {children}
+      </div>
+    </motion.div>
   );
 };
 
@@ -245,6 +508,48 @@ export const CardSkeletonContainer = ({
   );
 };
 
+const EnhancedContainer = ({
+  className,
+  children,
+  isHovered,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  className?: string;
+  children: React.ReactNode;
+  isHovered?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}) => {
+  return (
+    <motion.div
+      className={cn(
+        `h-16 w-16 rounded-full flex items-center justify-center bg-[rgba(248,248,248,0.01)]
+        shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
+        cursor-pointer relative transition-all duration-300 border border-white/10
+        hover:border-white/30 hover:shadow-[0px_0px_16px_0px_rgba(248,248,248,0.4)_inset,0px_16px_32px_-8px_rgba(0,0,0,0.6)]`,
+        isHovered && "border-white/40 shadow-[0px_0px_20px_0px_rgba(248,248,248,0.5)_inset,0px_20px_40px_-10px_rgba(0,0,0,0.7)]",
+        className
+      )}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      {/* Enhanced glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0"
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      />
+      <div className="relative z-10">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 const Container = ({
   className,
   children,
@@ -268,173 +573,71 @@ const Container = ({
 
 export const WorkdayLogo = ({ className }: { className?: string }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      {/* Workday blue circle background */}
-      <circle cx="12" cy="12" r="11" fill="#1f4e79"/>
-      
-      {/* Orange arc */}
-      <path 
-        d="M 12 4 A 8 8 0 0 1 20 12" 
-        fill="none" 
-        stroke="#ff6b35" 
-        strokeWidth="2.5" 
-        strokeLinecap="round"
-      />
-      
-      {/* White "W" letter */}
-      <g fill="white">
-        <path d="M 7.5 8 L 8.8 8 L 10.2 14 L 11.5 8 L 12.5 8 L 13.8 14 L 15.2 8 L 16.5 8 L 14.5 16 L 13.2 16 L 12 10.5 L 10.8 16 L 9.5 16 L 7.5 8 Z"/>
-      </g>
-    </svg>
+    <img
+      src="/assets/Workday Logo.jpeg"
+      alt="Workday"
+      className={cn("object-contain", className)}
+    />
   );
 };
 
 export const ADPLogo = ({ className }: { className?: string }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      {/* Red background */}
-      <rect x="1" y="1" width="22" height="22" rx="2" fill="#D52B1E"/>
-      
-      {/* ADP lettering - recreated based on the actual logo */}
-      <g fill="white">
-        {/* Letter A */}
-        <path d="M3.5 18.5 L3.5 16.8 L4.2 16.8 L6.8 11.2 L8.4 11.2 L11 16.8 L11.7 16.8 L11.7 18.5 L8.8 18.5 L8.8 16.8 L9.2 16.8 L8.8 15.8 L6.4 15.8 L6 16.8 L6.4 16.8 L6.4 18.5 L3.5 18.5 ZM7.6 13.2 L6.8 14.9 L8.4 14.9 L7.6 13.2 Z"/>
-        
-        {/* Letter D */}
-        <path d="M12.2 18.5 L12.2 11.2 L15.8 11.2 C17.4 11.2 18.5 12.4 18.5 14.8 C18.5 17.2 17.4 18.5 15.8 18.5 L12.2 18.5 ZM14.2 16.8 L15.5 16.8 C16.2 16.8 16.5 16.2 16.5 14.8 C16.5 13.4 16.2 12.9 15.5 12.9 L14.2 12.9 L14.2 16.8 Z"/>
-        
-        {/* Letter P */}
-        <path d="M19.2 18.5 L19.2 11.2 L22.2 11.2 C23.2 11.2 23.8 11.8 23.8 13.1 C23.8 14.4 23.2 14.9 22.2 14.9 L21.2 14.9 L21.2 16.8 L21.8 16.8 L21.8 18.5 L19.2 18.5 ZM21.2 12.9 L21.2 13.8 L21.8 13.8 C22.1 13.8 22.2 13.6 22.2 13.4 C22.2 13.1 22.1 12.9 21.8 12.9 L21.2 12.9 Z"/>
-      </g>
-      
-      {/* Registered trademark symbol */}
-      <circle cx="20.5" cy="19.5" r="1.2" fill="none" stroke="white" strokeWidth="0.15"/>
-      <text x="20.5" y="20" textAnchor="middle" fill="white" fontSize="0.8" fontWeight="bold">®</text>
-    </svg>
+    <img
+      src="/assets/ADP Image.png"
+      alt="ADP"
+      className={cn("object-contain", className)}
+    />
   );
 };
 
 export const PaychexLogo = ({ className }: { className?: string }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      {/* Paychex blue background */}
-      <rect x="1" y="1" width="22" height="22" rx="2" fill="#1e5a96"/>
-      
-      {/* PAYCHEX lettering - recreated based on the actual logo */}
-      <g fill="white">
-        {/* Simplified "PAYCHEX" text optimized for small sizes */}
-        <text 
-          x="12" 
-          y="13.5" 
-          textAnchor="middle" 
-          fill="white" 
-          fontSize="4.5" 
-          fontWeight="bold" 
-          fontFamily="Arial, sans-serif"
-          letterSpacing="0.2"
-        >
-          PAYCHEX
-        </text>
-      </g>
-      
-      {/* Registered trademark symbol */}
-      <text 
-        x="20.5" 
-        y="8" 
-        textAnchor="middle" 
-        fill="white" 
-        fontSize="1.5" 
-        fontWeight="bold"
-      >
-        ®
-      </text>
-    </svg>
+    <img
+      src="/assets/Paychex Landing Page.jpg"
+      alt="Paychex"
+      className={cn("object-contain", className)}
+    />
   );
 };
 
 export const BambooLogo = ({ className }: { className?: string }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      {/* BambooHR green background */}
-      <rect x="1" y="1" width="22" height="22" rx="2" fill="#68B25B"/>
-      
-      {/* Bamboo leaves */}
-      <g fill="white">
-        {/* Left leaf */}
-        <path d="M4 8 C4 8 6 6 8 7 C10 8 9 10 7 11 C5 12 4 10 4 8 Z"/>
-        
-        {/* Right leaf */}
-        <path d="M8 6 C8 6 10 4 12 5 C14 6 13 8 11 9 C9 10 8 8 8 6 Z"/>
-      </g>
-      
-      {/* Letter "b" - recreated based on the actual logo */}
-      <g fill="white">
-        {/* Vertical stem of "b" */}
-        <rect x="11" y="5" width="2.5" height="14" rx="1"/>
-        
-        {/* Top circular part of "b" */}
-        <circle cx="16" cy="11" r="4" fill="none" stroke="white" strokeWidth="2.5"/>
-        
-        {/* Connection between stem and circle */}
-        <rect x="11" y="10" width="6" height="2.5" rx="1"/>
-      </g>
-    </svg>
+    <img
+      src="/assets/BambooHR Image.png"
+      alt="BambooHR"
+      className={cn("object-contain", className)}
+    />
   );
 };
 
 export const GustoLogo = ({ className }: { className?: string }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      {/* Gusto orange background */}
-      <rect x="1" y="1" width="22" height="22" rx="2" fill="#f45d48"/>
-      
-      {/* Simplified "gusto" text based on the original logo */}
-      <g fill="white">
-        {/* Letter g */}
-        <path d="M3.5 11.5 C3.5 10.5 4.2 9.8 5.2 9.8 C6.2 9.8 6.9 10.5 6.9 11.5 L6.9 13.5 C6.9 14.5 6.2 15.2 5.2 15.2 C4.2 15.2 3.5 14.5 3.5 13.5 L3.5 11.5 Z M5.2 13.8 C5.7 13.8 6.1 13.4 6.1 12.9 L6.1 12.1 C6.1 11.6 5.7 11.2 5.2 11.2 C4.7 11.2 4.3 11.6 4.3 12.1 L4.3 12.9 C4.3 13.4 4.7 13.8 5.2 13.8 Z"/>
-        
-        {/* Letter u */}
-        <path d="M7.5 9.8 L8.3 9.8 L8.3 13.2 C8.3 13.7 8.7 14.1 9.2 14.1 C9.7 14.1 10.1 13.7 10.1 13.2 L10.1 9.8 L10.9 9.8 L10.9 13.2 C10.9 14.2 10.2 14.9 9.2 14.9 C8.2 14.9 7.5 14.2 7.5 13.2 L7.5 9.8 Z"/>
-        
-        {/* Letter s */}
-        <path d="M11.5 11.2 C11.5 10.6 12.0 10.1 12.6 10.1 C13.2 10.1 13.7 10.6 13.7 11.2 C13.7 11.8 13.2 12.3 12.6 12.3 C12.0 12.3 11.5 11.8 11.5 11.2 Z M11.5 13.8 C11.5 13.2 12.0 12.7 12.6 12.7 C13.2 12.7 13.7 13.2 13.7 13.8 C13.7 14.4 13.2 14.9 12.6 14.9 C12.0 14.9 11.5 14.4 11.5 13.8 Z"/>
-        
-        {/* Letter t */}
-        <path d="M14.5 9.8 L15.3 9.8 L15.3 10.6 L16.1 10.6 L16.1 11.4 L15.3 11.4 L15.3 13.2 C15.3 13.7 15.7 14.1 16.2 14.1 L16.1 14.9 C15.1 14.9 14.5 14.2 14.5 13.2 L14.5 11.4 L13.9 11.4 L13.9 10.6 L14.5 10.6 L14.5 9.8 Z"/>
-        
-        {/* Letter o */}
-        <path d="M17.5 11.5 C17.5 10.5 18.2 9.8 19.2 9.8 C20.2 9.8 20.9 10.5 20.9 11.5 L20.9 13.5 C20.9 14.5 20.2 15.2 19.2 15.2 C18.2 15.2 17.5 14.5 17.5 13.5 L17.5 11.5 Z M19.2 13.8 C19.7 13.8 20.1 13.4 20.1 12.9 L20.1 12.1 C20.1 11.6 19.7 11.2 19.2 11.2 C18.7 11.2 18.3 11.6 18.3 12.1 L18.3 12.9 C18.3 13.4 18.7 13.8 19.2 13.8 Z"/>
-      </g>
-    </svg>
+    <img
+      src="/assets/Gusto Inc Logo.svg"
+      alt="Gusto"
+      className={cn("object-contain", className)}
+    />
+  );
+};
+
+export const JustWorksLogo = ({ className }: { className?: string }) => {
+  return (
+    <img
+      src="/assets/JW Logo.png"
+      alt="JustWorks"
+      className={cn("object-contain", className)}
+    />
   );
 };
 
 // HR Systems data for easy expansion - defined after logo components
 const hrSystems = [
-  { name: "Workday", className: "h-12 w-12 circle-1", logoClassName: "h-6 w-6", logo: WorkdayLogo },
-  { name: "BambooHR", className: "h-16 w-16 circle-2", logoClassName: "h-8 w-8", logo: BambooLogo },
-  { name: "Paychex", className: "h-14 w-14 circle-3", logoClassName: "h-7 w-7", logo: PaychexLogo },
-  { name: "ADP", className: "h-12 w-12 circle-4", logoClassName: "h-6 w-6", logo: ADPLogo },
-  { name: "Gusto", className: "h-14 w-14 circle-5", logoClassName: "h-7 w-7", logo: GustoLogo },
+  { name: "Workday", className: "h-14 w-14 circle-1", logoClassName: "h-8 w-8", logo: WorkdayLogo },
+  { name: "BambooHR", className: "h-16 w-16 circle-2", logoClassName: "h-10 w-10", logo: BambooLogo },
+  { name: "Paychex", className: "h-14 w-14 circle-3", logoClassName: "h-8 w-8", logo: PaychexLogo },
+  { name: "ADP", className: "h-14 w-14 circle-4", logoClassName: "h-8 w-8", logo: ADPLogo },
+  { name: "Gusto", className: "h-14 w-14 circle-5", logoClassName: "h-8 w-8", logo: GustoLogo },
+  { name: "JustWorks", className: "h-14 w-14 circle-6", logoClassName: "h-8 w-8", logo: JustWorksLogo },
 ];
 

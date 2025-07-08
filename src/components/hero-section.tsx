@@ -205,22 +205,9 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl rounded-lg" />
 
               <SplitText
-                text="Are We Hiring the Same Guy?"
+                text="Are We Hiring the Same Guy"
                 className="block font-bold text-5xl text-white leading-tight md:text-7xl relative z-10"
                 delay={80}
-                duration={1.0}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 60, rotationX: -90 }}
-                to={{ opacity: 1, y: 0, rotationX: 0 }}
-                threshold={0.8}
-                rootMargin="0px"
-                textAlign="left"
-              />
-              <SplitText
-                text="the Same Guy?"
-                className="block font-bold text-5xl bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent leading-tight md:text-7xl relative z-10"
-                delay={60}
                 duration={1.0}
                 ease="power3.out"
                 splitType="chars"

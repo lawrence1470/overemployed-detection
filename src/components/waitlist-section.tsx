@@ -137,19 +137,25 @@ export function WaitlistSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
+            <motion.input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 backdrop-blur-xl transition-all duration-300"
               required
+              whileFocus={{ 
+                scale: 1.02,
+                borderColor: "rgba(255,255,255,0.4)",
+                boxShadow: "0 0 0 2px rgba(255,255,255,0.1)"
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
             <HoverBorderGradient
               as="button"
               containerClassName="rounded-xl"
               className={cn(
-                "bg-gray-800/50 text-white hover:bg-gray-700/50 px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300 whitespace-nowrap",
+                "bg-gray-800/50 text-white hover:bg-gray-700/50 px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300 whitespace-nowrap relative overflow-hidden",
                 joinWaitlist.isPending && "opacity-50 cursor-not-allowed"
               )}
               onClick={(e) => {
@@ -158,7 +164,34 @@ export function WaitlistSection() {
                 handleSubmit(e as any);
               }}
             >
-              {joinWaitlist.isPending ? "Joining..." : "Join waitlist"}
+              {joinWaitlist.isPending ? (
+                <div className="flex items-center space-x-2">
+                  <motion.div
+                    className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  />
+                  <span>Joining...</span>
+                </div>
+              ) : (
+                <motion.span
+                  className="flex items-center space-x-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Join waitlist</span>
+                  <motion.svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    whileHover={{ x: 2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </motion.svg>
+                </motion.span>
+              )}
             </HoverBorderGradient>
           </div>
           {error && (

@@ -1,9 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "motion/react";
 import { WobbleCard } from "~/components/ui/wobble-card";
 
 export default function WobbleCardDemo() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGetStarted = async () => {
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsLoading(false);
+  };
+
   return (
     <div className="px-6 py-20 md:px-8 md:py-24 lg:px-12 lg:py-32">
       {/* Section Header */}
@@ -71,12 +81,38 @@ export default function WobbleCardDemo() {
                 With over 100,000 monthly active bot users, Gippity AI is the most
                 popular AI platform for developers.
               </p>
-              <button className="inline-flex items-center px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-105">
-                Get Started Today
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </button>
+              <motion.button
+                onClick={handleGetStarted}
+                className="inline-flex items-center px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-sm border border-white/20 transition-all duration-200 relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <motion.div
+                      className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    />
+                    <span>Getting Started...</span>
+                  </div>
+                ) : (
+                  <>
+                    <span>Get Started Today</span>
+                    <motion.svg
+                      className="ml-2 w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      whileHover={{ x: 2 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </motion.svg>
+                  </>
+                )}
+              </motion.button>
             </div>
           </div>
           <img
