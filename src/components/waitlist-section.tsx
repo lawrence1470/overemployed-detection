@@ -77,58 +77,6 @@ export function WaitlistSection() {
 					</div>
 				</motion.div>
 
-				<motion.div
-					className="border-white/10 border-t pt-12"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.8, delay: 0.4 }}
-				>
-					<p
-						className={cn(
-							designSystem.typography.label.md,
-							"mb-8 text-white/50",
-						)}
-					>
-						Backed by
-					</p>
-					<div className="flex items-center justify-center gap-8 opacity-60">
-						{/* Unified investor logos */}
-						<motion.div
-							className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl"
-							whileHover={{
-								scale: 1.1,
-								backgroundColor: "rgba(255,255,255,0.2)",
-							}}
-						>
-							<span className="font-bold text-white text-xl">M</span>
-						</motion.div>
-						<div className="font-light text-white/80 text-xl">ventures*</div>
-						<motion.div
-							className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl"
-							whileHover={{
-								scale: 1.1,
-								backgroundColor: "rgba(255,255,255,0.2)",
-							}}
-						>
-							<svg
-								className="h-6 w-6 text-white"
-								fill="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path d="M13 10V3L4 14h7v7l9-11h-7z" />
-							</svg>
-						</motion.div>
-						<motion.div
-							className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl"
-							whileHover={{
-								scale: 1.1,
-								backgroundColor: "rgba(255,255,255,0.2)",
-							}}
-						>
-							<div className="h-6 w-6 rounded-sm bg-white/80" />
-						</motion.div>
-					</div>
-				</motion.div>
 			</div>
 		</section>
 	);

@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { ComingSoonWrapper } from "~/components/coming-soon-wrapper";
+import { Footer } from "~/components/footer";
 import { Navigation } from "~/components/navigation";
 import { StructuredData } from "~/components/structured-data";
 import { env } from "~/env";
@@ -132,6 +133,7 @@ export default function RootLayout({
               <Navigation />
             </div>
             {children}
+            <Footer />
           </ComingSoonWrapper>
         </TRPCReactProvider>
       </body>
