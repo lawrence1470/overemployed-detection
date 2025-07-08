@@ -3,7 +3,7 @@ import "~/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
-import { LayoutNavigation } from "~/components/layout-navigation";
+import { Navigation } from "~/components/navigation";
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 		<html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
 			<body className="bg-black text-gray-50 antialiased">
 				<div className="fixed top-0 right-0 left-0 z-50">
-					<LayoutNavigation />
+					<Navigation />
 				</div>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</body>
