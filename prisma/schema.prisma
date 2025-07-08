@@ -18,3 +18,16 @@ model Post {
 
     @@index([name])
 }
+
+model Waitlist {
+    id            String   @id @default(cuid())
+    email         String   @unique
+    employeeCount String?
+    hrisSystem    String?
+    emailSent     Boolean  @default(false)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@index([email])
+    @@index([createdAt])
+}

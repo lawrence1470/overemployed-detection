@@ -6,6 +6,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navigation } from "~/components/navigation";
 import { TRPCReactProvider } from "~/trpc/react";
 import { PremiumLoader } from "~/components/premium-loader";
+import { ComingSoonWrapper } from "~/components/coming-soon-wrapper";
+import { env } from "~/env";
 
 export const metadata: Metadata = {
   title: "VerifyPro - Employee Verification Platform",
@@ -34,11 +36,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-black text-gray-50 antialiased font-inter selection:bg-blue-500/20 selection:text-white">
-        <PremiumLoader />
-        <div className="fixed top-0 right-0 left-0 z-50">
-          <Navigation />
-        </div>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ComingSoonWrapper 
+            comingSoonMode={env.COMING_SOON_MODE === "true"}
+            isDevelopment={env.NODE_ENV === "development"}
+          >
+            <PremiumLoader />
+            <div className="fixed top-0 right-0 left-0 z-50">
+              <Navigation />
+            </div>
+            {children}
+          </ComingSoonWrapper>
+        </TRPCReactProvider>
       </body>
     </html>
   );

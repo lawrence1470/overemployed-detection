@@ -41,12 +41,17 @@ export function PointerHighlight({
     };
   }, []);
 
+  // Extra padding around rectangle and pointer so the outline sits slightly
+  // outside the text box.
+  const PAD = 6; // px
+
   return (
     <div
-      className={cn("relative w-fit", containerClassName)}
+      className={cn("relative inline-block", containerClassName)}
       ref={containerRef}
     >
       {children}
+
       {dimensions.width > 0 && dimensions.height > 0 && (
         <motion.div
           className="pointer-events-none absolute inset-0 z-0"
@@ -54,35 +59,31 @@ export function PointerHighlight({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
+          {/* Animated rectangle */}
           <motion.div
             className={cn(
-              "absolute inset-0 border border-neutral-800 dark:border-neutral-200",
-              rectangleClassName,
+              "absolute border border-neutral-800 dark:border-neutral-200",
+              rectangleClassName
             )}
-            initial={{
-              width: 0,
-              height: 0,
-            }}
+            style={{ x: -PAD / 2, y: -PAD / 2 }}
+            initial={{ width: 0, height: 0 }}
             whileInView={{
-              width: dimensions.width,
-              height: dimensions.height,
+              width: dimensions.width + PAD,
+              height: dimensions.height + PAD,
             }}
-            transition={{
-              duration: 1,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           />
+
+          {/* Pointer icon */}
           <motion.div
             className="pointer-events-none absolute"
             initial={{ opacity: 0 }}
             whileInView={{
               opacity: 1,
-              x: dimensions.width + 4,
-              y: dimensions.height + 4,
+              x: dimensions.width + PAD / 2 + 4,
+              y: dimensions.height + PAD / 2 + 4,
             }}
-            style={{
-              rotate: -90,
-            }}
+            style={{ rotate: -90 }}
             transition={{
               opacity: { duration: 0.1, ease: "easeInOut" },
               duration: 1,

@@ -252,8 +252,8 @@ export function HeroSection() {
           <div className="flex flex-col items-center justify-center gap-4 w-full px-2 sm:px-4">
             <HoverBorderGradient
               as="a"
-              containerClassName="rounded-xl w-full sm:w-auto"
-              className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 font-medium hover:bg-gray-50 transition-colors text-sm sm:text-base w-full sm:w-auto text-center"
+              containerClassName="rounded-xl"
+              className="bg-white text-black px-8 sm:px-10 py-3 sm:py-4 font-medium hover:bg-gray-50 transition-colors text-sm sm:text-base text-center"
               duration={1}
               clockwise={true}
               {...{ href: "/waitlist" }}
