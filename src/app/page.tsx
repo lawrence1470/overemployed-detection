@@ -9,6 +9,7 @@ import {
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { HeroSection } from "~/components/hero-section";
+import { DeploymentHeroSection } from "~/components/deployment-hero-section";
 import { FeaturesSection } from "~/components/features-section";
 import { GlowingFeaturesSection } from "~/components/glowing-features-section";
 import { MoonlightingSection } from "~/components/moonlighting-section";
@@ -237,6 +238,23 @@ export default function Home() {
         <HeroSection />
       </div>
 
+      {/* Deployment Hero Section */}
+      <div className="relative z-10">
+        <DeploymentHeroSection />
+      </div>
+
+      {/* Soham Section with Pulsing Effect */}
+      <AnimatedSection direction="up" delay={0.1} className="relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <SohamSection />
+        </motion.div>
+      </AnimatedSection>
+
       {/* Transition */}
       <div className="relative z-10 text-gray-200">
         <SectionDivider variant="wave" />
@@ -361,23 +379,6 @@ export default function Home() {
           <MoonlightingSection />
         </div>
       </AnimatedSection>
-
-      {/* Soham Section with Pulsing Effect */}
-      <AnimatedSection direction="up" delay={0.1} className="relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <SohamSection />
-        </motion.div>
-      </AnimatedSection>
-
-      {/* Final Transition */}
-      <div className="relative z-10 text-white">
-        <SectionDivider variant="curve" />
-      </div>
 
       {/* Waitlist Section with Spotlight Effect */}
       <AnimatedSection direction="up" delay={0.3} className="relative z-10">

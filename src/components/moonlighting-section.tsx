@@ -1,42 +1,41 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { getComponentClasses, designSystem } from "~/lib/design-system";
+import { cn } from "~/lib/utils";
 
 export function MoonlightingSection() {
-	const sectionRef = useRef<HTMLElement>(null);
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						entry.target.classList.add("animate-in");
-					}
-				}
-			},
-			{ threshold: 0.1 },
-		);
-
-		const elements = sectionRef.current?.querySelectorAll(".fade-in");
-		if (elements) {
-			for (const el of elements) {
-				observer.observe(el);
-			}
-		}
-
-		return () => observer.disconnect();
-	}, []);
-
 	return (
 		<section
-			ref={sectionRef}
-			className="relative min-h-screen overflow-hidden bg-black text-white"
+			className={cn(getComponentClasses.section(), "min-h-screen bg-black text-white")}
 		>
 			{/* Minimal Background */}
 			<div className="absolute inset-0">
 				<div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
-				<div className="absolute top-1/4 right-1/3 h-96 w-96 rounded-full bg-orange-500/5 blur-3xl" />
-				<div className="absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-red-500/5 blur-3xl" />
+				<motion.div 
+					className="absolute top-1/4 right-1/3 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"
+					animate={{ 
+						scale: [1, 1.2, 1],
+						opacity: [0.1, 0.2, 0.1]
+					}}
+					transition={{ 
+						duration: 8, 
+						repeat: Infinity, 
+						ease: "easeInOut" 
+					}}
+				/>
+				<motion.div 
+					className="absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"
+					animate={{ 
+						scale: [1.2, 1, 1.2],
+						opacity: [0.1, 0.2, 0.1]
+					}}
+					transition={{ 
+						duration: 10, 
+						repeat: Infinity, 
+						ease: "easeInOut" 
+					}}
+				/>
 			</div>
 
 			{/* Simple Floating Elements */}
@@ -61,103 +60,128 @@ export function MoonlightingSection() {
 					/>
 				</svg>
 
-				{/* Minimal floating cards */}
-				<div className="absolute top-32 right-8 hidden rounded-xl border border-gray-800 bg-gray-900/50 p-3 backdrop-blur-sm lg:block">
-					<div className="mb-1 flex items-center space-x-2">
-						<div className="h-2 w-2 rounded-full bg-red-400" />
-						<span className="text-gray-300 text-xs">Detected</span>
+				{/* Unified floating cards */}
+				<motion.div 
+					className={cn(getComponentClasses.card('glass'), "absolute top-32 right-8 hidden p-4 lg:block")}
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 1, duration: 0.8 }}
+					whileHover={{ scale: 1.05, y: -5 }}
+				>
+					<div className="mb-2 flex items-center space-x-2">
+						<div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+						<span className={cn(designSystem.typography.label.md, "text-white/90")}>Detected</span>
 					</div>
-					<div className="font-semibold text-base text-white">127</div>
-					<div className="text-gray-400 text-xs">Dual Employment Cases</div>
-				</div>
+					<div className={cn(getComponentClasses.heading('sm'), "text-white mb-1")}>127</div>
+					<div className={cn(getComponentClasses.body('xs'), "text-white/70")}>Dual Employment Cases</div>
+				</motion.div>
 
-				<div className="absolute bottom-32 left-8 hidden rounded-xl border border-gray-800 bg-gray-900/50 p-3 backdrop-blur-sm lg:block">
-					<div className="mb-1 flex items-center space-x-2">
-						<div className="h-2 w-2 rounded-full bg-orange-400" />
-						<span className="text-gray-300 text-xs">Flagged</span>
+				<motion.div 
+					className={cn(getComponentClasses.card('glass'), "absolute bottom-32 left-8 hidden p-4 lg:block")}
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 1.2, duration: 0.8 }}
+					whileHover={{ scale: 1.05, y: -5 }}
+				>
+					<div className="mb-2 flex items-center space-x-2">
+						<div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+						<span className={cn(designSystem.typography.label.md, "text-white/90")}>Flagged</span>
 					</div>
-					<div className="font-semibold text-base text-white">23</div>
-					<div className="text-gray-400 text-xs">Calendar Conflicts</div>
-				</div>
+					<div className={cn(getComponentClasses.heading('sm'), "text-white mb-1")}>23</div>
+					<div className={cn(getComponentClasses.body('xs'), "text-white/70")}>Calendar Conflicts</div>
+				</motion.div>
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-20">
-				{/* Simple badge */}
-				<div className="fade-in mb-6 flex items-center space-x-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-2 backdrop-blur-sm">
-					<div className="h-2 w-2 rounded-full bg-orange-400" />
-					<span className="text-gray-300 text-sm">Detection Intelligence</span>
-				</div>
+			<div className={cn(getComponentClasses.container(), "relative z-10 flex min-h-screen flex-col items-center justify-center py-20")}>
+				{/* Unified badge */}
+				<motion.span 
+					className={cn(getComponentClasses.badge('warning'), "mb-6")}
+					initial={{ opacity: 0, scale: 0.9 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.8 }}
+					viewport={{ once: true }}
+				>
+					🔍 Detection Intelligence
+				</motion.span>
 
 				{/* Main Content */}
-				<div className="max-w-3xl text-center">
-					<h2 className="fade-in mb-6 font-bold text-4xl text-white md:text-5xl">
+				<div className="max-w-4xl text-center">
+					<motion.h2 
+						className={cn(getComponentClasses.heading('xl'), "text-white mb-6")}
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: true }}
+					>
 						Is Your Dev Moonlighting... or Sunsurfing? 🫣
-					</h2>
+					</motion.h2>
 
-					<div className="fade-in mb-12 space-y-4 text-gray-400">
-						<p className="text-xl">
+					<motion.div 
+						className="mb-12 space-y-4"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.4 }}
+						viewport={{ once: true }}
+					>
+						<p className={cn(getComponentClasses.body('lg'), "text-white/80")}>
 							He's not burned out—he's just double-booked.
 						</p>
-						<p className="text-lg">
+						<p className={cn(getComponentClasses.body('md'), "text-white/70")}>
 							If your engineer needs a calendar for his calendars, you need us.
 						</p>
-					</div>
+					</motion.div>
 
-					{/* Clean Stats */}
-					<div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-						<div className="fade-in rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-							<div className="mb-2 font-bold text-2xl text-white">
-								47%
-							</div>
-							<div className="text-gray-400 text-sm">
-								remote workers juggle multiple jobs
-							</div>
-						</div>
-						<div className="fade-in rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-							<div className="mb-2 font-bold text-2xl text-white">
-								2.3x
-							</div>
-							<div className="text-gray-400 text-sm">
-								productivity loss from context switching
-							</div>
-						</div>
-						<div className="fade-in rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm">
-							<div className="mb-2 font-bold text-2xl text-white">
-								$12K
-							</div>
-							<div className="text-gray-400 text-sm">
-								average cost of a bad hire
-							</div>
-						</div>
-					</div>
+					{/* Unified Stats Grid */}
+					<motion.div 
+						className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3"
+						initial={{ opacity: 0, y: 50 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.6 }}
+						viewport={{ once: true }}
+					>
+						{[
+							{ stat: "47%", desc: "remote workers juggle multiple jobs" },
+							{ stat: "2.3x", desc: "productivity loss from context switching" },
+							{ stat: "$12K", desc: "average cost of a bad hire" }
+						].map((item, index) => (
+							<motion.div 
+								key={index}
+								className={getComponentClasses.card('glass')}
+								whileHover={{ scale: 1.05, y: -5 }}
+								transition={{ type: "spring", stiffness: 300, damping: 30 }}
+							>
+								<div className={cn(getComponentClasses.heading('lg'), "text-white mb-2")}>
+									{item.stat}
+								</div>
+								<div className={cn(getComponentClasses.body('sm'), "text-white/70")}>
+									{item.desc}
+								</div>
+							</motion.div>
+						))}
+					</motion.div>
 
-					{/* Simple CTA */}
-					<div className="fade-in mt-12">
-						<a
+					{/* Unified CTA */}
+					<motion.div 
+						className="mt-12"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.8 }}
+						viewport={{ once: true }}
+					>
+						<motion.a
 							href="#waitlist"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
+							className={getComponentClasses.button('primary')}
+							whileHover={{ scale: 1.05, y: -2 }}
+							whileTap={{ scale: 0.95 }}
 						>
 							Join Waitlist
-						</a>
-					</div>
+						</motion.a>
+					</motion.div>
 				</div>
 			</div>
-
-			<style jsx>{`
-				.fade-in {
-					opacity: 0;
-					transform: translateY(20px);
-					transition: all 0.6s ease-out;
-				}
-				
-				.fade-in.animate-in {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			`}</style>
 		</section>
 	);
 }

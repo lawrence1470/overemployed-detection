@@ -6,8 +6,13 @@ export default function Orb({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
+}: {
+  hue?: number;
+  hoverIntensity?: number;
+  rotateOnHover?: boolean;
+  forceHoverState?: boolean;
 }) {
-  const ctnDom = useRef(null);
+  const ctnDom = useRef<HTMLDivElement>(null);
 
   const vert = /* glsl */ `
     precision highp float;

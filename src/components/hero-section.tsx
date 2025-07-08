@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import SplitText from "~/components/ui/split-text";
 import Orb from "~/components/Orb";
+import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 
 export function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -204,7 +205,7 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl rounded-lg" />
 
               <SplitText
-                text="Are We Hiring"
+                text="Are We Hiring the Same Guy?"
                 className="block font-bold text-5xl text-white leading-tight md:text-7xl relative z-10"
                 delay={80}
                 duration={1.0}
@@ -245,29 +246,16 @@ export function HeroSection() {
 
           {/* Premium CTA buttons with advanced interactions */}
           <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-start">
-            <motion.a
-              href="#waitlist"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block rounded-xl bg-gradient-to-r from-white to-gray-100 px-8 py-3 font-medium text-black transition-all duration-300 overflow-hidden"
-              whileHover={{
-                scale: 1.05,
-                y: -3,
-                boxShadow: "0 20px 40px rgba(255,255,255,0.1)",
-              }}
-              whileTap={{ scale: 0.95 }}
+            <HoverBorderGradient
+              as="a"
+              containerClassName="rounded-xl"
+              className="bg-white text-black px-8 py-3 font-medium hover:bg-gray-50 transition-colors"
+              duration={1}
+              clockwise={true}
+              {...{ href: "/waitlist" }}
             >
-              {/* Ripple effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl"
-                initial={{ scale: 0, opacity: 0 }}
-                whileHover={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-              <span className="relative z-10 group-hover:text-gray-900 transition-colors">
-                Join Waitlist
-              </span>
-            </motion.a>
+              Join Waitlist
+            </HoverBorderGradient>
           </div>
         </div>
       </div>

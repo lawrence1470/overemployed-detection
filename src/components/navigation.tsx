@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 
 export function Navigation() {
   return (
@@ -35,27 +36,16 @@ export function Navigation() {
       </motion.div>
 
       {/* Premium CTA Button */}
-      <motion.a
-        href="/waitlist"
-        className="group relative inline-block rounded-xl bg-gradient-to-r from-white to-gray-100 px-6 py-2 font-semibold text-black transition-all duration-300 overflow-hidden shadow-lg"
-        whileHover={{
-          scale: 1.05,
-          y: -2,
-          boxShadow: "0 10px 30px rgba(255,255,255,0.2)",
-        }}
-        whileTap={{ scale: 0.95 }}
+      <HoverBorderGradient
+        as="a"
+        containerClassName="rounded-xl"
+        className="bg-white text-black px-6 py-2 font-semibold hover:bg-gray-50 transition-colors"
+        duration={1}
+        clockwise={true}
+        {...{ href: "/waitlist" }}
       >
-        {/* Animated shine effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-xl"
-          initial={{ x: "-100%" }}
-          whileHover={{ x: "100%" }}
-          transition={{ duration: 0.6 }}
-        />
-        <span className="relative z-10 group-hover:text-gray-900 transition-colors">
-          Join Waitlist
-        </span>
-      </motion.a>
+        Join Waitlist
+      </HoverBorderGradient>
     </motion.nav>
   );
 }

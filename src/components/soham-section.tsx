@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function SohamSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black text-white">
@@ -64,6 +66,25 @@ export function SohamSection() {
 
         {/* Main Content */}
         <div className="max-w-4xl text-center">
+          {/* Profile Image */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 blur-xl scale-110"></div>
+              <div className="relative overflow-hidden rounded-full border-4 border-red-400/30 shadow-2xl">
+                <Image
+                  src="/assets/soham.JPG"
+                  alt="Soham Parekh"
+                  width={200}
+                  height={200}
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  priority
+                />
+              </div>
+              {/* Animated ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-red-400/50 animate-pulse"></div>
+            </div>
+          </div>
+
           <h2 className="mb-8 font-bold text-4xl text-white md:text-6xl lg:text-7xl leading-tight">
             Don't Hire Another{" "}
             <span className="relative">

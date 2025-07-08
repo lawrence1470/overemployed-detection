@@ -2,57 +2,79 @@
 import { animate, motion } from "motion/react";
 import React, { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
-import { GoCopilot } from "react-icons/go";
+import { getComponentClasses } from "~/lib/design-system";
 
 export default function IntegrationsSection() {
   return (
-    <div className="flex items-center gap-16 max-w-6xl mx-auto px-4">
+    <div className={cn(getComponentClasses.container(), "grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16")}>
       {/* Card on the left */}
-      <div className="flex-shrink-0 w-96">
-        <Card>
+      <motion.div 
+        className="flex-shrink-0"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <UnifiedCard>
           <CardSkeletonContainer>
             <Skeleton />
           </CardSkeletonContainer>
-          <CardTitle>Trusted by Enterprise HR Teams</CardTitle>
-          <CardDescription>
+          <UnifiedCardTitle>Trusted by Enterprise HR Teams</UnifiedCardTitle>
+          <UnifiedCardDescription>
             Connect instantly with the HR platforms your team already uses.
-          </CardDescription>
-        </Card>
-      </div>
+          </UnifiedCardDescription>
+        </UnifiedCard>
+      </motion.div>
       
       {/* Text content on the right */}
-      <div className="flex-1">
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 mb-4">
+      <motion.div 
+        className="flex-1 space-y-6"
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <span className={getComponentClasses.badge('info')}>
           🔗 Enterprise Integrations
         </span>
         
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 className={cn(getComponentClasses.heading('xl'), "text-white")}>
           Plug Into Your Existing HR Stack
         </h2>
         
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+        <p className={cn(getComponentClasses.body('lg'), "text-white/80")}>
           Our platform seamlessly connects with your current HR tools to automatically detect dual employment patterns.
         </p>
         
-        <div className="space-y-3 mb-6">
+        <div className="space-y-4">
           <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <span className="text-gray-700 dark:text-gray-300">Lightning-fast OAuth setup</span>
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
+              Lightning-fast OAuth setup
+            </span>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-gray-700 dark:text-gray-300">Real-time data synchronization</span>
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
+              Real-time data synchronization
+            </span>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-            <span className="text-gray-700 dark:text-gray-300">Enterprise-grade security</span>
+            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+            <span className={cn(getComponentClasses.body('md'), "text-white/90")}>
+              Enterprise-grade security
+            </span>
           </div>
         </div>
         
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+        <motion.button 
+          className={getComponentClasses.button('primary')}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
           View All Integrations
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     </div>
   );
 }
@@ -60,48 +82,13 @@ export default function IntegrationsSection() {
 const Skeleton = () => {
   const scale = [1, 1.1, 1];
   const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"];
-  const sequence = [
-    [
-      ".circle-1",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-2",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-3",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-4",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-5",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-  ];
+  
+  // Generate animation sequence for all HR systems
+  const sequence = hrSystems.map((_, index) => [
+    `.circle-${index + 1}`,
+    { scale, transform },
+    { duration: 0.8 },
+  ]);
 
   useEffect(() => {
     animate(sequence, {
@@ -110,24 +97,19 @@ const Skeleton = () => {
       repeatDelay: 1,
     });
   }, []);
+
   return (
     <div className="p-8 overflow-hidden h-full relative flex items-center justify-center">
-      <div className="flex flex-row shrink-0 justify-center items-center gap-2">
-        <Container className="h-8 w-8 circle-1">
-          <WorkdayLogo className="h-4 w-4 " />
-        </Container>
-        <Container className="h-12 w-12 circle-2">
-          <BambooLogo className="h-6 w-6 dark:text-white" />
-        </Container>
-        <Container className="circle-3">
-          <SuccessFactorsLogo className="h-8 w-8 dark:text-white" />
-        </Container>
-        <Container className="h-12 w-12 circle-4">
-          <PaychexLogo className="h-6 w-6 " />
-        </Container>
-        <Container className="h-8 w-8 circle-5">
-          <ADPLogo className="h-4 w-4 " />
-        </Container>
+      {/* Main row of HR systems - all 5 authentic logos */}
+      <div className="flex flex-row shrink-0 justify-center items-center gap-3 flex-wrap max-w-lg">
+        {hrSystems.map((system, index) => {
+          const LogoComponent = system.logo;
+          return (
+            <Container key={system.name} className={system.className}>
+              <LogoComponent className={`${system.logoClassName} dark:text-white`} />
+            </Container>
+          );
+        })}
       </div>
 
       <div className="h-40 w-px absolute top-20 m-auto z-40 bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-move">
@@ -174,7 +156,8 @@ const Sparkles = () => {
   );
 };
 
-export const Card = ({
+// Unified Card Components using Design System
+export const UnifiedCard = ({
   className,
   children,
 }: {
@@ -184,7 +167,8 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "max-w-sm w-full mx-auto p-8 rounded-xl border border-[rgba(255,255,255,0.10)] dark:bg-[rgba(40,40,40,0.70)] bg-gray-100 shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset] group",
+        getComponentClasses.card('glass'),
+        "w-full max-w-md",
         className
       )}
     >
@@ -193,7 +177,7 @@ export const Card = ({
   );
 };
 
-export const CardTitle = ({
+export const UnifiedCardTitle = ({
   children,
   className,
 }: {
@@ -203,7 +187,8 @@ export const CardTitle = ({
   return (
     <h3
       className={cn(
-        "text-lg font-semibold text-gray-800 dark:text-white py-2",
+        getComponentClasses.heading('sm'),
+        "text-white py-2",
         className
       )}
     >
@@ -212,7 +197,7 @@ export const CardTitle = ({
   );
 };
 
-export const CardDescription = ({
+export const UnifiedCardDescription = ({
   children,
   className,
 }: {
@@ -222,7 +207,8 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "text-sm font-normal text-neutral-600 dark:text-neutral-400 max-w-sm",
+        getComponentClasses.body('sm'),
+        "text-white/70",
         className
       )}
     >
@@ -230,6 +216,11 @@ export const CardDescription = ({
     </p>
   );
 };
+
+// Legacy Card Components (kept for compatibility)
+export const Card = UnifiedCard;
+export const CardTitle = UnifiedCardTitle;
+export const CardDescription = UnifiedCardDescription;
 
 export const CardSkeletonContainer = ({
   className,
@@ -282,24 +273,26 @@ export const WorkdayLogo = ({ className }: { className?: string }) => {
       className={className}
       fill="currentColor"
     >
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#FF6B35"/>
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">W</text>
+      {/* Workday blue circle background */}
+      <circle cx="12" cy="12" r="11" fill="#1f4e79"/>
+      
+      {/* Orange arc */}
+      <path 
+        d="M 12 4 A 8 8 0 0 1 20 12" 
+        fill="none" 
+        stroke="#ff6b35" 
+        strokeWidth="2.5" 
+        strokeLinecap="round"
+      />
+      
+      {/* White "W" letter */}
+      <g fill="white">
+        <path d="M 7.5 8 L 8.8 8 L 10.2 14 L 11.5 8 L 12.5 8 L 13.8 14 L 15.2 8 L 16.5 8 L 14.5 16 L 13.2 16 L 12 10.5 L 10.8 16 L 9.5 16 L 7.5 8 Z"/>
+      </g>
     </svg>
   );
 };
 
-export const SuccessFactorsLogo = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#0073E6"/>
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">SF</text>
-    </svg>
-  );
-};
 export const ADPLogo = ({ className }: { className?: string }) => {
   return (
     <svg
@@ -307,8 +300,24 @@ export const ADPLogo = ({ className }: { className?: string }) => {
       className={className}
       fill="currentColor"
     >
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#D52B1E"/>
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">ADP</text>
+      {/* Red background */}
+      <rect x="1" y="1" width="22" height="22" rx="2" fill="#D52B1E"/>
+      
+      {/* ADP lettering - recreated based on the actual logo */}
+      <g fill="white">
+        {/* Letter A */}
+        <path d="M3.5 18.5 L3.5 16.8 L4.2 16.8 L6.8 11.2 L8.4 11.2 L11 16.8 L11.7 16.8 L11.7 18.5 L8.8 18.5 L8.8 16.8 L9.2 16.8 L8.8 15.8 L6.4 15.8 L6 16.8 L6.4 16.8 L6.4 18.5 L3.5 18.5 ZM7.6 13.2 L6.8 14.9 L8.4 14.9 L7.6 13.2 Z"/>
+        
+        {/* Letter D */}
+        <path d="M12.2 18.5 L12.2 11.2 L15.8 11.2 C17.4 11.2 18.5 12.4 18.5 14.8 C18.5 17.2 17.4 18.5 15.8 18.5 L12.2 18.5 ZM14.2 16.8 L15.5 16.8 C16.2 16.8 16.5 16.2 16.5 14.8 C16.5 13.4 16.2 12.9 15.5 12.9 L14.2 12.9 L14.2 16.8 Z"/>
+        
+        {/* Letter P */}
+        <path d="M19.2 18.5 L19.2 11.2 L22.2 11.2 C23.2 11.2 23.8 11.8 23.8 13.1 C23.8 14.4 23.2 14.9 22.2 14.9 L21.2 14.9 L21.2 16.8 L21.8 16.8 L21.8 18.5 L19.2 18.5 ZM21.2 12.9 L21.2 13.8 L21.8 13.8 C22.1 13.8 22.2 13.6 22.2 13.4 C22.2 13.1 22.1 12.9 21.8 12.9 L21.2 12.9 Z"/>
+      </g>
+      
+      {/* Registered trademark symbol */}
+      <circle cx="20.5" cy="19.5" r="1.2" fill="none" stroke="white" strokeWidth="0.15"/>
+      <text x="20.5" y="20" textAnchor="middle" fill="white" fontSize="0.8" fontWeight="bold">®</text>
     </svg>
   );
 };
@@ -320,8 +329,37 @@ export const PaychexLogo = ({ className }: { className?: string }) => {
       className={className}
       fill="currentColor"
     >
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#00A651"/>
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">P</text>
+      {/* Paychex blue background */}
+      <rect x="1" y="1" width="22" height="22" rx="2" fill="#1e5a96"/>
+      
+      {/* PAYCHEX lettering - recreated based on the actual logo */}
+      <g fill="white">
+        {/* Simplified "PAYCHEX" text optimized for small sizes */}
+        <text 
+          x="12" 
+          y="13.5" 
+          textAnchor="middle" 
+          fill="white" 
+          fontSize="4.5" 
+          fontWeight="bold" 
+          fontFamily="Arial, sans-serif"
+          letterSpacing="0.2"
+        >
+          PAYCHEX
+        </text>
+      </g>
+      
+      {/* Registered trademark symbol */}
+      <text 
+        x="20.5" 
+        y="8" 
+        textAnchor="middle" 
+        fill="white" 
+        fontSize="1.5" 
+        fontWeight="bold"
+      >
+        ®
+      </text>
     </svg>
   );
 };
@@ -333,8 +371,70 @@ export const BambooLogo = ({ className }: { className?: string }) => {
       className={className}
       fill="currentColor"
     >
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#68B25B"/>
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">B</text>
+      {/* BambooHR green background */}
+      <rect x="1" y="1" width="22" height="22" rx="2" fill="#68B25B"/>
+      
+      {/* Bamboo leaves */}
+      <g fill="white">
+        {/* Left leaf */}
+        <path d="M4 8 C4 8 6 6 8 7 C10 8 9 10 7 11 C5 12 4 10 4 8 Z"/>
+        
+        {/* Right leaf */}
+        <path d="M8 6 C8 6 10 4 12 5 C14 6 13 8 11 9 C9 10 8 8 8 6 Z"/>
+      </g>
+      
+      {/* Letter "b" - recreated based on the actual logo */}
+      <g fill="white">
+        {/* Vertical stem of "b" */}
+        <rect x="11" y="5" width="2.5" height="14" rx="1"/>
+        
+        {/* Top circular part of "b" */}
+        <circle cx="16" cy="11" r="4" fill="none" stroke="white" strokeWidth="2.5"/>
+        
+        {/* Connection between stem and circle */}
+        <rect x="11" y="10" width="6" height="2.5" rx="1"/>
+      </g>
     </svg>
   );
 };
+
+export const GustoLogo = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+    >
+      {/* Gusto orange background */}
+      <rect x="1" y="1" width="22" height="22" rx="2" fill="#f45d48"/>
+      
+      {/* Simplified "gusto" text based on the original logo */}
+      <g fill="white">
+        {/* Letter g */}
+        <path d="M3.5 11.5 C3.5 10.5 4.2 9.8 5.2 9.8 C6.2 9.8 6.9 10.5 6.9 11.5 L6.9 13.5 C6.9 14.5 6.2 15.2 5.2 15.2 C4.2 15.2 3.5 14.5 3.5 13.5 L3.5 11.5 Z M5.2 13.8 C5.7 13.8 6.1 13.4 6.1 12.9 L6.1 12.1 C6.1 11.6 5.7 11.2 5.2 11.2 C4.7 11.2 4.3 11.6 4.3 12.1 L4.3 12.9 C4.3 13.4 4.7 13.8 5.2 13.8 Z"/>
+        
+        {/* Letter u */}
+        <path d="M7.5 9.8 L8.3 9.8 L8.3 13.2 C8.3 13.7 8.7 14.1 9.2 14.1 C9.7 14.1 10.1 13.7 10.1 13.2 L10.1 9.8 L10.9 9.8 L10.9 13.2 C10.9 14.2 10.2 14.9 9.2 14.9 C8.2 14.9 7.5 14.2 7.5 13.2 L7.5 9.8 Z"/>
+        
+        {/* Letter s */}
+        <path d="M11.5 11.2 C11.5 10.6 12.0 10.1 12.6 10.1 C13.2 10.1 13.7 10.6 13.7 11.2 C13.7 11.8 13.2 12.3 12.6 12.3 C12.0 12.3 11.5 11.8 11.5 11.2 Z M11.5 13.8 C11.5 13.2 12.0 12.7 12.6 12.7 C13.2 12.7 13.7 13.2 13.7 13.8 C13.7 14.4 13.2 14.9 12.6 14.9 C12.0 14.9 11.5 14.4 11.5 13.8 Z"/>
+        
+        {/* Letter t */}
+        <path d="M14.5 9.8 L15.3 9.8 L15.3 10.6 L16.1 10.6 L16.1 11.4 L15.3 11.4 L15.3 13.2 C15.3 13.7 15.7 14.1 16.2 14.1 L16.1 14.9 C15.1 14.9 14.5 14.2 14.5 13.2 L14.5 11.4 L13.9 11.4 L13.9 10.6 L14.5 10.6 L14.5 9.8 Z"/>
+        
+        {/* Letter o */}
+        <path d="M17.5 11.5 C17.5 10.5 18.2 9.8 19.2 9.8 C20.2 9.8 20.9 10.5 20.9 11.5 L20.9 13.5 C20.9 14.5 20.2 15.2 19.2 15.2 C18.2 15.2 17.5 14.5 17.5 13.5 L17.5 11.5 Z M19.2 13.8 C19.7 13.8 20.1 13.4 20.1 12.9 L20.1 12.1 C20.1 11.6 19.7 11.2 19.2 11.2 C18.7 11.2 18.3 11.6 18.3 12.1 L18.3 12.9 C18.3 13.4 18.7 13.8 19.2 13.8 Z"/>
+      </g>
+    </svg>
+  );
+};
+
+// HR Systems data for easy expansion - defined after logo components
+const hrSystems = [
+  { name: "Workday", className: "h-12 w-12 circle-1", logoClassName: "h-6 w-6", logo: WorkdayLogo },
+  { name: "BambooHR", className: "h-16 w-16 circle-2", logoClassName: "h-8 w-8", logo: BambooLogo },
+  { name: "Paychex", className: "h-14 w-14 circle-3", logoClassName: "h-7 w-7", logo: PaychexLogo },
+  { name: "ADP", className: "h-12 w-12 circle-4", logoClassName: "h-6 w-6", logo: ADPLogo },
+  { name: "Gusto", className: "h-14 w-14 circle-5", logoClassName: "h-7 w-7", logo: GustoLogo },
+];
+

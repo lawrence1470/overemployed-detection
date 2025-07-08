@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { z } from "zod";
+import { motion } from "motion/react";
 import { api } from "~/trpc/react";
+import { getComponentClasses, designSystem } from "~/lib/design-system";
+import { cn } from "~/lib/utils";
+import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 
 const waitlistSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -14,7 +18,7 @@ export function WaitlistSection() {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
-  
+
   const joinWaitlist = api.waitlist.join.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,9 +27,9 @@ export function WaitlistSection() {
 
     try {
       const validatedData = waitlistSchema.parse({ email });
-      
+
       await joinWaitlist.mutateAsync(validatedData);
-      
+
       setIsSubmitted(true);
       setEmail("");
     } catch (err) {
@@ -39,80 +43,188 @@ export function WaitlistSection() {
 
   if (isSubmitted) {
     return (
-      <section id="waitlist" className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-        <div className="max-w-2xl mx-auto text-center">
+      <section
+        id="waitlist"
+        className="min-h-screen bg-black text-white flex items-center justify-center px-4"
+      >
+        <motion.div
+          className="max-w-2xl mx-auto text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="mb-8">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <motion.div
+              className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.5,
+                type: "spring",
+                stiffness: 300,
+              }}
+            >
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">You're in!</h2>
-            <p className="text-gray-400 text-lg">
-              Thanks for joining our waitlist. We'll keep you updated on our progress.
+            </motion.div>
+            <h2
+              className={cn(
+                getComponentClasses.heading("xl"),
+                "text-white mb-6"
+              )}
+            >
+              You're in!
+            </h2>
+            <p className={cn(getComponentClasses.body("lg"), "text-white/70")}>
+              Thanks for joining our waitlist. We'll keep you updated on our
+              progress.
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
     );
   }
 
   return (
-    <section id="waitlist" className="min-h-screen bg-black text-white flex items-center justify-center px-4">
+    <section
+      id="waitlist"
+      className="min-h-screen bg-black text-white flex items-center justify-center px-4"
+    >
       <div className="max-w-2xl mx-auto text-center">
-        <div className="mb-12">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1
+            className={cn(
+              designSystem.typography.display.lg,
+              "text-white mb-6"
+            )}
+          >
             Join the waitlist
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl mx-auto">
-            Receive all the latest news and updates,<br />
+          <p
+            className={cn(
+              getComponentClasses.body("lg"),
+              "text-white/70 max-w-xl mx-auto"
+            )}
+          >
+            Receive all the latest news and updates,
+            <br />
             as well as early access to the beta.
           </p>
-        </div>
+        </motion.div>
 
-        <form onSubmit={handleSubmit} className="mb-16">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="flex-1 px-6 py-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+              className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 backdrop-blur-xl transition-all duration-300"
               required
             />
-            <button
-              type="submit"
-              disabled={joinWaitlist.isPending}
-              className="px-8 py-4 bg-gray-200 text-black font-medium rounded-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            <HoverBorderGradient
+              as="button"
+              containerClassName="rounded-xl"
+              className={cn(
+                "bg-gray-800/50 text-white hover:bg-gray-700/50 px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300 whitespace-nowrap",
+                joinWaitlist.isPending && "opacity-50 cursor-not-allowed"
+              )}
+              onClick={(e) => {
+                if (joinWaitlist.isPending) return;
+                e.preventDefault();
+                handleSubmit(e as any);
+              }}
             >
               {joinWaitlist.isPending ? "Joining..." : "Join waitlist"}
-            </button>
+            </HoverBorderGradient>
           </div>
           {error && (
-            <p className="mt-4 text-red-400 text-sm">{error}</p>
+            <motion.p
+              className="mt-4 text-red-400 text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {error}
+            </motion.p>
           )}
-        </form>
+        </motion.form>
 
-        <div className="border-t border-gray-800 pt-12">
-          <p className="text-gray-500 text-sm mb-8">Backed by</p>
+        <motion.div
+          className="border-t border-white/10 pt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p
+            className={cn(
+              designSystem.typography.label.md,
+              "text-white/50 mb-8"
+            )}
+          >
+            Backed by
+          </p>
           <div className="flex items-center justify-center gap-8 opacity-60">
-            {/* Placeholder investor logos */}
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <span className="text-black font-bold text-xl">M</span>
-            </div>
-            <div className="text-white text-xl font-light">
-              ventures*
-            </div>
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            {/* Unified investor logos */}
+            <motion.div
+              className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center"
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "rgba(255,255,255,0.2)",
+              }}
+            >
+              <span className="text-white font-bold text-xl">M</span>
+            </motion.div>
+            <div className="text-white/80 text-xl font-light">ventures*</div>
+            <motion.div
+              className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center"
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "rgba(255,255,255,0.2)",
+              }}
+            >
+              <svg
+                className="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-            </div>
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <div className="w-6 h-6 bg-black rounded-sm"></div>
-            </div>
+            </motion.div>
+            <motion.div
+              className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center"
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "rgba(255,255,255,0.2)",
+              }}
+            >
+              <div className="w-6 h-6 bg-white/80 rounded-sm"></div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
