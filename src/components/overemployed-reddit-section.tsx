@@ -57,7 +57,7 @@ export default function OveremployedRedditSection() {
   const [selectedThread, setSelectedThread] = useState<number | null>(null);
 
   return (
-    <section className="relative min-h-screen py-20 lg:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden flex items-center">
+    <section className="relative h-full w-full py-20 lg:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
       {/* Ominous Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-transparent to-orange-900/20" />

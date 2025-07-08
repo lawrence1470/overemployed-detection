@@ -298,7 +298,7 @@ export default function Home() {
       {/* Pointer Highlight with Magnetic Effect */}
       <AnimatedSection direction="up" delay={0.4} className="relative z-10">
         <motion.div
-          className="py-20 bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden"
+          className="bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden"
           whileInView={{
             background: [
               "linear-gradient(135deg, rgb(243 244 246) 0%, rgb(243 244 246) 100%)",

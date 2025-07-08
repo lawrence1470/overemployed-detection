@@ -1,137 +1,106 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
-import { Timeline } from "~/components/ui/timeline";
+import { HorizontalTimeline } from "~/components/ui/horizontal-timeline";
 import { getComponentClasses } from "~/lib/design-system";
 import { cn } from "~/lib/utils";
 
 const timelineData = [
   {
-    title: "Step 1",
+    title: "Connect your HRIS",
+    subtitle: "Sync your payroll data to load all your employees and identifying information.",
     content: (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-200 md:text-xl">
-          Connect your HRIS
-        </h3>
-        <p className="mb-8 text-sm font-normal text-neutral-800 dark:text-neutral-200 md:text-base">
-          Sync your payroll data to load all your employees and identifying information. One-click integration with major HR platforms.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          {/* HRIS Integration Visual */}
-          <div className="rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 p-6 text-white shadow-xl">
-            <div className="text-center space-y-3">
-              <div className="text-4xl mb-2">🔗</div>
-              <h4 className="font-bold">Quick Setup</h4>
-              <p className="text-xs opacity-90">5-minute OAuth flow</p>
-            </div>
+      <motion.div 
+        className="max-w-md mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-20 h-20 rounded-full bg-blue-500/10 flex items-center justify-center">
+            <span className="text-4xl">🔗</span>
           </div>
-          <div className="rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 text-white shadow-xl">
-            <div className="text-center space-y-3">
-              <div className="text-4xl mb-2">🏢</div>
-              <h4 className="font-bold">100+ Integrations</h4>
-              <p className="text-xs opacity-90">BambooHR, Gusto, Workday...</p>
-            </div>
+          <div className="space-y-3">
+            <h3 className="text-2xl font-semibold text-white">Quick Integration</h3>
+            <p className="text-white/70 leading-relaxed">
+              One-click OAuth setup with BambooHR, Gusto, Workday, and 100+ other HR platforms. 
+              Enterprise-ready with SOC 2 compliance.
+            </p>
           </div>
-          <div className="col-span-2 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 p-6 text-white shadow-xl">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="font-bold mb-1">Enterprise Ready</h4>
-                <p className="text-sm opacity-90">SOC 2 compliant, end-to-end encryption</p>
-              </div>
-              <div className="text-3xl">🛡️</div>
-            </div>
+          <div className="pt-4 w-full">
+            <div className="text-sm text-white/50">Takes just 5 minutes</div>
           </div>
         </div>
-      </div>
+      </motion.div>
     ),
   },
   {
-    title: "Step 2",
+    title: "VerifyHire monitors",
+    subtitle: "We compare your data to our network, job boards, LinkedIn, and more.",
     content: (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-200 md:text-xl">
-          VerifyHire monitors
-        </h3>
-        <p className="mb-8 text-sm font-normal text-neutral-800 dark:text-neutral-200 md:text-base">
-          We'll compare your employment data to thousands of other companies in our network, job boards, LinkedIn, and more.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          {/* Monitoring Visuals */}
-          <div className="rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 p-6 text-white shadow-xl">
-            <div className="space-y-3">
-              <div className="text-3xl">🔍</div>
-              <h4 className="font-bold">Network Scan</h4>
-              <div className="space-y-1 text-xs">
-                <div className="flex items-center justify-between">
-                  <span>Companies</span>
-                  <span className="text-green-300">✓</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Job Boards</span>
-                  <span className="text-green-300">✓</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>LinkedIn</span>
-                  <span className="text-green-300">✓</span>
-                </div>
-              </div>
-            </div>
+      <motion.div 
+        className="max-w-md mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-20 h-20 rounded-full bg-purple-500/10 flex items-center justify-center">
+            <span className="text-4xl">🔍</span>
           </div>
-          <div className="rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 p-6 text-white shadow-xl">
-            <div className="space-y-3">
-              <div className="text-3xl">🤖</div>
-              <h4 className="font-bold">AI Analysis</h4>
-              <p className="text-xs opacity-90">Pattern matching across millions of profiles</p>
-            </div>
+          <div className="space-y-3">
+            <h3 className="text-2xl font-semibold text-white">AI-Powered Detection</h3>
+            <p className="text-white/70 leading-relaxed">
+              Our network scans 10,000+ companies, major job boards, and LinkedIn profiles. 
+              Advanced pattern matching identifies dual employment instantly.
+            </p>
           </div>
-          <div className="col-span-2 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 p-6 text-white shadow-xl">
-            <div className="text-center space-y-3">
-              <div className="text-3xl">⚡</div>
-              <h4 className="font-bold">Real-Time Detection</h4>
-              <p className="text-sm opacity-90">Continuous monitoring with instant results</p>
+          <div className="pt-4 w-full">
+            <div className="flex items-center justify-center gap-4 text-sm text-white/50">
+              <span className="flex items-center gap-1">
+                <span className="text-green-400">●</span> Real-time
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-400">●</span> 24/7 monitoring
+              </span>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     ),
   },
   {
-    title: "Step 3",
+    title: "Get notified",
+    subtitle: "Receive instant alerts with detailed reports and recommended actions.",
     content: (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-200 md:text-xl">
-          Get notified
-        </h3>
-        <p className="mb-8 text-sm font-normal text-neutral-800 dark:text-neutral-200 md:text-base">
-          If we find a potential match, you'll be notified immediately with detailed information to help you take action.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          {/* Alert Visuals */}
-          <div className="rounded-xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl">
-            <div className="space-y-3">
-              <div className="text-3xl animate-pulse">🚨</div>
-              <h4 className="font-bold">Instant Alerts</h4>
-              <p className="text-xs opacity-90">Email, Slack, SMS notifications</p>
-            </div>
+      <motion.div 
+        className="max-w-md mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
+            <motion.span 
+              className="text-4xl"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              🚨
+            </motion.span>
           </div>
-          <div className="rounded-xl bg-gradient-to-br from-red-500 to-pink-500 p-6 text-white shadow-xl">
-            <div className="space-y-3">
-              <div className="text-3xl">📊</div>
-              <h4 className="font-bold">Detailed Reports</h4>
-              <p className="text-xs opacity-90">Evidence & recommendations</p>
-            </div>
+          <div className="space-y-3">
+            <h3 className="text-2xl font-semibold text-white">Instant Alerts</h3>
+            <p className="text-white/70 leading-relaxed">
+              Get notified via email, Slack, or SMS when we detect a match. 
+              Detailed reports include evidence and legal guidance for next steps.
+            </p>
           </div>
-          <div className="col-span-2 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 p-6 text-white shadow-xl">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="font-bold mb-1">Take Action</h4>
-                <p className="text-sm opacity-90">Clear next steps with legal guidance</p>
-              </div>
-              <div className="text-3xl">⚖️</div>
-            </div>
+          <div className="pt-4 w-full">
+            <div className="text-sm text-white/50">Average detection time: &lt;24 hours</div>
           </div>
         </div>
-      </div>
+      </motion.div>
     ),
   },
 ];
@@ -200,13 +169,13 @@ export function HowItWorksSection() {
 
         {/* Timeline Content */}
         <motion.div 
-          className="relative w-full"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="relative w-full -mx-8 md:-mx-12 lg:-mx-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <Timeline data={timelineData} />
+          <HorizontalTimeline data={timelineData} />
         </motion.div>
 
         {/* Bottom CTA */}
