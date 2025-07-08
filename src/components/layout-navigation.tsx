@@ -47,6 +47,8 @@ export function LayoutNavigation() {
 
 			<a
 				href="#waitlist"
+				target="_blank"
+				rel="noopener noreferrer"
 				className="inline-block rounded-lg bg-white px-6 py-2 font-medium text-black transition-colors hover:bg-gray-100"
 			>
 				Join Waitlist

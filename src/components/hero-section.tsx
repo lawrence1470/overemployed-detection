@@ -3,15 +3,26 @@
 import Link from "next/link";
 import SplitText from "~/components/ui/split-text";
 import GridMotionDemo from "~/components/grid-motion-demo";
+import Orb from "~/components/Orb";
 
 export function HeroSection() {
 	return (
 		<section className="relative h-screen overflow-hidden bg-black text-white">
+			{/* Orb Background - Covering entire section */}
+			<div className="absolute inset-0 opacity-30">
+				<Orb
+					hue={240}
+					hoverIntensity={0.1}
+					rotateOnHover={false}
+					forceHoverState={true}
+				/>
+			</div>
+			
 			{/* Minimal Background */}
 			<div className="absolute inset-0">
-				<div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
-				<div className="absolute top-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
-				<div className="absolute right-1/3 bottom-1/3 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl" />
+				<div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-black/90 to-gray-900/80" />
+				<div className="absolute top-1/3 left-1/3 h-96 w-96 rounded-full bg-blue-500/3 blur-3xl" />
+				<div className="absolute right-1/3 bottom-1/3 h-96 w-96 rounded-full bg-purple-500/3 blur-3xl" />
 			</div>
 
 			{/* Minimal Floating Elements */}
@@ -69,7 +80,7 @@ export function HeroSection() {
 					</div>
 
 					{/* Main Heading */}
-					<div className="mb-4 text-center lg:text-left">
+					<div className="mb-4 text-center lg:text-left relative">
 						<SplitText
 							text="Are We Hiring"
 							className="block font-bold text-5xl text-white leading-tight md:text-7xl"
@@ -107,6 +118,8 @@ export function HeroSection() {
 					<div className="flex flex-col items-center gap-4 sm:flex-row lg:items-start">
 						<a
 							href="#waitlist"
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
 						>
 							Join Waitlist

@@ -136,6 +136,8 @@ export function MoonlightingSection() {
 					<div className="fade-in mt-12">
 						<a
 							href="#waitlist"
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-block rounded-lg bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-gray-100"
 						>
 							Join Waitlist

@@ -1,17 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { Badge, Heading, Text } from "~/components/ui/typography";
 
 export function Navigation() {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
 		<nav className="border-gray-800 border-b bg-gray-950/95 backdrop-blur supports-[backdrop-filter]:bg-gray-950/75">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="flex h-16 items-center justify-between">
-					<div className="flex items-center space-x-8">
+					<div className="flex items-center">
 						<Link href="/" className="flex items-center space-x-2">
 							<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600">
 								<span className="font-bold text-sm text-white">V</span>
@@ -20,44 +18,13 @@ export function Navigation() {
 								VerifyPro
 							</Heading>
 						</Link>
-
-						<div className="hidden items-center space-x-8 md:flex">
-							<Link
-								href="/features"
-								className="text-gray-300 transition-colors hover:text-white"
-							>
-								Features
-							</Link>
-							<Link
-								href="/pricing"
-								className="text-gray-300 transition-colors hover:text-white"
-							>
-								Pricing
-							</Link>
-							<Link
-								href="/docs"
-								className="text-gray-300 transition-colors hover:text-white"
-							>
-								Documentation
-							</Link>
-							<Link
-								href="/about"
-								className="text-gray-300 transition-colors hover:text-white"
-							>
-								About
-							</Link>
-						</div>
 					</div>
 
 					<div className="hidden items-center space-x-4 md:flex">
 						<Link
-							href="/login"
-							className="px-3 py-2 text-gray-300 transition-colors hover:text-white"
-						>
-							Sign In
-						</Link>
-						<Link
 							href="#waitlist"
+							target="_blank"
+							rel="noopener noreferrer"
 							className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition-colors hover:bg-indigo-700"
 						>
 							Join Waitlist
@@ -65,81 +32,18 @@ export function Navigation() {
 					</div>
 
 					<div className="md:hidden">
-						<button
-							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className="text-gray-300 transition-colors hover:text-white"
+						<Link
+							href="#waitlist"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="rounded-lg bg-indigo-600 px-3 py-2 font-medium text-white transition-colors hover:bg-indigo-700"
 						>
-							<svg
-								className="h-6 w-6"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								{isMenuOpen ? (
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M6 18L18 6M6 6l12 12"
-									/>
-								) : (
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M4 6h16M4 12h16M4 18h16"
-									/>
-								)}
-							</svg>
-						</button>
+							Join Waitlist
+						</Link>
 					</div>
 				</div>
 			</div>
 
-			{isMenuOpen && (
-				<div className="border-gray-800 border-t md:hidden">
-					<div className="space-y-1 bg-gray-900 px-2 pt-2 pb-3">
-						<Link
-							href="/features"
-							className="block px-3 py-2 text-gray-300 transition-colors hover:text-white"
-						>
-							Features
-						</Link>
-						<Link
-							href="/pricing"
-							className="block px-3 py-2 text-gray-300 transition-colors hover:text-white"
-						>
-							Pricing
-						</Link>
-						<Link
-							href="/docs"
-							className="block px-3 py-2 text-gray-300 transition-colors hover:text-white"
-						>
-							Documentation
-						</Link>
-						<Link
-							href="/about"
-							className="block px-3 py-2 text-gray-300 transition-colors hover:text-white"
-						>
-							About
-						</Link>
-						<div className="border-gray-800 border-t pt-4">
-							<Link
-								href="/login"
-								className="block px-3 py-2 text-gray-300 transition-colors hover:text-white"
-							>
-								Sign In
-							</Link>
-							<Link
-								href="#waitlist"
-								className="mx-3 block rounded-lg bg-indigo-600 px-3 py-2 text-center font-medium text-white transition-colors hover:bg-indigo-700"
-							>
-								Join Waitlist
-							</Link>
-						</div>
-					</div>
-				</div>
-			)}
 		</nav>
 	);
 }

@@ -59,7 +59,7 @@ export default function FeaturesSectionDemo() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-0">
       {features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
       ))}
@@ -81,20 +81,20 @@ const Feature = ({
   return (
     <div
       className={cn(
-        "flex flex-col p-6 lg:p-8 relative group/feature bg-gray-900/50 border border-gray-800 lg:border-0 rounded-lg lg:rounded-none transition-all duration-200 hover:bg-gray-800/50",
+        "flex flex-col p-4 lg:p-6 relative group/feature bg-gray-900/50 border border-gray-800 lg:border-0 rounded-lg lg:rounded-none transition-all duration-200 hover:bg-gray-800/50",
         // Desktop borders - only on lg screens
         "lg:border-r lg:border-gray-800",
         (index === 0 || index === 4) && "lg:border-l lg:border-gray-800",
         index < 4 && "lg:border-b lg:border-gray-800"
       )}
     >
-      <div className="mb-4 text-gray-400 w-6 h-6">
+      <div className="mb-3 text-gray-400 w-5 h-5 lg:w-6 lg:h-6">
         {icon}
       </div>
-      <div className="text-lg font-bold mb-3 text-white">
+      <div className="text-base lg:text-lg font-bold mb-2 text-white leading-tight">
         {title}
       </div>
-      <p className="text-sm text-gray-400 leading-relaxed">
+      <p className="text-xs lg:text-sm text-gray-400 leading-relaxed">
         {description}
       </p>
     </div>
