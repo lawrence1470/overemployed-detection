@@ -11,9 +11,9 @@ const steps = [
     subtitle: "Connect Your HRIS",
     description:
       "Easily connect & manage your employee data using our secure OAuth integration platform.",
-    image: "/api/placeholder/600/400", // Replace with actual image
-    color: "orange",
-    gradient: "from-orange-500 to-red-500",
+    color: "blue",
+    gradient: "from-blue-500 to-blue-600",
+    bgGradient: "from-blue-500/5 to-blue-600/5",
   },
   {
     number: "02",
@@ -21,9 +21,9 @@ const steps = [
     subtitle: "We Scan 24/7",
     description:
       "Save hours of manual checking. We'll monitor 10,000+ companies & provide real-time detection service.",
-    image: "/api/placeholder/600/400", // Replace with actual image
-    color: "orange",
-    gradient: "from-orange-500 to-red-500",
+    color: "purple",
+    gradient: "from-purple-500 to-purple-600",
+    bgGradient: "from-purple-500/5 to-purple-600/5",
   },
   {
     number: "03",
@@ -31,9 +31,9 @@ const steps = [
     subtitle: "Get Instant Alerts",
     description:
       "Feel the peace of mind knowing your company is protected from dual employment fraud 24/7.",
-    image: "/api/placeholder/600/400", // Replace with actual image
-    color: "orange",
-    gradient: "from-orange-500 to-red-500",
+    color: "green",
+    gradient: "from-green-500 to-green-600",
+    bgGradient: "from-green-500/5 to-green-600/5",
   },
 ];
 
@@ -49,7 +49,7 @@ export function HowItWorksSection() {
   return (
     <section
       ref={containerRef}
-      className="relative py-20 lg:py-32 bg-black overflow-hidden"
+      className="relative py-20 lg:py-32 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden"
     >
       <motion.div className="relative z-10" style={{ opacity }}>
         <div className={cn(getComponentClasses.container(), "max-w-7xl")}>
@@ -113,66 +113,196 @@ export function HowItWorksSection() {
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
                   {/* Image Container */}
-                  <div className="relative h-64 lg:h-72 rounded-t-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
-                    {/* Placeholder for actual images/illustrations */}
-                    <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative h-64 lg:h-72 rounded-t-2xl overflow-hidden bg-gradient-to-br from-gray-900 to-black border border-white/5">
+                    {/* Illustrations */}
+                    <div className="absolute inset-0 flex items-center justify-center p-8">
                       {index === 0 && (
-                        <svg
-                          className="w-32 h-32 text-white/20"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                        // Connect illustration
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <motion.div
+                            className="absolute w-32 h-32 rounded-2xl bg-blue-500/10 border border-blue-500/20"
+                            animate={{
+                              rotate: [0, 5, 0, -5, 0],
+                            }}
+                            transition={{
+                              duration: 4,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
                           />
-                        </svg>
+                          <motion.div
+                            className="absolute w-24 h-24 rounded-xl bg-blue-500/20 border border-blue-500/30"
+                            style={{ top: "20%", right: "25%" }}
+                            animate={{
+                              scale: [1, 1.1, 1],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: 0.5,
+                            }}
+                          />
+                          <svg
+                            className="relative z-10 w-20 h-20 text-blue-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                            />
+                          </svg>
+                          {/* Connection lines */}
+                          <motion.div
+                            className="absolute w-px h-20 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent"
+                            style={{ left: "50%", top: "-30%" }}
+                            animate={{
+                              opacity: [0, 1, 0],
+                              scaleY: [0, 1, 0],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                        </div>
                       )}
                       {index === 1 && (
-                        <svg
-                          className="w-32 h-32 text-white/20"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        // Monitor illustration
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          {/* Scanning radar effect */}
+                          <motion.div
+                            className="absolute w-40 h-40 rounded-full border-2 border-purple-500/20"
+                            animate={{
+                              scale: [1, 1.5, 1],
+                              opacity: [0.5, 0, 0.5],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeOut",
+                            }}
                           />
-                        </svg>
+                          <motion.div
+                            className="absolute w-32 h-32 rounded-full border-2 border-purple-500/30"
+                            animate={{
+                              scale: [1, 1.4, 1],
+                              opacity: [0.6, 0, 0.6],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeOut",
+                              delay: 0.5,
+                            }}
+                          />
+                          <div className="relative w-24 h-24 rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center">
+                            <svg
+                              className="w-12 h-12 text-purple-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              />
+                            </svg>
+                          </div>
+                          {/* Scanning line */}
+                          <motion.div
+                            className="absolute w-full h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+                            animate={{
+                              y: [-60, 60, -60],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                        </div>
                       )}
                       {index === 2 && (
-                        <svg
-                          className="w-32 h-32 text-white/20"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                          />
-                        </svg>
+                        // Alert illustration
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <motion.div
+                            className="absolute w-32 h-32 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center"
+                            animate={{
+                              scale: [1, 1.05, 1],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          >
+                            <svg
+                              className="w-16 h-16 text-green-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </motion.div>
+                          {/* Notification badges */}
+                          <motion.div
+                            className="absolute top-10 right-10 w-12 h-12 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center"
+                            animate={{
+                              opacity: [0, 1, 1, 0],
+                              scale: [0.8, 1, 1, 0.8],
+                              y: [0, -5, -5, 0],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeOut",
+                            }}
+                          >
+                            <span className="text-green-400 text-xs font-bold">!</span>
+                          </motion.div>
+                          <motion.div
+                            className="absolute bottom-10 left-10 w-10 h-10 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center"
+                            animate={{
+                              opacity: [0, 1, 1, 0],
+                              scale: [0.8, 1, 1, 0.8],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "easeOut",
+                              delay: 1,
+                            }}
+                          >
+                            <span className="text-green-400 text-xs">✓</span>
+                          </motion.div>
+                        </div>
                       )}
                     </div>
                     
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   </div>
 
                   {/* Content */}
-                  <div className="relative bg-gray-900/90 backdrop-blur-xl rounded-b-2xl border border-white/10 border-t-0 p-8 pt-10">
+                  <div className="relative bg-gray-900/50 backdrop-blur-xl rounded-b-2xl border border-white/5 border-t-0 p-8 pt-10">
                     <h3 className="text-white font-bold text-xl mb-4">
                       {step.title}
                     </h3>
-                    <p className="text-white/70 leading-relaxed">
+                    <p className="text-white/60 leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -181,8 +311,8 @@ export function HowItWorksSection() {
                   <div
                     className={cn(
                       "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-                      "bg-gradient-to-br pointer-events-none blur-xl",
-                      step.gradient
+                      "bg-gradient-to-br pointer-events-none blur-2xl",
+                      step.bgGradient
                     )}
                     style={{ transform: "scale(0.95)" }}
                   />
@@ -202,16 +332,29 @@ export function HowItWorksSection() {
             <motion.a
               href="#waitlist"
               className={cn(
-                "inline-flex items-center px-8 py-4 rounded-full",
-                "bg-gradient-to-r from-orange-500 to-red-500",
-                "text-white font-semibold text-lg",
-                "hover:from-orange-600 hover:to-red-600",
-                "transition-all duration-200 shadow-2xl"
+                "inline-flex items-center px-8 py-4 rounded-xl",
+                "bg-white/10 backdrop-blur-sm border border-white/20",
+                "text-white font-medium",
+                "hover:bg-white/20 hover:border-white/30",
+                "transition-all duration-200"
               )}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              Book Now
+              Get Started
+              <svg
+                className="ml-2 w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
             </motion.a>
           </motion.div>
         </div>
