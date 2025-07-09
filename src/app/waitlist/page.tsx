@@ -185,8 +185,8 @@ export default function WaitlistPage() {
               <div className="space-y-3">
                 {[
                   { icon: Eye, text: "Real-time employment verification" },
-                  { icon: Shield, text: "99.7% detection accuracy" },
-                  { icon: Zap, text: "Results in under 24 hours" },
+                  { icon: Shield, text: "2352+ companies in our network" },
+                  { icon: Zap, text: "Integrations with 100+ HRIS systems" },
                   { icon: CheckCircle, text: "SOC 2 Type II certified" },
                 ].map((feature, index) => {
                   const Icon = feature.icon;

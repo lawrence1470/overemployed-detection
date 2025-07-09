@@ -130,10 +130,10 @@ export function WaitlistSuccessModal({
 									Limited Offer
 								</div>
 								<h3 className="mb-2 font-semibold text-lg text-white">
-									Skip the line with Early Access
+									Priority Waitlist Position
 								</h3>
 								<p className="mb-4 text-gray-400 text-sm">
-									Get immediate access today. Limited spots available.
+									We are only prioritizing serious customers, if you'd like early access please commit a $100 fully refundable deposit to bump you to the top of the list.
 								</p>
 							</div>
 
@@ -144,7 +144,7 @@ export function WaitlistSuccessModal({
 									containerClassName="w-full rounded-lg"
 									className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-3 font-semibold text-sm text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700"
 								>
-									Get Early Access - $499
+									Secure Priority Position - $100
 								</HoverBorderGradient>
 
 								<button
