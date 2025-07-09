@@ -2,6 +2,7 @@
 
 import { ArrowRight, Check, Clock, Shield, Zap } from "lucide-react";
 import { motion } from "motion/react";
+import { useState } from "react";
 import { Navigation } from "~/components/navigation";
 import { HoverBorderGradient } from "~/components/ui/hover-border-gradient";
 import { designSystem, getComponentClasses } from "~/lib/design-system";
@@ -26,9 +27,80 @@ const benefits = [
 ];
 
 export default function EarlyAccessPage() {
-  const handleCheckout = () => {
-    // This would integrate with Stripe checkout
-    console.log("Redirecting to Stripe checkout...");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    
+    try {
+      // Get user email from cookies or sessionStorage if available
+      const getUserEmail = () => {
+        if (typeof window === 'undefined') return 'user@example.com';
+        
+        // Try to get from cookies first
+        const cookies = document.cookie.split(';');
+        const emailCookie = cookies.find(cookie => cookie.trim().startsWith('userEmail='));
+        if (emailCookie) {
+          return decodeURIComponent(emailCookie.split('=')[1]);
+        }
+        
+        // Fallback to sessionStorage
+        return sessionStorage.getItem('waitlistEmail') || 'user@example.com';
+      };
+      
+      const userEmail = getUserEmail();
+      
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          userInfo: {
+            source: 'early-access',
+            timestamp: new Date().toISOString(),
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create checkout session');
+      }
+
+      const { sessionId } = await response.json();
+      
+      if (!sessionId) {
+        throw new Error('No session ID received');
+      }
+      
+      // Check if publishable key is configured
+      const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+      if (!publishableKey || publishableKey === 'pk_test_YOUR_PUBLISHABLE_KEY_HERE') {
+        throw new Error('Stripe publishable key not configured. Please check your environment variables.');
+      }
+      
+      // Redirect to Stripe Checkout
+      const stripe = await import('@stripe/stripe-js').then(module => 
+        module.loadStripe(publishableKey)
+      );
+      
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
+      
+      const result = await stripe.redirectToCheckout({ sessionId });
+      
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -130,11 +202,21 @@ export default function EarlyAccessPage() {
                 as="button"
                 onClick={handleCheckout}
                 containerClassName="w-full rounded-xl"
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isLoading}
               >
                 <span className="flex items-center justify-center gap-2">
-                  Secure My Priority Position
-                  <ArrowRight className="h-4 w-4" />
+                  {isLoading ? (
+                    <>
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      Secure My Priority Position
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
                 </span>
               </HoverBorderGradient>
             </motion.div>
