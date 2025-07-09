@@ -18,55 +18,6 @@ import { WaitlistForm } from "~/components/waitlist-form";
 import { getComponentClasses } from "~/lib/design-system";
 import { cn } from "~/lib/utils";
 
-// Floating elements that represent detected employees
-function FloatingEmployees() {
-	const employees = [
-		{ id: 1, x: "10%", y: "20%", delay: 0, duration: 15, name: "J.D." },
-		{ id: 2, x: "80%", y: "15%", delay: 2, duration: 18, name: "S.M." },
-		{ id: 3, x: "85%", y: "70%", delay: 4, duration: 20, name: "A.P." },
-		{ id: 4, x: "15%", y: "75%", delay: 1, duration: 17, name: "M.R." },
-		{ id: 5, x: "50%", y: "10%", delay: 3, duration: 19, name: "K.L." },
-		{ id: 6, x: "45%", y: "85%", delay: 5, duration: 16, name: "R.T." },
-	];
-
-	return (
-		<>
-			{employees.map((emp) => (
-				<motion.div
-					key={emp.id}
-					className="pointer-events-none absolute"
-					style={{ left: emp.x, top: emp.y }}
-					initial={{ opacity: 0, scale: 0 }}
-					animate={{
-						opacity: [0, 0.3, 0],
-						scale: [0.8, 1.2, 0.8],
-						y: [-20, 20, -20],
-					}}
-					transition={{
-						delay: emp.delay,
-						duration: emp.duration,
-						repeat: Number.POSITIVE_INFINITY,
-						ease: "easeInOut",
-					}}
-				>
-					<div className="relative">
-						<div className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-600 bg-gradient-to-br from-gray-700 to-gray-900">
-							<span className="font-medium text-gray-300 text-xs">
-								{emp.name}
-							</span>
-						</div>
-						<motion.div
-							className="-top-1 -right-1 absolute h-3 w-3 rounded-full bg-red-500"
-							animate={{ scale: [1, 1.2, 1] }}
-							transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-						/>
-					</div>
-				</motion.div>
-			))}
-		</>
-	);
-}
-
 // Stats ticker showing platform capabilities
 function StatsTicker() {
 	const stats = [
@@ -170,7 +121,6 @@ export default function WaitlistPage() {
 			</div>
 
 			{/* Animated Elements */}
-			<FloatingEmployees />
 			<SecurityScanner />
 
 			{/* Stats Ticker - now in normal flow */}

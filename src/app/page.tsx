@@ -50,7 +50,7 @@ const WaitlistSection = dynamic(
 	},
 );
 
-const IntegrationsSection = dynamic(() => import("~/components/integrations"), {
+const SecuritySection = dynamic(() => import("~/components/security"), {
 	loading: () => (
 		<div className="py-20">
 			<div className="mb-12 text-center">
@@ -365,7 +365,7 @@ export default function Home() {
 						transition={{ duration: 0.8, delay: 0.2 }}
 						viewport={{ once: true }}
 					>
-						<IntegrationsSection />
+						<SecuritySection />
 					</motion.div>
 				</div>
 			</AnimatedSection>
