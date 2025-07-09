@@ -7,30 +7,30 @@ import { cn } from "~/lib/utils";
 const steps = [
 	{
 		number: "01",
-		title: "Connect in 2 Min.",
+		title: "Integrate Your Payroll",
 		subtitle: "Connect Your HRIS",
 		description:
-			"Easily connect & manage your employee data using our secure OAuth integration platform.",
+			"Connect your HRIS/payroll system to sync employee information.",
 		color: "blue",
 		gradient: "from-blue-500 to-blue-600",
 		bgGradient: "from-blue-500/5 to-blue-600/5",
 	},
 	{
 		number: "02",
-		title: "Let Us Monitor",
+		title: "Monitor Your Employees",
 		subtitle: "We Scan 24/7",
 		description:
-			"Save hours of manual checking. We'll monitor 10,000+ companies & provide real-time detection service.",
+			"We will compare your employees to our (growing) network of thousands of companies.",
 		color: "purple",
 		gradient: "from-purple-500 to-purple-600",
 		bgGradient: "from-purple-500/5 to-purple-600/5",
 	},
 	{
 		number: "03",
-		title: "Your Company Stays Protected",
+		title: "Get notified!",
 		subtitle: "Get Instant Alerts",
 		description:
-			"Feel the peace of mind knowing your company is protected from dual employment fraud 24/7.",
+			"If a match pops up, you will be immediately notified. Stay protected from dual employment fraud.",
 		color: "green",
 		gradient: "from-green-500 to-green-600",
 		bgGradient: "from-green-500/5 to-green-600/5",
@@ -118,45 +118,62 @@ export function HowItWorksSection() {
 										{/* Illustrations */}
 										<div className="absolute inset-0 flex items-center justify-center p-8">
 											{index === 0 && (
-												// Connect illustration
+												// Payroll/HRIS integration illustration
 												<div className="relative flex h-full w-full items-center justify-center">
+													{/* Main Rippling Logo */}
 													<motion.div
-														className="absolute h-32 w-32 rounded-2xl border border-blue-500/20 bg-blue-500/10"
+														className="relative flex h-24 w-24 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10"
 														animate={{
-															rotate: [0, 5, 0, -5, 0],
-														}}
-														transition={{
-															duration: 4,
-															repeat: Number.POSITIVE_INFINITY,
-															ease: "easeInOut",
-														}}
-													/>
-													<motion.div
-														className="absolute h-24 w-24 rounded-xl border border-blue-500/30 bg-blue-500/20"
-														style={{ top: "20%", right: "25%" }}
-														animate={{
-															scale: [1, 1.1, 1],
+															scale: [1, 1.05, 1],
 														}}
 														transition={{
 															duration: 3,
 															repeat: Number.POSITIVE_INFINITY,
 															ease: "easeInOut",
+														}}
+													>
+														<img
+															src="/assets/Rippling Logo.jpeg"
+															alt="Rippling"
+															className="h-16 w-16 rounded-lg object-cover"
+														/>
+													</motion.div>
+
+													{/* Other HRIS logos - placeholder circles */}
+													<motion.div
+														className="absolute top-8 left-8 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/20"
+														animate={{
+															y: [0, -5, 0],
+														}}
+														transition={{
+															duration: 2.5,
+															repeat: Number.POSITIVE_INFINITY,
+															ease: "easeInOut",
 															delay: 0.5,
 														}}
-													/>
-													<svg
-														className="relative z-10 h-20 w-20 text-blue-400"
-														fill="none"
-														stroke="currentColor"
-														viewBox="0 0 24 24"
 													>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															strokeWidth={1.5}
-															d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-														/>
-													</svg>
+														<span className="font-bold text-blue-400 text-xs">
+															HR
+														</span>
+													</motion.div>
+
+													<motion.div
+														className="absolute right-8 bottom-8 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/20"
+														animate={{
+															y: [0, 5, 0],
+														}}
+														transition={{
+															duration: 2.8,
+															repeat: Number.POSITIVE_INFINITY,
+															ease: "easeInOut",
+															delay: 1,
+														}}
+													>
+														<span className="font-bold text-blue-400 text-xs">
+															ERP
+														</span>
+													</motion.div>
+
 													{/* Connection lines */}
 													<motion.div
 														className="absolute h-20 w-px bg-gradient-to-b from-transparent via-blue-400/50 to-transparent"
