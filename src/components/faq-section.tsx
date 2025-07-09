@@ -102,15 +102,6 @@ export function FAQSection() {
 					>
 						Got Questions? We've Got Answers
 					</h2>
-					<p
-						className={cn(
-							getComponentClasses.body("lg"),
-							"mx-auto max-w-3xl text-white/70 leading-relaxed",
-						)}
-					>
-						Everything you need to know about VerifyHire's dual employment
-						detection platform.
-					</p>
 				</motion.div>
 
 				{/* FAQ Items */}

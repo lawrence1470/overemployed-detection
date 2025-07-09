@@ -13,6 +13,13 @@ interface WaitlistEmailData {
 	hrisSystem?: string;
 }
 
+interface ContactFormData {
+	name: string;
+	email: string;
+	company?: string;
+	message: string;
+}
+
 export async function sendWaitlistThankYouEmail(data: WaitlistEmailData) {
 	if (!env.RESEND_API_KEY || !env.FROM_EMAIL) {
 		console.warn(
@@ -44,6 +51,33 @@ export async function sendWaitlistThankYouEmail(data: WaitlistEmailData) {
 		return { success: true, data: result };
 	} catch (error) {
 		console.error("Failed to send email:", error);
+		return { success: false, error };
+	}
+}
+
+export async function sendContactFormEmail(data: ContactFormData) {
+	if (!env.RESEND_API_KEY || !env.FROM_EMAIL) {
+		console.warn(
+			"Resend API key or FROM_EMAIL not configured, skipping email send",
+		);
+		return { success: false, message: "Email service not configured" };
+	}
+
+	try {
+		const emailHtml = getContactFormEmailTemplate(data);
+
+		const result = await resend.emails.send({
+			from: env.FROM_EMAIL,
+			to: ["support@verify.com"], // This will be updated when the domain is ready
+			subject: `New Contact Form Submission from ${data.name}`,
+			html: emailHtml,
+			replyTo: data.email,
+		});
+
+		console.log("Contact form email sent successfully:", result);
+		return { success: true, data: result };
+	} catch (error) {
+		console.error("Failed to send contact form email:", error);
 		return { success: false, error };
 	}
 }
@@ -430,5 +464,148 @@ We'll notify you as soon as VerifyHire is ready for new customers. In the meanti
 ---
 © 2025 VerifyHire • Protecting companies from dual employment fraud
 This email was sent to ${data.email} because you joined our waitlist.
+  `;
+}
+
+function getContactFormEmailTemplate(data: ContactFormData): string {
+	return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Form Submission</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px;
+            text-align: center;
+        }
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+        .content {
+            padding: 32px;
+        }
+        .field {
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .field:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .field-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .field-value {
+            font-size: 16px;
+            color: #2d3748;
+            word-wrap: break-word;
+        }
+        .message-field .field-value {
+            background-color: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+        }
+        .footer {
+            background-color: #f7fafc;
+            padding: 24px 32px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+        }
+        .reply-button {
+            display: inline-block;
+            background: #667eea;
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>New Contact Form Submission</h1>
+            <p>VerifyHire Support</p>
+        </div>
+        
+        <div class="content">
+            <div class="field">
+                <div class="field-label">Name</div>
+                <div class="field-value">${data.name}</div>
+            </div>
+            
+            <div class="field">
+                <div class="field-label">Email</div>
+                <div class="field-value">${data.email}</div>
+            </div>
+            
+            ${
+							data.company
+								? `
+            <div class="field">
+                <div class="field-label">Company</div>
+                <div class="field-value">${data.company}</div>
+            </div>
+            `
+								: ""
+						}
+            
+            <div class="field message-field">
+                <div class="field-label">Message</div>
+                <div class="field-value">${data.message}</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This email was submitted through the VerifyHire contact form.</p>
+            <p>Please respond within one business day.</p>
+            <a href="mailto:${data.email}" class="reply-button">Reply to ${data.name}</a>
+        </div>
+    </div>
+</body>
+</html>
   `;
 }

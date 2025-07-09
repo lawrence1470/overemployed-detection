@@ -22,6 +22,7 @@ interface FormData {
 	email: string;
 	employeeCount: string;
 	hrisSystem: string;
+	customHrisSystem: string;
 }
 
 const employeeCountOptions = [
@@ -44,6 +45,7 @@ const hrisSystems = [
 	"Rippling",
 	"Gusto",
 	"JustWorks",
+	"Deel",
 	"Other",
 ];
 
@@ -52,6 +54,7 @@ export function WaitlistForm() {
 		email: "",
 		employeeCount: "",
 		hrisSystem: "",
+		customHrisSystem: "",
 	});
 	const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
 	const [showHrisDropdown, setShowHrisDropdown] = useState(false);
@@ -81,12 +84,22 @@ export function WaitlistForm() {
 
 	const handleSubmitStep1 = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (formData.email && formData.employeeCount && formData.hrisSystem) {
+		
+		// Check if all required fields are filled
+		const isOtherSelected = formData.hrisSystem === "Other";
+		const isCustomHrisRequired = isOtherSelected && !formData.customHrisSystem.trim();
+		
+		if (formData.email && formData.employeeCount && formData.hrisSystem && !isCustomHrisRequired) {
+			// If "Other" is selected, use the custom HRIS system name
+			const hrisSystemToSubmit = isOtherSelected && formData.customHrisSystem
+				? formData.customHrisSystem
+				: formData.hrisSystem;
+
 			setIsSubmitting(true);
 			joinWaitlistMutation.mutate({
 				email: formData.email,
 				employeeCount: formData.employeeCount,
-				hrisSystem: formData.hrisSystem,
+				hrisSystem: hrisSystemToSubmit,
 			});
 		}
 	};
@@ -131,7 +144,7 @@ export function WaitlistForm() {
 									)}
 								>
 									Join the waitlist and be the first to know when we're ready
-									for new customers. Plus, get exclusive early access options.
+									for new customers. Plus, get exclusive access to new features.
 								</p>
 							</div>
 
@@ -263,6 +276,8 @@ export function WaitlistForm() {
 																setFormData({
 																	...formData,
 																	hrisSystem: system,
+																	// Clear custom HRIS field when selecting a different option
+																	customHrisSystem: system === "Other" ? formData.customHrisSystem : "",
 																});
 																setShowHrisDropdown(false);
 															}}
@@ -281,6 +296,35 @@ export function WaitlistForm() {
 										</AnimatePresence>
 									</div>
 								</div>
+
+								{/* Custom HRIS System Text Field - shown when "Other" is selected */}
+								<AnimatePresence>
+									{formData.hrisSystem === "Other" && (
+										<motion.div
+											initial={{ opacity: 0, height: 0 }}
+											animate={{ opacity: 1, height: "auto" }}
+											exit={{ opacity: 0, height: 0 }}
+											transition={{ duration: 0.3 }}
+											className="space-y-1.5"
+										>
+											<Label htmlFor="customHrisSystem" className="text-white/90">
+												Please specify your HRIS system
+											</Label>
+											<Input
+												id="customHrisSystem"
+												type="text"
+												placeholder="e.g., Custom ERP, Proprietary System..."
+												value={formData.customHrisSystem}
+												onChange={(e) =>
+													setFormData({ ...formData, customHrisSystem: e.target.value })
+												}
+												containerClassName="w-full"
+												className="border-gray-700 bg-gray-900/50 text-white placeholder:text-gray-500"
+												required={formData.hrisSystem === "Other"}
+											/>
+										</motion.div>
+									)}
+								</AnimatePresence>
 
 								<div className="pt-4">
 									<button

@@ -72,17 +72,17 @@ export default function ProblemSolutionSection() {
 							💰 Hidden Costs
 						</div>
 						<h2 className="mb-4 text-balance text-left font-bold text-white text-xl leading-tight tracking-tight md:text-2xl lg:text-3xl">
-							$17K to replace each mis-hire
+							$250K average loss per ghost employee
 						</h2>
 						<p className="text-left text-base text-white/80 leading-relaxed md:text-lg">
 							<PointerHighlight
 								pointerClassName="text-purple-400"
 								rectangleClassName="border-purple-400/50"
 							>
-								42 days + $4.7K to hire
+								37% productivity drop,
 							</PointerHighlight>
-							, then months to discover the truth. The real cost of overemployed
-							hires is devastating.
+							3-6 months undetected, plus security risks. Each overemployed hire
+							costs far more than just salary.
 						</p>
 					</div>
 				</WobbleCard>

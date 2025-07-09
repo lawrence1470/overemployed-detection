@@ -60,8 +60,19 @@ export function Navigation() {
 				</div>
 			</motion.a>
 
-			{/* Enhanced CTA Button */}
+			{/* Navigation Links and CTA Button */}
 			<div className="flex items-center space-x-4">
+				{/* Why do I need this link */}
+				<motion.a
+					href="/why-do-i-need-this"
+					className="hidden font-medium text-sm text-white/70 transition-colors duration-300 hover:text-white md:block"
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+				>
+					Why do I need this?
+				</motion.a>
+
+
 				{/* Access Site CTA Button */}
 				<HoverBorderGradient
 					as="a"

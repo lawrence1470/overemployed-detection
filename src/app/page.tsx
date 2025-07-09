@@ -50,22 +50,6 @@ const WaitlistSection = dynamic(
 	},
 );
 
-const SecuritySection = dynamic(() => import("~/components/security"), {
-	loading: () => (
-		<div className="py-20">
-			<div className="mb-12 text-center">
-				<Skeleton height="3rem" width="50%" className="mx-auto mb-4" />
-				<SkeletonText lines={2} className="mx-auto max-w-2xl" />
-			</div>
-			<div className="flex justify-center gap-8">
-				{[1, 2, 3, 4].map((i) => (
-					<Skeleton key={i} variant="circular" width={80} height={80} />
-				))}
-			</div>
-		</div>
-	),
-});
-
 const ProblemSolutionSection = dynamic(
 	() => import("~/components/problem-solution-section"),
 	{
@@ -76,30 +60,6 @@ const ProblemSolutionSection = dynamic(
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 						<Skeleton height="300px" variant="rounded" />
 						<Skeleton height="300px" variant="rounded" />
-					</div>
-				</div>
-			</div>
-		),
-	},
-);
-
-const OveremployedRedditSection = dynamic(
-	() => import("~/components/overemployed-reddit-section"),
-	{
-		loading: () => (
-			<div className="py-20">
-				<div className="mx-auto max-w-7xl px-8">
-					<div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-						<div>
-							<Skeleton height="3rem" width="80%" className="mb-4" />
-							<SkeletonText lines={3} className="mb-8" />
-							<Skeleton height="400px" variant="rounded" />
-						</div>
-						<div className="space-y-4">
-							{[1, 2, 3].map((i) => (
-								<Skeleton key={i} height="100px" variant="rounded" />
-							))}
-						</div>
 					</div>
 				</div>
 			</div>
@@ -311,20 +271,8 @@ export default function Home() {
 				<HeroSection />
 			</div>
 
-			{/* Soham Section with Pulsing Effect */}
-			<AnimatedSection direction="up" delay={0.1} className="relative z-10">
-				<motion.div
-					initial={{ opacity: 0, scale: 0.95 }}
-					whileInView={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 1, ease: "easeOut" }}
-					viewport={{ once: true }}
-				>
-					<SohamSection />
-				</motion.div>
-			</AnimatedSection>
-
 			{/* How It Works Section */}
-			<AnimatedSection direction="up" delay={0.2} className="relative z-10">
+			<AnimatedSection direction="up" delay={0.1} className="relative z-10">
 				<div className="relative overflow-hidden">
 					<motion.div
 						className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5"
@@ -337,37 +285,16 @@ export default function Home() {
 				</div>
 			</AnimatedSection>
 
-			{/* Creative Integrations Section */}
-			<AnimatedSection direction="up" delay={0.1} className="relative z-10">
-				<div className="relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-950 py-20">
-					{/* Animated Grid Background */}
-					<motion.div
-						className="absolute inset-0 opacity-5"
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 0.05 }}
-						transition={{ duration: 2 }}
-					>
-						<div
-							className="absolute inset-0"
-							style={{
-								backgroundImage: `
-									linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-									linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px)
-								`,
-								backgroundSize: "50px 50px",
-							}}
-						/>
-					</motion.div>
-
-					<motion.div
-						initial={{ scale: 0.9, opacity: 0 }}
-						whileInView={{ scale: 1, opacity: 1 }}
-						transition={{ duration: 0.8, delay: 0.2 }}
-						viewport={{ once: true }}
-					>
-						<SecuritySection />
-					</motion.div>
-				</div>
+			{/* Soham Section with Pulsing Effect */}
+			<AnimatedSection direction="up" delay={0.2} className="relative z-10">
+				<motion.div
+					initial={{ opacity: 0, scale: 0.95 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 1, ease: "easeOut" }}
+					viewport={{ once: true }}
+				>
+					<SohamSection />
+				</motion.div>
 			</AnimatedSection>
 
 			{/* Wobble Card with Rotation Effect */}
@@ -388,31 +315,6 @@ export default function Home() {
 					/>
 					<ProblemSolutionSection />
 				</div>
-			</AnimatedSection>
-
-			{/* Pointer Highlight with Magnetic Effect */}
-			<AnimatedSection direction="up" delay={0.4} className="relative z-10">
-				<motion.div
-					className="relative flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-900 to-gray-950"
-					whileInView={{
-						background: [
-							"linear-gradient(135deg, rgb(243 244 246) 0%, rgb(243 244 246) 100%)",
-							"linear-gradient(135deg, rgb(243 244 246) 0%, rgb(249 250 251) 50%, rgb(243 244 246) 100%)",
-							"linear-gradient(135deg, rgb(243 244 246) 0%, rgb(243 244 246) 100%)",
-						],
-					}}
-					transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-					viewport={{ once: true }}
-				>
-					<motion.div
-						className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent"
-						initial={{ x: "-100%" }}
-						whileInView={{ x: "100%" }}
-						transition={{ duration: 2, delay: 0.5 }}
-						viewport={{ once: true }}
-					/>
-					<OveremployedRedditSection />
-				</motion.div>
 			</AnimatedSection>
 
 			{/* FAQ Section */}

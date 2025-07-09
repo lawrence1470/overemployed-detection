@@ -235,6 +235,14 @@ const JustWorksLogo = ({ className }: { className?: string }) => (
 	/>
 );
 
+const RipplingLogo = ({ className }: { className?: string }) => (
+	<img
+		src="/assets/optimized/Rippling Logo.jpg"
+		alt="Rippling"
+		className={cn("object-contain", className)}
+	/>
+);
+
 // HR Systems data
 const hrSystems = [
 	{ name: "Workday", logo: WorkdayLogo },
@@ -243,4 +251,5 @@ const hrSystems = [
 	{ name: "ADP", logo: ADPLogo },
 	{ name: "Gusto", logo: GustoLogo },
 	{ name: "JustWorks", logo: JustWorksLogo },
+	{ name: "Rippling", logo: RipplingLogo },
 ];

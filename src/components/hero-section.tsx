@@ -139,7 +139,7 @@ export function HeroSection() {
 				>
 					<div className="mb-2 flex items-center space-x-2">
 						<motion.div
-							className="h-2 w-2 rounded-full bg-green-400"
+							className="h-2 w-2 rounded-full bg-red-400"
 							animate={{
 								scale: [1, 1.3, 1],
 								opacity: [0.7, 1, 0.7],
@@ -150,10 +150,10 @@ export function HeroSection() {
 								ease: "easeInOut",
 							}}
 						/>
-						<span className="font-medium text-white/90 text-xs">Active</span>
+						<span className="font-medium text-white/90 text-xs">Trending</span>
 					</div>
-					<div className="mb-1 font-bold text-lg text-white">2,847</div>
-					<div className="text-white/70 text-xs">Employees Verified</div>
+					<div className="mb-1 font-bold text-lg text-white">451K+</div>
+					<div className="text-white/70 text-xs">r/overemployed members</div>
 				</motion.div>
 
 				<motion.div
@@ -182,8 +182,8 @@ export function HeroSection() {
 						/>
 						<span className="font-medium text-white/90 text-xs">Alert</span>
 					</div>
-					<div className="mb-1 font-bold text-lg text-white">14</div>
-					<div className="text-white/70 text-xs">Potential Matches</div>
+					<div className="mb-1 font-bold text-lg text-white">46%</div>
+					<div className="text-white/70 text-xs">Remote workers have 2+ jobs</div>
 				</motion.div>
 			</div>
 

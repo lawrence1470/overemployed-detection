@@ -1,4 +1,5 @@
 import { authRouter } from "~/server/api/routers/auth";
+import { contactRouter } from "~/server/api/routers/contact";
 import { postRouter } from "~/server/api/routers/post";
 import { waitlistRouter } from "~/server/api/routers/waitlist";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
 	post: postRouter,
 	auth: authRouter,
 	waitlist: waitlistRouter,
+	contact: contactRouter,
 });
 
 // export type definition of API
