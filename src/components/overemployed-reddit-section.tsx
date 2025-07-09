@@ -256,7 +256,7 @@ export default function OveremployedRedditSection() {
 									whileHover={{ scale: 1.03 }}
 									whileTap={{ scale: 0.97 }}
 								>
-									Join Waitlist
+									Get Started
 									<svg
 										className="ml-2 h-3 w-3"
 										fill="none"

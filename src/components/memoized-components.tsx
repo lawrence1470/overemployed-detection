@@ -1,10 +1,10 @@
 "use client";
 
-import { memo } from "react";
 import { motion } from "motion/react";
+import { memo } from "react";
 import { HeroSection } from "~/components/hero-section";
-import { SohamSection } from "~/components/soham-section";
 import { HowItWorksSection } from "~/components/how-it-works";
+import { SohamSection } from "~/components/soham-section";
 
 // Memoized components to prevent unnecessary re-renders
 export const MemoizedHeroSection = memo(HeroSection);

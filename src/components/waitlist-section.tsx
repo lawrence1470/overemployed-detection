@@ -76,7 +76,6 @@ export function WaitlistSection() {
 						</HoverBorderGradient>
 					</div>
 				</motion.div>
-
 			</div>
 		</section>
 	);
