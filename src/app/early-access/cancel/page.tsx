@@ -105,9 +105,9 @@ export default function CancelPage() {
             >
               <HoverBorderGradient
                 as="a"
-                href="/early-access"
                 containerClassName="rounded-xl"
                 className="bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700"
+                {...{ href: "/early-access" }}
               >
                 <span className="flex items-center justify-center gap-2">
                   Try Again
@@ -117,9 +117,9 @@ export default function CancelPage() {
 
               <HoverBorderGradient
                 as="a"
-                href="/"
                 containerClassName="rounded-xl"
                 className="border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/20"
+                {...{ href: "/" }}
               >
                 <span className="flex items-center justify-center gap-2">
                   <ArrowLeft className="h-4 w-4" />

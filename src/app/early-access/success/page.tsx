@@ -108,9 +108,9 @@ export default function SuccessPage() {
             >
               <HoverBorderGradient
                 as="a"
-                href="/"
                 containerClassName="inline-block rounded-xl"
                 className="bg-gradient-to-r from-green-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-green-700 hover:to-blue-700"
+                {...{ href: "/" }}
               >
                 <span className="flex items-center gap-2">
                   Back to Home

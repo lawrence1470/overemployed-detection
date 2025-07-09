@@ -41,7 +41,8 @@ export default function EarlyAccessPage() {
         const cookies = document.cookie.split(';');
         const emailCookie = cookies.find(cookie => cookie.trim().startsWith('userEmail='));
         if (emailCookie) {
-          return decodeURIComponent(emailCookie.split('=')[1]);
+          const emailValue = emailCookie.split('=')[1];
+          return emailValue ? decodeURIComponent(emailValue) : 'user@example.com';
         }
         
         // Fallback to sessionStorage
@@ -203,7 +204,7 @@ export default function EarlyAccessPage() {
                 onClick={handleCheckout}
                 containerClassName="w-full rounded-xl"
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isLoading}
+                {...{ disabled: isLoading }}
               >
                 <span className="flex items-center justify-center gap-2">
                   {isLoading ? (

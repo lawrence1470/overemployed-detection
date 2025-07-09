@@ -4,14 +4,15 @@ import Stripe from 'stripe';
 import { db } from '~/server/db';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2025-06-30.basil',
 });
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
-  const sig = headers().get('stripe-signature')!;
+  const headersList = await headers();
+  const sig = headersList.get('stripe-signature')!;
 
   let event: Stripe.Event;
 
