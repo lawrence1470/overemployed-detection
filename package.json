@@ -27,6 +27,7 @@
 		"@radix-ui/react-label": "^2.1.7",
 		"@react-email/components": "^0.2.0",
 		"@react-email/render": "^1.1.3",
+		"@stripe/stripe-js": "^7.4.0",
 		"@t3-oss/env-nextjs": "^0.12.0",
 		"@tabler/icons-react": "^3.34.0",
 		"@tanstack/react-query": "^5.69.0",
@@ -49,6 +50,7 @@
 		"react-icons": "^5.5.0",
 		"resend": "^4.6.0",
 		"server-only": "^0.0.1",
+		"stripe": "^18.3.0",
 		"superjson": "^2.2.1",
 		"tailwind-merge": "^3.3.1",
 		"zod": "^3.24.2"

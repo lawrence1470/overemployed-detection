@@ -20,14 +20,19 @@ model Post {
 }
 
 model Waitlist {
-    id            String   @id @default(cuid())
-    email         String   @unique
-    employeeCount String?
-    hrisSystem    String?
-    emailSent     Boolean  @default(false)
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
+    id                String   @id @default(cuid())
+    email             String   @unique
+    employeeCount     String?
+    hrisSystem        String?
+    emailSent         Boolean  @default(false)
+    depositStatus     String   @default("none") // "none", "pending", "authorized", "captured", "refunded"
+    stripePaymentId   String?  // Store Stripe payment_intent ID
+    depositAmount     Int?     // Amount in cents
+    depositDate       DateTime?
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
 
     @@index([email])
     @@index([createdAt])
+    @@index([depositStatus])
 }

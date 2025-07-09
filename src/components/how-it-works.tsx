@@ -169,9 +169,11 @@ export function HowItWorksSection() {
                               delay: 1,
                             }}
                           >
-                            <span className="font-bold text-blue-400 text-xs">
-                              ERP
-                            </span>
+                            <img
+                              src="/assets/optimized/ADP Image.webp"
+                              alt="ADP"
+                              className="h-8 w-8 rounded object-contain"
+                            />
                           </motion.div>
 
                           {/* Connection lines */}
@@ -420,7 +422,7 @@ const ISO27001Logo = ({ className }: { className?: string }) => (
 
 const HIPAALogo = ({ className }: { className?: string }) => (
   <img
-    src="/assets/optimized/HIPAA Compliant Image.webp"
+    src="/assets/optimized/HIPAA Compliance Image.webp"
     alt="HIPAA Compliant"
     className={className}
     loading="lazy"

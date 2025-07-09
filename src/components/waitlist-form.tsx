@@ -90,6 +90,11 @@ export function WaitlistForm() {
 		const isCustomHrisRequired = isOtherSelected && !formData.customHrisSystem.trim();
 		
 		if (formData.email && formData.employeeCount && formData.hrisSystem && !isCustomHrisRequired) {
+			// Save email to cookies for 30 days
+			const expirationDate = new Date();
+			expirationDate.setDate(expirationDate.getDate() + 30);
+			document.cookie = `userEmail=${encodeURIComponent(formData.email)}; expires=${expirationDate.toUTCString()}; path=/`;
+			
 			// If "Other" is selected, use the custom HRIS system name
 			const hrisSystemToSubmit = isOtherSelected && formData.customHrisSystem
 				? formData.customHrisSystem
