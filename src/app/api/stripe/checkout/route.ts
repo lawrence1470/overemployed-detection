@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
           user_info: JSON.stringify(userInfo),
         },
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/early-access/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/early-access/cancel`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL?.trim()}/early-access/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL?.trim()}/early-access/cancel`,
       customer_email: email,
       metadata: {
         type: 'priority_deposit',
