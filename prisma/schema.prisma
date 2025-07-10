@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -16,17 +19,22 @@ model Post {
   @@index([name])
 }
 
-model waitlist {
-  id                 String    @id
+model Waitlist {
+  id                 String    @id @default(cuid())
   email              String    @unique
-  emailSent          Boolean   @default(false)
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime
-  depositStatus      String    @default("none")
-  depositAmount      Int?
-  depositDate        DateTime?
-  stripePaymentId    String?
-  stripeClientSecret String?
   employeeCount      String?
   hrisSystem         String?
+  emailSent          Boolean   @default(false)
+  depositStatus      String    @default("none") // "none", "pending", "authorized", "captured", "refunded"
+  stripePaymentId    String?   // Store Stripe payment_intent ID
+  stripeClientSecret String?   // Store Stripe client secret
+  depositAmount      Int?      // Amount in cents
+  depositDate        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([email])
+  @@index([createdAt])
+  @@index([depositStatus])
+  @@map("waitlist") // Maps to the lowercase table name in database
 }
