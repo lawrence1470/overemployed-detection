@@ -123,7 +123,7 @@ export function WaitlistForm() {
 				isExistingUser={true}
 			/>
 
-			<div className="mx-auto max-w-2xl">
+			<div className="mx-auto max-w-2xl px-4 sm:px-0">
 				<AnimatePresence mode="wait">
 					<motion.div
 						key="waitlist-form"
@@ -133,11 +133,11 @@ export function WaitlistForm() {
 						transition={{ duration: 0.5 }}
 					>
 						<div>
-							<div className="mb-8 text-center">
+							<div className="mb-6 text-center sm:mb-8">
 								<h1
 									className={cn(
 										getComponentClasses.heading("lg"),
-										"mb-4 text-white",
+										"mb-3 text-white sm:mb-4 text-2xl sm:text-3xl lg:text-4xl",
 									)}
 								>
 									VerifyHire is currently at capacity!
@@ -145,17 +145,16 @@ export function WaitlistForm() {
 								<p
 									className={cn(
 										getComponentClasses.body("md"),
-										"mx-auto max-w-sm text-white/70",
+										"mx-auto max-w-xs sm:max-w-sm text-white/70 text-sm sm:text-base",
 									)}
 								>
-									Join the waitlist and be the first to know when we're ready
-									for new customers. Plus, get exclusive access to new features.
+									Join the waitlist and get notified when we're ready for new customers.
 								</p>
 							</div>
 
-							<form onSubmit={handleSubmitStep1} className="space-y-4">
-								<div className="space-y-1.5">
-									<Label htmlFor="email" className="text-white/90">
+							<form onSubmit={handleSubmitStep1} className="space-y-3 sm:space-y-4">
+								<div className="space-y-1 sm:space-y-1.5">
+									<Label htmlFor="email" className="text-white/90 text-sm">
 										Work Email
 									</Label>
 									<Input
@@ -167,13 +166,13 @@ export function WaitlistForm() {
 											setFormData({ ...formData, email: e.target.value })
 										}
 										containerClassName="w-full"
-										className="border-gray-700 bg-gray-900/50 text-white placeholder:text-gray-500"
+										className="border-gray-700 bg-gray-900/50 text-white placeholder:text-gray-500 h-10 sm:h-11"
 										required
 									/>
 								</div>
 
-								<div className="space-y-1.5">
-									<Label htmlFor="employeeCount" className="text-white/90">
+								<div className="space-y-1 sm:space-y-1.5">
+									<Label htmlFor="employeeCount" className="text-white/90 text-sm">
 										Company Size
 									</Label>
 									<div className="relative">
@@ -185,7 +184,7 @@ export function WaitlistForm() {
 											className={cn(
 												"flex w-full items-center justify-between",
 												"border border-gray-700 bg-gray-900/50 text-white",
-												"rounded-md px-3 py-2 text-sm",
+												"rounded-md px-3 py-2 text-sm h-10 sm:h-11",
 												"transition-colors hover:bg-gray-800/50",
 												formData.employeeCount ? "text-white" : "text-gray-500",
 											)}
@@ -237,8 +236,8 @@ export function WaitlistForm() {
 									</div>
 								</div>
 
-								<div className="space-y-1.5">
-									<Label htmlFor="hrisSystem" className="text-white/90">
+								<div className="space-y-1 sm:space-y-1.5">
+									<Label htmlFor="hrisSystem" className="text-white/90 text-sm">
 										Current HRIS System
 									</Label>
 									<div className="relative">
@@ -248,7 +247,7 @@ export function WaitlistForm() {
 											className={cn(
 												"flex w-full items-center justify-between",
 												"border border-gray-700 bg-gray-900/50 text-white",
-												"rounded-md px-3 py-2 text-sm",
+												"rounded-md px-3 py-2 text-sm h-10 sm:h-11",
 												"transition-colors hover:bg-gray-800/50",
 												formData.hrisSystem ? "text-white" : "text-gray-500",
 											)}
@@ -310,9 +309,9 @@ export function WaitlistForm() {
 											animate={{ opacity: 1, height: "auto" }}
 											exit={{ opacity: 0, height: 0 }}
 											transition={{ duration: 0.3 }}
-											className="space-y-1.5"
+											className="space-y-1 sm:space-y-1.5"
 										>
-											<Label htmlFor="customHrisSystem" className="text-white/90">
+											<Label htmlFor="customHrisSystem" className="text-white/90 text-sm">
 												Please specify your HRIS system
 											</Label>
 											<Input
@@ -324,14 +323,14 @@ export function WaitlistForm() {
 													setFormData({ ...formData, customHrisSystem: e.target.value })
 												}
 												containerClassName="w-full"
-												className="border-gray-700 bg-gray-900/50 text-white placeholder:text-gray-500"
+												className="border-gray-700 bg-gray-900/50 text-white placeholder:text-gray-500 h-10 sm:h-11"
 												required={formData.hrisSystem === "Other"}
 											/>
 										</motion.div>
 									)}
 								</AnimatePresence>
 
-								<div className="pt-4">
+								<div className="pt-3 sm:pt-4">
 									<button
 										type="submit"
 										disabled={isSubmitting}
@@ -341,7 +340,7 @@ export function WaitlistForm() {
 											as="div"
 											containerClassName="w-full rounded-xl"
 											className={cn(
-												"relative flex min-h-[56px] w-full cursor-pointer items-center justify-center overflow-hidden bg-white px-8 py-5 font-semibold text-black transition-all duration-300 hover:bg-gray-100",
+												"relative flex min-h-[48px] sm:min-h-[56px] w-full cursor-pointer items-center justify-center overflow-hidden bg-white px-6 sm:px-8 py-3 sm:py-5 font-semibold text-black transition-all duration-300 hover:bg-gray-100",
 												isSubmitting &&
 													"cursor-not-allowed opacity-50 hover:bg-gray-100",
 											)}

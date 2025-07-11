@@ -126,15 +126,15 @@ export default function EarlyAccessPage() {
         />
       </div>
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-20">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-12 text-center"
+            className="mb-8 sm:mb-12 text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-green-500/20 px-4 py-2 font-medium text-green-300 text-sm">
+            <div className="mt-8 mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full bg-green-500/20 px-4 py-2 font-medium text-green-300 text-sm">
               <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
               Thank You for Joining Our Waitlist
             </div>
@@ -142,7 +142,7 @@ export default function EarlyAccessPage() {
             <h1
               className={cn(
                 designSystem.typography.display.lg,
-                "mb-6 text-white"
+                "mb-4 sm:mb-6 text-white"
               )}
             >
               Priority Access Available
@@ -159,31 +159,31 @@ export default function EarlyAccessPage() {
             </p>
           </motion.div>
 
-          <div className="mb-12 grid gap-8 md:grid-cols-2">
+          <div className="mb-8 sm:mb-12 grid gap-6 sm:gap-8 md:grid-cols-2">
             {/* Pricing Card */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-blue-900/30 p-8"
+              className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-blue-900/30 p-6 sm:p-8"
             >
               <h2
                 className={cn(
                   getComponentClasses.heading("lg"),
-                  "mb-4 text-white"
+                  "mb-3 sm:mb-4 text-white"
                 )}
               >
                 Priority Waitlist Position
               </h2>
 
-              <div className="mb-6">
-                <span className="font-bold text-5xl text-white">$100</span>
+              <div className="mb-4 sm:mb-6">
+                <span className="font-bold text-4xl sm:text-5xl text-white">$100</span>
                 <span className="ml-2 text-white/60">
                   fully refundable deposit
                 </span>
               </div>
 
-              <ul className="mb-8 space-y-4">
+              <ul className="mb-6 sm:mb-8 space-y-3 sm:space-y-4">
                 {benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-500/20">
@@ -203,7 +203,7 @@ export default function EarlyAccessPage() {
                 as="button"
                 onClick={handleCheckout}
                 containerClassName="w-full rounded-xl"
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 px-6 sm:px-8 py-3 sm:py-4 font-semibold text-white transition-all duration-300 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 {...{ disabled: isLoading }}
               >
                 <span className="flex items-center justify-center gap-2">
@@ -214,7 +214,7 @@ export default function EarlyAccessPage() {
                     </>
                   ) : (
                     <>
-                      Secure My Priority Position
+                      Get Priority Access
                       <ArrowRight className="h-4 w-4" />
                     </>
                   )}
@@ -227,7 +227,7 @@ export default function EarlyAccessPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               <h3
                 className={cn(

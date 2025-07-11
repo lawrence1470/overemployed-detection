@@ -39,10 +39,10 @@ export const WaitlistConfirmationEmail = ({
 				}}
 			>
 				<Container
-					style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}
+					style={{ maxWidth: "600px", margin: "0 auto", padding: "20px 16px" }}
 				>
 					{/* Header */}
-					<Section style={{ textAlign: "center", marginBottom: "32px" }}>
+					<Section style={{ textAlign: "center", marginBottom: "20px" }}>
 						<Heading
 							style={{
 								color: "#ffffff",
@@ -65,22 +65,22 @@ export const WaitlistConfirmationEmail = ({
 							backgroundColor: "#0a0a0a",
 							border: "1px solid #1a1a1a",
 							borderRadius: "16px",
-							padding: "40px",
-							marginBottom: "24px",
+							padding: "24px",
+							marginBottom: "16px",
 						}}
 					>
 						{/* Success Icon */}
-						<Section style={{ textAlign: "center", marginBottom: "32px" }}>
+						<Section style={{ textAlign: "center", marginBottom: "20px" }}>
 							<Text
 								style={{
 									display: "inline-block",
 									background: "linear-gradient(135deg, #22c55e, #16a34a)",
-									width: "56px",
-									height: "56px",
+									width: "48px",
+									height: "48px",
 									borderRadius: "50%",
 									color: "#ffffff",
-									fontSize: "28px",
-									lineHeight: "56px",
+									fontSize: "24px",
+									lineHeight: "48px",
 									fontWeight: "bold",
 									textAlign: "center",
 									boxShadow: "0 10px 30px rgba(34, 197, 94, 0.3)",
@@ -95,11 +95,11 @@ export const WaitlistConfirmationEmail = ({
 						<Heading
 							style={{
 								color: "#ffffff",
-								fontSize: "28px",
+								fontSize: "24px",
 								fontWeight: "bold",
 								textAlign: "center",
-								marginBottom: "8px",
-								margin: "0 0 8px 0",
+								marginBottom: "6px",
+								margin: "0 0 6px 0",
 							}}
 						>
 							You're on the list!
@@ -109,8 +109,8 @@ export const WaitlistConfirmationEmail = ({
 							style={{
 								color: "#9ca3af",
 								textAlign: "center",
-								marginBottom: "32px",
-								fontSize: "16px",
+								marginBottom: "20px",
+								fontSize: "15px",
 								lineHeight: "1.5",
 							}}
 						>
@@ -124,29 +124,29 @@ export const WaitlistConfirmationEmail = ({
 								backgroundColor: "#1a0f08",
 								border: "1px solid #3d1f0a",
 								borderRadius: "12px",
-								padding: "24px",
-								marginBottom: "32px",
+								padding: "20px",
+								marginBottom: "20px",
 							}}
 						>
 							<Heading
 								style={{
 									color: "#f97316",
-									fontSize: "20px",
+									fontSize: "18px",
 									fontWeight: "bold",
 									textAlign: "center",
-									marginBottom: "20px",
-									margin: "0 0 20px 0",
+									marginBottom: "16px",
+									margin: "0 0 16px 0",
 								}}
 							>
 								Understanding the Threat
 							</Heading>
 
-							<Row style={{ marginBottom: "24px" }}>
+							<Row style={{ marginBottom: "16px" }}>
 								<Column align="center">
 									<Text
 										style={{
 											color: "#f97316",
-											fontSize: "24px",
+											fontSize: "20px",
 											fontWeight: "bold",
 											margin: "0 0 4px 0",
 										}}
@@ -169,7 +169,7 @@ export const WaitlistConfirmationEmail = ({
 									<Text
 										style={{
 											color: "#f97316",
-											fontSize: "24px",
+											fontSize: "20px",
 											fontWeight: "bold",
 											margin: "0 0 4px 0",
 										}}
@@ -192,7 +192,7 @@ export const WaitlistConfirmationEmail = ({
 									<Text
 										style={{
 											color: "#f97316",
-											fontSize: "24px",
+											fontSize: "20px",
 											fontWeight: "bold",
 											margin: "0 0 4px 0",
 										}}
@@ -217,8 +217,8 @@ export const WaitlistConfirmationEmail = ({
 								style={{
 									color: "#d1d5db",
 									textAlign: "center",
-									marginBottom: "24px",
-									fontSize: "15px",
+									marginBottom: "16px",
+									fontSize: "14px",
 									lineHeight: "1.6",
 								}}
 							>
@@ -234,10 +234,10 @@ export const WaitlistConfirmationEmail = ({
 										backgroundColor: "#f97316",
 										color: "#ffffff",
 										fontWeight: "600",
-										paddingTop: "16px",
-										paddingBottom: "16px",
-										paddingLeft: "32px",
-										paddingRight: "32px",
+										paddingTop: "12px",
+										paddingBottom: "12px",
+										paddingLeft: "24px",
+										paddingRight: "24px",
 										borderRadius: "12px",
 										textDecoration: "none",
 										boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
@@ -254,16 +254,16 @@ export const WaitlistConfirmationEmail = ({
 								backgroundColor: "#0f0f0f",
 								border: "1px solid #1a1a1a",
 								borderRadius: "8px",
-								padding: "20px",
+								padding: "16px",
 							}}
 						>
 							<Heading
 								style={{
 									color: "#ffffff",
-									fontSize: "18px",
+									fontSize: "16px",
 									fontWeight: "600",
-									marginBottom: "12px",
-									margin: "0 0 12px 0",
+									marginBottom: "10px",
+									margin: "0 0 10px 0",
 								}}
 							>
 								What's Next?
@@ -271,7 +271,7 @@ export const WaitlistConfirmationEmail = ({
 							<Text
 								style={{
 									color: "#9ca3af",
-									fontSize: "14px",
+									fontSize: "13px",
 									margin: "0",
 									lineHeight: "1.6",
 								}}
@@ -284,7 +284,7 @@ export const WaitlistConfirmationEmail = ({
 					</Container>
 
 					{/* Footer */}
-					<Section style={{ textAlign: "center", marginTop: "32px" }}>
+					<Section style={{ textAlign: "center", marginTop: "20px" }}>
 						<Text
 							style={{
 								color: "#4b5563",
